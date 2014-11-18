@@ -65,8 +65,25 @@ public class BoardSituation
 		{
 			putSeeds(positionCol,positionRow);
 			
+			/*
+			if(getTurno()==1){
+				if(currentX==numColumn-1 && currentY==1 )
+			}
+			
+			if((!(&& getTurno()==1)) && getTurno()==1){
+				setTurno(2);
+			}
+			else if((!(currentX==0 && currentY==1 && getTurno()==2))&& getTurno()==2){
+				setTurno(1);
+			}
+			*/
 			return "Move done";
 		}
+		
+		
+			
+		
+		
 	}
     
     
@@ -102,7 +119,8 @@ public class BoardSituation
         		row++;	
     	}
     	
-    	  	//currentX=
+    	  	currentX=row;
+    	  	currentY=col;
     	
     }
     
@@ -132,6 +150,15 @@ public class BoardSituation
     	
     	
     	return respuesta;
+	}
+    
+    
+    public void eatSeeds() {
+    	
+    	int numeatedSeeds=0; 
+    	
+    	numeatedSeeds= Board[currentX][currentY].getNumSeed();
+		
 	}
 
 	public int getTurno() {
