@@ -22,5 +22,5 @@
     <string name="T1">T1</string>
     <string name="T2">T2</string>
     <string name="space">----</string>
-
+	<string name="start">Start</string>
 </resources>

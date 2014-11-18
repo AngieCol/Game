@@ -64,19 +64,10 @@ public class BoardSituation
 		else
 		{
 			putSeeds(positionCol,positionRow);
+			eatSeeds();
 			
-			/*
-			if(getTurno()==1){
-				if(currentX==numColumn-1 && currentY==1 )
-			}
+			setTurn();
 			
-			if((!(&& getTurno()==1)) && getTurno()==1){
-				setTurno(2);
-			}
-			else if((!(currentX==0 && currentY==1 && getTurno()==2))&& getTurno()==2){
-				setTurno(1);
-			}
-			*/
 			return "Move done";
 		}
 		
@@ -89,7 +80,22 @@ public class BoardSituation
     
     
     
-    public void putSeeds(int row, int col) {
+    public void setTurn() {
+    	
+    	if(currentY!=1){
+    		
+    	}
+    	
+    	if(getTurno()==1 && currentX==numColumn-1 && currentY==1 ){
+		}
+		
+		 else if((!(currentX==0 && currentY==1 && getTurno()==2))&& getTurno()==2){
+			setTurno(1);
+		}
+		
+	}
+
+	public void putSeeds(int row, int col) {
     	
     	int numSeeds=Board[row][col].getNumSeed();
     	Board[row][col].setNumSeed(0);
@@ -155,9 +161,20 @@ public class BoardSituation
     
     public void eatSeeds() {
     	
-    	int numeatedSeeds=0; 
+    	 
     	
-    	numeatedSeeds= Board[currentX][currentY].getNumSeed();
+    	
+    	if(currentY==numRow-1 && getTurno()==1 && Board[currentX][currentY].getNumSeed()==1 && Board[currentX][0].getNumSeed()>0){
+    		Board[1][numColumn-1].setNumSeed((Board[currentX][0].getNumSeed())+1);
+    		Board[currentX][0].setNumSeed(0);
+    		Board[currentX][currentY].setNumSeed(0);
+    	}
+    	else if(currentY==0 && getTurno()==2 && Board[currentX][currentY].getNumSeed()==1 && Board[currentX][numColumn-1].getNumSeed()>0){
+    		Board[1][0].setNumSeed((Board[currentX][numColumn-1].getNumSeed())+1);
+    		Board[currentX][numColumn-1].setNumSeed(0);
+    		Board[currentX][currentY].setNumSeed(0);
+    	}
+    			
 		
 	}
 
