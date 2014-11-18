@@ -9,7 +9,6 @@ public class Slot {
 	 */
 	String type="";
 	int numSeed=0;
-	static int initialSeed=3;
 	
 	
 	
@@ -18,10 +17,10 @@ public class Slot {
 	 * Constructor	
 	 * @param type
 	 */
-	public Slot(String type)
+	public Slot(String type, int seed)
 	{
 	  this.type =type; 
-	  this.numSeed=initialSeed;
+	  this.numSeed=seed;
 	  
 	  
 	}
@@ -52,6 +51,10 @@ public class Slot {
 
 	public void setNumSeed(int numSeed) {
 		this.numSeed = numSeed;
+	}
+	
+	public void sumSeed(int numSeed) {
+		this.numSeed = this.numSeed+ numSeed;
 	}
 
 }
