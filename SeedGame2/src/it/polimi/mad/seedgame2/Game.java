@@ -20,7 +20,7 @@ public class Game extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+			
 				Intent in= new Intent(Game.this, Match.class);
 				startActivity(in);
 			}

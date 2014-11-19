@@ -35,7 +35,7 @@ public class BoardSituation
     	
     	Board= new Slot[numRow][numColumn];
     	
-		for(int i=0; i<numColumn-1; i++)
+		for(int i=0; i<numColumn; i++)
 		{
 			Board[0][i]=new Slot("B2",3);
 			Board[1][i]=new Slot("N",-1);
@@ -49,7 +49,7 @@ public class BoardSituation
 
 	}
     
-    public String movement(int positionCol, int positionRow)
+    public String movement(int positionRow, int positionCol)
     {
 		Slot s= Board[positionRow][positionCol];
     	
@@ -63,7 +63,7 @@ public class BoardSituation
 		
 		else
 		{
-			putSeeds(positionCol,positionRow);
+			putSeeds(positionRow,positionCol);
 			eatSeeds();
 			
 			setTurn();
@@ -133,29 +133,33 @@ public class BoardSituation
     
     public String verifyMovement(Slot s) {
 	   	
-    	String respuesta="";
     	
-    	if(s.numSeed==0)
-	   	{
-	   		respuesta= "It is an empty slot. ";
-	   	}
+    	
     	
     	//B1, B2, T1, T2, N
     	if (s.type=="B2" && getTurno()==1){
-	   		respuesta+= "This slot belongs to the player 2. ";
+	   		return "This slot belongs to the player 2. ";
 	   	}
-    	if (s.type=="B1" && getTurno()==2){
-	   		respuesta+= "This slot belongs to the player 1. ";
+    	else if (s.type=="B1" && getTurno()==2){
+	   		return "This slot belongs to the player 1. ";
 	   	}	
-    	if (s.type=="T1" || s.type=="T2"){
-	   		respuesta+= "You cannot move from here. ";
+    	else if (s.type=="T1" || s.type=="T2"){
+	   		return "You cannot move from here. ";
 	   	}
-    	if (s.type=="N" || s.type=="N"){
-	   		respuesta+= "This is part of the Board, You cannot move from here. ";
+    	else if (s.type=="N" || s.type=="N"){
+	   		return "This is part of the Board, You cannot move from here. ";
 	   	}
+    	else if(s.numSeed==0)
+	   	{
+	   		return "It is an empty slot. ";
+	   	}
+    	else
+    	{
+    		return "";
+    	}
     	
     	
-    	return respuesta;
+    	
 	}
     
     
