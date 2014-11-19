@@ -68,7 +68,7 @@ public class BoardSituation
 			
 			setTurn();
 			
-			return "Move done";
+			return "Move done!. Now It's the turn of player "+getTurno();
 		}
 		
 		
@@ -79,18 +79,26 @@ public class BoardSituation
     
     
     
-    
+    //VOY AQUÍIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
     public void setTurn() {
     	
-    	if(currentY!=1){
-    		
-    	}
-    	
-    	if(getTurno()==1 && currentX==numColumn-1 && currentY==1 ){
+    	  	
+    	if(getTurno()==1 && currentX==1 && currentY==numColumn-1)
+    	{
+    		setTurno(1);
 		}
 		
-		 else if((!(currentX==0 && currentY==1 && getTurno()==2))&& getTurno()==2){
+		else if(getTurno()==2 && currentX==1 && currentY==0)
+		{
+			setTurno(2);
+		}
+		else if(getTurno()==2)
+		{
 			setTurno(1);
+		}
+		else 
+		{
+			setTurno(2);
 		}
 		
 	}
@@ -113,7 +121,12 @@ public class BoardSituation
     	//Comienza a poner semillas
     	while (numSeeds>0)
     	{
-    		Board[row][col].sumSeed(1);
+    		//except P’s opponent's tray
+    		if(!(getTurno()==1 && row==1 && col==0) && !(getTurno()==2 && row==1 && col==numColumn-1))
+    		{
+    			Board[row][col].sumSeed(1);
+    		}
+    		
     		numSeeds--;
     		if (row==numRow-1 && col<numColumn-1)
         		col++;

@@ -74,7 +74,7 @@ public class Match extends Activity {
 		b15= (TextView) findViewById(R.id.textView12);
 		
 		message= (TextView) findViewById(R.id.textView34);
-		message.setText("Please Select Players and press Start");
+		message.setText("Please Select the Players and Press Start....");
 		
 			
 				
