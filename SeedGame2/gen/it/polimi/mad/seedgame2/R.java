@@ -95,6 +95,7 @@ public final class R {
         public static final int space=0x7f050014;
         public static final int stadistics=0x7f050004;
         public static final int start=0x7f050015;
+        public static final int state=0x7f050016;
     }
     public static final class style {
         /** 

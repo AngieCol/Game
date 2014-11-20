@@ -1,5 +1,7 @@
 package it.polimi.mad.seedgame2;
 
+import android.util.Log;
+
 public class BoardSituation 
 {
 	
@@ -68,7 +70,7 @@ public class BoardSituation
 			
 			setTurn();
 			
-			return "Move done!. Now It's the turn of player "+getTurno();
+			return "Move done! Now It's the turn of Player: "+getTurno();
 		}
 		
 		
@@ -79,26 +81,32 @@ public class BoardSituation
     
     
     
-    //VOY AQUÍIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+    
     public void setTurn() {
     	
-    	  	
+    	String x=""+getTurno()+"--"+currentX+"--"+currentY;
+    	
+    	Log.v("ifs",x);
     	if(getTurno()==1 && currentX==1 && currentY==numColumn-1)
     	{
     		setTurno(1);
+    		Log.v("ifs","primer if");
 		}
 		
 		else if(getTurno()==2 && currentX==1 && currentY==0)
 		{
 			setTurno(2);
+			Log.v("ifs","primer else if");
 		}
 		else if(getTurno()==2)
 		{
 			setTurno(1);
+			Log.v("ifs","2 else if");
 		}
 		else 
 		{
 			setTurno(2);
+			Log.v("ifs","else");
 		}
 		
 	}
@@ -128,6 +136,9 @@ public class BoardSituation
     		}
     		
     		numSeeds--;
+    		currentX=row;
+    	  	currentY=col;
+    	  	
     		if (row==numRow-1 && col<numColumn-1)
         		col++;
         	else if(col==numColumn-1 && row>0)
@@ -138,8 +149,7 @@ public class BoardSituation
         		row++;	
     	}
     	
-    	  	currentX=row;
-    	  	currentY=col;
+    	  	
     	
     }
     

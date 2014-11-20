@@ -1,10 +1,10 @@
 package it.polimi.mad.seedgame2;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 import junit.framework.*;
 import org.junit.Test;
-import android.test.AndroidTestCase;
-import android.util.Log;
+//import android.test.AndroidTestCase;
+//import android.util.Log;
 
 public class BoardSituationTest extends TestCase{
 
