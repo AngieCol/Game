@@ -84,30 +84,39 @@ public class BoardSituation
     
     public void setTurn() {
     	
-    	String x=""+getTurno()+"--"+currentX+"--"+currentY;
+    	if(getTurno()==1 && !(currentX==1 && currentY==numColumn-1))
+    	{
+    		setTurno(2);
+    		
+		}
+		
+		else if(getTurno()==2 && !(currentX==1 && currentY==0))
+		{
+			setTurno(1);
+			
+		}
     	
-    	Log.v("ifs",x);
-    	if(getTurno()==1 && currentX==1 && currentY==numColumn-1)
+    	/*if(getTurno()==1 && currentX==1 && currentY==numColumn-1)
     	{
     		setTurno(1);
-    		Log.v("ifs","primer if");
+    		
 		}
 		
 		else if(getTurno()==2 && currentX==1 && currentY==0)
 		{
 			setTurno(2);
-			Log.v("ifs","primer else if");
+			
 		}
 		else if(getTurno()==2)
 		{
 			setTurno(1);
-			Log.v("ifs","2 else if");
+			
 		}
 		else 
 		{
 			setTurno(2);
-			Log.v("ifs","else");
-		}
+			
+		}*/
 		
 	}
 
