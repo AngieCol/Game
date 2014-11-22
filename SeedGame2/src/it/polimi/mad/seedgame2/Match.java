@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Match extends Activity {
@@ -35,9 +36,9 @@ public class Match extends Activity {
 	TextView b15= null;
 	
 	TextView message= null;
-
+	EditText inputString=null;
 	
-	
+	TextView explica= null;
 	
 	
 	
@@ -76,7 +77,7 @@ public class Match extends Activity {
 		message= (TextView) findViewById(R.id.textView34);
 		message.setText("Please Select the Players and Press Start....");
 		
-			
+		explica=(TextView) findViewById(R.id.textView35);
 				
 		
 		
@@ -85,9 +86,8 @@ public class Match extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
-				message.setText("Player "+bs.getTurno()+" begins");
 				bs= new BoardSituation();
+				message.setText("Player "+bs.getTurno()+" begins");
 				paintBoard();
 				
 			
@@ -96,6 +96,33 @@ public class Match extends Activity {
 		});
 		
 		
+		
+		
+		inputString= (EditText)findViewById(R.id.editText1);
+		
+		Button bStart2= (Button) findViewById(R.id.button2);
+		bStart2.setOnClickListener(new OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				String inputS= inputString.getText().toString();
+				
+				String rta=bs.verifyStringInput(inputS);
+				
+				if(rta==""){
+				 bs= new BoardSituation(inputS);
+				 message.setText("Player "+bs.getTurno()+" begins");
+				 paintBoard();
+				}
+				else
+					message.setText("The input text has a wrong structure. "+rta);
+				
+				
+				
+			
+				
+			}
+		});
 		
 		
 	
