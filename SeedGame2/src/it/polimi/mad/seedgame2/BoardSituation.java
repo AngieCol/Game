@@ -16,6 +16,8 @@ public class BoardSituation
 	int turno=0;
 	int currentX=-1;
 	int currentY=-1;
+	
+	String winner="";
 
 	///////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////
@@ -112,8 +114,14 @@ public class BoardSituation
 			putSeeds(positionRow,positionCol);
 			eatSeeds();
 			setTurn();
-
-			return "Move done!!! Now It's the turn of Player: "+getTurno();
+			if(!verifyWin())
+			{
+			 return "Move done!!! Now It's the turn of Player: "+getTurno();
+			}
+			else
+			{
+				return "The game is finished. "+ winner; 
+			}
 		}
 
 
@@ -246,7 +254,55 @@ public class BoardSituation
 	public void setTurno(int turno) {
 		this.turno = turno;
 	}
+	
+	
+	
+	public boolean verifyWin() {
+		
+		int numSeed1=0;
+		int numSeed2=0;
+		
+		for(int i=0; i<numColumn; i++)
+		{
+			numSeed2+=Board[0][i].getNumSeed();
+			numSeed1+=Board[numRow-1][i].getNumSeed();
+		}
+		
+		if(numSeed1>0 && numSeed2>0)
+		{
+			return false;
+		}
+		else 
+		{
+			if(numSeed1<1)
+			{
+				Board[1][0].sumSeed(numSeed2);
+				
+			}
+			else
+			{
+				Board[1][numColumn-1].sumSeed(numSeed1);
+			}
+			if(Board[1][0].getNumSeed()>Board[1][numColumn-1].getNumSeed())
+				winner= "The winner is Player 1!!!";
+			else if (Board[1][0].getNumSeed()<Board[1][numColumn-1].getNumSeed())
+				winner= "The winner is Player 2!!!";
+			else
+				winner="There is a draw of player 1 and player 2";
+			return true;
+		}
+		
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String verifyStringInput(String s) {
 
 		String[] inputSplited= s.split(",");

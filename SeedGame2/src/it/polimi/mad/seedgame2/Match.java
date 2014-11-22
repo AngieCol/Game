@@ -54,7 +54,12 @@ public class Match extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.match);
 		bs= new BoardSituation();
-	    
+		
+		
+		message= (TextView) findViewById(R.id.textView34);
+		message.setText("Please Select the Players and Press Start....");
+		explica=(TextView) findViewById(R.id.textView35);
+		
 		b00= (TextView) findViewById(R.id.textView1);
 		b01= (TextView) findViewById(R.id.textView2);
 		b02= (TextView) findViewById(R.id.textView3);
@@ -74,10 +79,9 @@ public class Match extends Activity {
 		b10= (TextView) findViewById(R.id.textView7);
 		b15= (TextView) findViewById(R.id.textView12);
 		
-		message= (TextView) findViewById(R.id.textView34);
-		message.setText("Please Select the Players and Press Start....");
 		
-		explica=(TextView) findViewById(R.id.textView35);
+		
+		
 				
 		
 		
@@ -267,6 +271,13 @@ public class Match extends Activity {
 
 	
 	public void paintBoard(){
+		
+		if(message.getText().toString().contains("The game is finished"))
+		{
+			bs=new BoardSituation();
+		}
+		
+		
 		b00.setText((bs.Board[0][0].getNumSeed())+"");
 		b01.setText((bs.Board[0][1].getNumSeed())+"");
 		b02.setText((bs.Board[0][2].getNumSeed())+"");
