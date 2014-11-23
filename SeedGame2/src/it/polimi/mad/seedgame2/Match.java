@@ -115,7 +115,14 @@ public class Match extends Activity {
 				
 				if(rta==""){
 				 bs= new BoardSituation(inputS);
-				 message.setText("Player "+bs.getTurno()+" begins");
+				 boolean b= bs.verifyWin();
+				 if(!b){
+					 message.setText("Player "+bs.getTurno()+" begins");
+				 }
+				 else{
+					 message.setText("The game is finished. "+ bs.getWinner());
+				 }
+				 
 				 paintBoard();
 				}
 				else
@@ -272,10 +279,7 @@ public class Match extends Activity {
 	
 	public void paintBoard(){
 		
-		if(message.getText().toString().contains("The game is finished"))
-		{
-			bs=new BoardSituation();
-		}
+	
 		
 		
 		b00.setText((bs.Board[0][0].getNumSeed())+"");
