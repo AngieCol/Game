@@ -123,8 +123,8 @@ public class BoardSituation
 			}
 			else
 			{
-				paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurno()+". "+eated);
-				return "The game is finished. "+ winner+". "; 
+				paintBoardInConsole("The game is finished. "+ winner+". "+". "+eated);
+				return "The game is finished. "+ winner+". "+eated; 
 			}
 		}
 
