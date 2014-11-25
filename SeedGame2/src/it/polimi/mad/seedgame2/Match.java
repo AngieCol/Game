@@ -59,9 +59,9 @@ public class Match {
 
 				}
 			}
-		if(numSeedsInInputString==36)
+		if(numSeedsInInputString!=36)
 		{
-			respuesta+="The total number of seeds in the board has to be 36. ";
+			respuesta+="The total number of seeds in the board has to be 36. "+numSeedsInInputString;
 		}
 		return respuesta;
 }

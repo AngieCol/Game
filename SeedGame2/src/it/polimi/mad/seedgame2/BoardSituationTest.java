@@ -20,7 +20,7 @@ public class BoardSituationTest extends TestCase{
 	 * Number of seeds are 36
 	 */
 	@Test
-	public void testBoardCreationdefault() 
+	public void testBoardCreationDefault() 
 	{
 		BoardSituation b = new BoardSituation();
 		
