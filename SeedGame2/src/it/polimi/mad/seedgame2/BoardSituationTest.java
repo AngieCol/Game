@@ -10,18 +10,188 @@ public class BoardSituationTest extends TestCase{
 
 	
 	/**
+	 * Correct Default Creation of the Board	
+	 * Creation of each slot
+	 * Player 1 has the turn 
+	 * 
+	 */
+	@Test
+	public void testBoardCreationdefault() 
+	{
+		BoardSituation b = new BoardSituation();
+		
+		
+		Slot s= b.Board[0][0];
+		
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][1];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][2];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][3];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][4];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][5];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		
+		s= b.Board[2][1];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][2];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][3];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][4];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][5];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		
+		
+		s= b.Board[1][0];
+		assertTrue(s.getType().equals("T2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[1][5];
+		assertTrue(s.getType().equals("T1"));
+		assertTrue(s.getNumSeed()==3);
+		
+		
+		assertTrue(b.getTurno()==1);
+		
+		
+	}
+	
+	/**
+	 * Correct Creation of the Board using Parameters	
+	 * Board Situation 
+	 * 
+	 */
+	@Test
+	public void testBoardCreationParameters() 
+	{
+		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
+		BoardSituation b = new BoardSituation();
+		
+		
+		Slot s= b.Board[0][0];
+		
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][1];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][2];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][3];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][4];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[0][5];
+		assertTrue(s.getType().equals("B2"));
+		assertTrue(s.getNumSeed()==3);
+		
+		s= b.Board[2][1];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][2];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][3];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][4];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[2][5];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
+		
+		
+		s= b.Board[1][0];
+		assertTrue(s.getType().equals("T2"));
+		assertTrue(s.getNumSeed()==3);
+		s= b.Board[1][5];
+		assertTrue(s.getType().equals("T1"));
+		assertTrue(s.getNumSeed()==3);
+		
+		assertTrue(b.getTurno()==2);
+	}
+	
+	/**
 	 * Players	alternate	turns	
 	 * Board Situation 
 	 * 
 	 */
-	
+	@Test
+	public void testAlternateTurns() 
+	{
+		BoardSituation b = new BoardSituation();
+		Slot s= b.Board[2][0];
+		
+			
+			assertTrue(b.verifyMovement(s).equals(""));
+	}
 	
 	/**
-	 * Player doesn't change turns	
+	 * Player doesn't change turns	(Player1’s	last	seed	drops	in	
+	 * his/her	own	tray,	Player 1	moves again)
 	 * Board Situation 
 	 * 
 	 */
 	
+	/**
+	 * Player 1 takes all the	seeds	from	the selected bowl	and	moves
+	 * counter-clockwise,	dropping	one	seed	in	each	bowl	or	tray,
+	 * except	Player2’s Tray		
+	 * Board Situation 
+	 * 
+	 */
+	
+	/**
+	 * Player 2 takes all the	seeds	from	the selected bowl	and	moves
+	 * counter-clockwise,	dropping	one	seed	in	each	bowl	or	tray,
+	 * except	Player1’s Tray		
+	 * Board Situation 
+	 * 
+	 */
+	
+
+	/**
+	 * Player's 1	last	seed	drops	in	an	empty	bowl	of	Player1,
+	 * Player1	moves	that	seed	to his/her	Tray	and	also	picks up
+	 * all	the	seeds	in	Player's 2	bowl (opposite	to	the	empty	bowl),
+	 * and	places	them	all	in	Player’s 1	own	tray	
+	 * 
+	 */
+	
+	
+	
+	/**
+	 * Player's 2	last	seed	drops	in	an	empty	bowl	of	Player2,
+	 * Player2	moves	that	seed	to his/her	Tray	and	also	picks up
+	 * all	the	seeds	in	Player's 1	bowl (opposite	to	the	empty	bowl),
+	 * and	places	them	all	in	Player’s 2	own	tray	
+	 * 
+	 */
+	
+	/**
+	 * The end of the	game (All	the	bowls on	one player's	side	are	
+	 * empty. The	remaining	seeds	are	moved	to	the	other player's	tray.
+	 * The	winner	is	the	player	with	the	most	seeds.		
+	 */
 	
 	
 	
@@ -141,52 +311,7 @@ public class BoardSituationTest extends TestCase{
 		
 	}
 	
-	/**
-	 * Player 1 plays in player's 2 board
-	 */
-	@Test
-	public void testBoardSituation2() 
-	{
-		
-		BoardSituation b = new BoardSituation();
-		Slot s= b.Board[2][0];
-		
-			
-			assertTrue(b.verifyMovement(s).equals(""));
-			
-		
-		
-	}
 	
 	
-	@Test
-	public void testBoardSituation() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMovement() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPutSeeds() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testVerifyMovement() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetTurno() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetTurno() {
-		fail("Not yet implemented");
-	}
-
+	
 }

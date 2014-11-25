@@ -356,5 +356,18 @@ public class BoardSituation
 }
 
 
+	
+	
+	
+	public int CountSeedsInBoard() 
+	{
+		int numTotalSeeds=0;
+		for(int i=0; i<numColumn; i++)
+		{
+			numTotalSeeds+=Board[0][i].getNumSeed()+Board[2][i].getNumSeed();
+		}
+		numTotalSeeds+=Board[1][0].getNumSeed()+Board[1][5].getNumSeed();
+		return numTotalSeeds;
+	}
 
 }
