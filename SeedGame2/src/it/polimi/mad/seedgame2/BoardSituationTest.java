@@ -10,6 +10,23 @@ public class BoardSituationTest extends TestCase{
 
 	
 	/**
+	 * Players	alternate	turns	
+	 * Board Situation 
+	 * 
+	 */
+	
+	
+	/**
+	 * Player doesn't change turns	
+	 * Board Situation 
+	 * 
+	 */
+	
+	
+	
+	
+	
+	/**
 	 * The first test consist in:
 	 *  1) Initial situation of the Board has to be the following: 
 	 *  [0][0]: number of seeds 3, type B2

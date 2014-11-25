@@ -17,10 +17,10 @@ public class Slot {
 	 * Constructor	
 	 * @param type
 	 */
-	public Slot(String type, int seed)
+	public Slot(String typeS, int seed)
 	{
-	  this.type =type; 
-	  this.numSeed=seed;
+	  type =typeS; 
+	  numSeed=seed;
 	  
 	  
 	}
@@ -35,8 +35,8 @@ public class Slot {
 
 
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String typeS) {
+		type = typeS;
 	}
 
 
@@ -49,12 +49,12 @@ public class Slot {
 
 
 
-	public void setNumSeed(int numSeed) {
-		this.numSeed = numSeed;
+	public void setNumSeed(int numSeedS) {
+		numSeed = numSeedS;
 	}
 	
-	public void sumSeed(int numSeed) {
-		this.numSeed = this.numSeed+ numSeed;
+	public void sumSeed(int numSeedS) {
+		numSeed = numSeed+ numSeedS;
 	}
 
 }

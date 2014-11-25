@@ -86,10 +86,10 @@ public class BoardSituation
 	public void paintBoardInConsole(String s) {
 		
 		
-		Log.v("GameConsola", " =====================================================");
+		Log.d("GameConsola", " =====================================================");
 		Log.v("GameConsola", s);
-		Log.v("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		Log.v("GameConsola", " | "+ Board[0][0].getNumSeed()+" | "+ Board[0][1].getNumSeed()+" | "+ Board[0][2].getNumSeed()+" | "+  Board[0][3].getNumSeed()+" | "+  Board[0][4].getNumSeed()+" | "+  Board[0][5].getNumSeed()+" | " );
+		Log.e("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		Log.w("GameConsola", " | "+ Board[0][0].getNumSeed()+" | "+ Board[0][1].getNumSeed()+" | "+ Board[0][2].getNumSeed()+" | "+  Board[0][3].getNumSeed()+" | "+  Board[0][4].getNumSeed()+" | "+  Board[0][5].getNumSeed()+" | " );
 		Log.v("GameConsola", " | "+ Board[1][0].getNumSeed()+" |  | " + Board[1][5].getNumSeed()+" | " );
 		Log.v("GameConsola", " | "+ Board[2][0].getNumSeed()+" | "+ Board[2][1].getNumSeed()+" | "+ Board[2][2].getNumSeed()+" | "+  Board[2][3].getNumSeed()+" | "+  Board[2][4].getNumSeed()+" | "+  Board[2][5].getNumSeed()+" | " );
 		Log.v("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -266,7 +266,7 @@ public class BoardSituation
 	}
 
 	public void setWinner(String win) {
-		this.winner = win;
+		winner = win;
 	}
 	
 	

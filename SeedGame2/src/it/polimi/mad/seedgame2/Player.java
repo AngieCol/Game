@@ -6,24 +6,41 @@ public class Player {
 	String userName;
 	int totalPoints; 
 	int numPlayedGame;
+	int numDrawnGame;
 	int numWonGames; 
-	int HighestScore;
-	int Lowestscore;
+	int highestScore;
+	int lowestscore;
 	boolean isHuman;
-	int playerNumber;
+	
 
 
-	public Player(String username) {
-		this.userName=username;
+	public Player(String usern) {
+		userName=usern;
 		numPlayedGame=0;
+		numDrawnGame=0;
 		numWonGames=0; 
-		HighestScore=0;
-		Lowestscore=0;
+		highestScore=0;
+		lowestscore=0;
 		isHuman=true;
 		
 	}
 
 
+	public void updatePlayer(String winner, int points) {
+		numPlayedGame++;
+		
+		if (points> highestScore)
+			highestScore=points;
+		if (points< lowestscore)
+			lowestscore=points;
+		if(winner.equalsIgnoreCase("winner"))
+			numWonGames++;
+		else if(winner.equalsIgnoreCase("drawn"))
+			numDrawnGame++;
+		
+	}
+	
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -65,22 +82,22 @@ public class Player {
 
 
 	public int getHighestScore() {
-		return HighestScore;
+		return highestScore;
 	}
 
 
 	public void setHighestScore(int highestScore) {
-		HighestScore = highestScore;
+		this.highestScore = highestScore;
 	}
 
 
 	public int getLowestscore() {
-		return Lowestscore;
+		return lowestscore;
 	}
 
 
 	public void setLowestscore(int lowestscore) {
-		Lowestscore = lowestscore;
+		this.lowestscore = lowestscore;
 	}
 
 
@@ -94,13 +111,5 @@ public class Player {
 	}
 
 
-	public int getPlayerNumber() {
-		return playerNumber;
-	}
-
-
-	public void setPlayerNumber(int playerNumber) {
-		this.playerNumber = playerNumber;
-	}
-
+	
 }
