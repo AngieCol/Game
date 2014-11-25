@@ -27,6 +27,7 @@ public class BoardSituationTest extends TestCase{
 		
 		Slot s= b.Board[0][0];
 		
+		
 		assertTrue(s.getType().equals("B2"));
 		assertTrue(s.getNumSeed()==3);
 		s= b.Board[0][1];
@@ -169,9 +170,15 @@ public class BoardSituationTest extends TestCase{
 	@Test
 	public void testIncorrectInputString() 
 	{
-		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
+		//There are more numbers in the input text (The length of the input text must be 15)
+		String inputString="3,3,3,3,3,3,3,3,3,3,3,3,0,0,1";
+		Match m=new Match("","","");
+		//assertTrue(m.verifyStringInput(inputString).equals(""));
 		
-		//assertTrue(.equals("B2"));
+		
+		
+		
+		
 	}
 	
 	

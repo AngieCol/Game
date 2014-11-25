@@ -15,6 +15,8 @@ public class MatchUI extends Activity {
 	
 	
 	BoardSituation bs=null;
+	Match mat=null;
+	
 	
 	TextView b00= null;
 	TextView b01= null;
@@ -54,7 +56,7 @@ public class MatchUI extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.match);
 		bs= new BoardSituation();
-		
+		mat= new Match("", "", "");
 		
 		message= (TextView) findViewById(R.id.textView34);
 		message.setText("Please Select the Players and Press Start...");
@@ -111,7 +113,7 @@ public class MatchUI extends Activity {
 			public void onClick(View v) {
 				String inputS= inputString.getText().toString();
 				
-				String rta=bs.verifyStringInput(inputS);
+				String rta=mat.verifyStringInput(inputS);
 				
 				if(rta==""){
 				 bs= new BoardSituation(inputS);

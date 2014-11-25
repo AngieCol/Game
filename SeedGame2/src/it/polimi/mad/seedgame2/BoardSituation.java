@@ -324,49 +324,7 @@ public class BoardSituation
 	
 	
 	
-	public String verifyStringInput(String s) {
-
-		String[] inputSplited= s.split(",");
-		String respuesta=""; 
-		int numSeedsInInputString=0;
-		
-		if(inputSplited.length!=15)
-		{
-			respuesta+="The number of integers separated by comma has to be 15. ";
-		}
-		if(!inputSplited[inputSplited.length-1].toString().equals("1") && !inputSplited[inputSplited.length-1].toString().equals("2"))
-		{
-			respuesta+="The last number must be 1 or 2 because it is the current player. ";
-		}
-		
-		for(int i=0; i<inputSplited.length; i++)
-			{
-				try 
-				{
-					int numSeed=Integer.parseInt(inputSplited[i]);
-					if(Integer.parseInt(inputSplited[i])<0)
-						respuesta+="The input text must be integer numbers, greater than 0, separated by comma. "; 
-
-					//i<inputSplited.length-1 because the last one is the player that has the  turn
-					if(i<inputSplited.length-1)
-						numSeedsInInputString+=numSeed;
-					
-					
-				} 
-				catch (NumberFormatException e) 
-				{
-					respuesta+="The input text cannot include letters or decimal numbers, it must be integer numbers, greater than 0, separated by comma. "; 
-
-				}
-			}
-		if(numSeedsInInputString==this.numBoardSeeds)
-		{
-			respuesta+="The total number of seeds in the board has to be 36. ";
-		}
-		return respuesta;
-}
-
-
+	
 	
 	
 	
