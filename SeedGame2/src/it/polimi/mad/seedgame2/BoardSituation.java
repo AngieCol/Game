@@ -11,6 +11,7 @@ public class BoardSituation
 
 	static int numColumn = 6;
 	static int numRow = 3;
+	static int numBoardSeeds = 36;
 
 	Slot[][] Board = null;
 	int turno=0;
@@ -327,7 +328,8 @@ public class BoardSituation
 
 		String[] inputSplited= s.split(",");
 		String respuesta=""; 
-				
+		int numSeedsInInputString=0;
+		
 		if(inputSplited.length!=15)
 		{
 			respuesta+="The number of integers separated by comma has to be 15. ";
@@ -336,14 +338,20 @@ public class BoardSituation
 		{
 			respuesta+="The last number must be 1 or 2 because it is the current player. ";
 		}
+		
 		for(int i=0; i<inputSplited.length; i++)
 			{
 				try 
 				{
-					Integer.parseInt(inputSplited[i]);
+					int numSeed=Integer.parseInt(inputSplited[i]);
 					if(Integer.parseInt(inputSplited[i])<0)
 						respuesta+="The input text must be integer numbers, greater than 0, separated by comma. "; 
 
+					//i<inputSplited.length-1 because the last one is the player that has the  turn
+					if(i<inputSplited.length-1)
+						numSeedsInInputString+=numSeed;
+					
+					
 				} 
 				catch (NumberFormatException e) 
 				{
@@ -351,7 +359,10 @@ public class BoardSituation
 
 				}
 			}
-		
+		if(numSeedsInInputString==this.numBoardSeeds)
+		{
+			respuesta+="The total number of seeds in the board has to be 36. ";
+		}
 		return respuesta;
 }
 
@@ -369,5 +380,7 @@ public class BoardSituation
 		numTotalSeeds+=Board[1][0].getNumSeed()+Board[1][5].getNumSeed();
 		return numTotalSeeds;
 	}
+	
+
 
 }

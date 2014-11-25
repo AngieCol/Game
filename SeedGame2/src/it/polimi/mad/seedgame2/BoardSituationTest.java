@@ -12,8 +12,12 @@ public class BoardSituationTest extends TestCase{
 	/**
 	 * Correct Default Creation of the Board	
 	 * Creation of each slot
+	 * 3,3,3,3,3,3 belongs to player's 2 bowls
+	 * 3,3,3,3,3,3 belongs to player's 1 bowls
+	 * 0  belongs to player's 2 tray
+	 * 0  belongs to player's 1 tray
 	 * Player 1 has the turn 
-	 * 
+	 * Number of seeds are 36
 	 */
 	@Test
 	public void testBoardCreationdefault() 
@@ -41,6 +45,9 @@ public class BoardSituationTest extends TestCase{
 		assertTrue(s.getType().equals("B2"));
 		assertTrue(s.getNumSeed()==3);
 		
+		s= b.Board[2][0];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==3);
 		s= b.Board[2][1];
 		assertTrue(s.getType().equals("B1"));
 		assertTrue(s.getNumSeed()==3);
@@ -68,67 +75,105 @@ public class BoardSituationTest extends TestCase{
 		
 		assertTrue(b.getTurno()==1);
 		
+		assertTrue(b.CountSeedsInBoard()==b.numBoardSeeds);
+		
 		
 	}
 	
 	/**
 	 * Correct Creation of the Board using Parameters	
-	 * Board Situation 
+	 * inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2"
+	 * Creation of each slot. 
+	 * 1,1,1,1,5,5 belongs to player's 2 bowls
+	 * 2,4,0,0,0,0 belongs to player's 1 bowls
+	 * 10  belongs to player's 2 tray
+	 * 6  belongs to player's 1 tray
+	 * Player 2 has the turn 
+	 * Number of seeds are 36
 	 * 
 	 */
 	@Test
 	public void testBoardCreationParameters() 
 	{
 		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
-		BoardSituation b = new BoardSituation();
+		BoardSituation b = new BoardSituation(inputString);
 		
 		
 		Slot s= b.Board[0][0];
 		
 		assertTrue(s.getType().equals("B2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==1);
 		s= b.Board[0][1];
 		assertTrue(s.getType().equals("B2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==1);
 		s= b.Board[0][2];
 		assertTrue(s.getType().equals("B2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==1);
 		s= b.Board[0][3];
 		assertTrue(s.getType().equals("B2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==1);
 		s= b.Board[0][4];
 		assertTrue(s.getType().equals("B2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==5);
 		s= b.Board[0][5];
 		assertTrue(s.getType().equals("B2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==5);
 		
+		
+		s= b.Board[2][0];
+		assertTrue(s.getType().equals("B1"));
+		assertTrue(s.getNumSeed()==2);
 		s= b.Board[2][1];
 		assertTrue(s.getType().equals("B1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==4);
 		s= b.Board[2][2];
 		assertTrue(s.getType().equals("B1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==0);
 		s= b.Board[2][3];
 		assertTrue(s.getType().equals("B1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==0);
 		s= b.Board[2][4];
 		assertTrue(s.getType().equals("B1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==0);
 		s= b.Board[2][5];
 		assertTrue(s.getType().equals("B1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==0);
 		
 		
 		s= b.Board[1][0];
 		assertTrue(s.getType().equals("T2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==10);
 		s= b.Board[1][5];
 		assertTrue(s.getType().equals("T1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==6);
 		
 		assertTrue(b.getTurno()==2);
+		assertTrue(b.CountSeedsInBoard()==b.numBoardSeeds);
 	}
+	
+	/**
+	 * The verification of the input text, before the creation of the Board 
+	 * using Parameters returns the proper message when the inputString 
+	 * is not created properly 
+	 * 
+	 * - There are more numbers in the input text (The length of the input text must be 15)
+	 * - There are less numbers in the input text (The length of the input text must be 15)
+	 * - The last number is not a valid player (Must be 1 or 2). 
+	 * - The last number is not a valid player (Must be 1 or 2). 
+	 * - The input text contains letters.
+	 * - The input text contains decimals.
+	 * - The input text contains negative numbers
+	 * - The total number of seeds in the board is different to 36.
+	 */
+	
+	@Test
+	public void testIncorrectInputString() 
+	{
+		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
+		
+		//assertTrue(.equals("B2"));
+	}
+	
 	
 	/**
 	 * Players	alternate	turns	
@@ -138,11 +183,7 @@ public class BoardSituationTest extends TestCase{
 	@Test
 	public void testAlternateTurns() 
 	{
-		BoardSituation b = new BoardSituation();
-		Slot s= b.Board[2][0];
-		
-			
-			assertTrue(b.verifyMovement(s).equals(""));
+
 	}
 	
 	/**
