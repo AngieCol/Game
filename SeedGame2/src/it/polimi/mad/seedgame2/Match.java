@@ -29,6 +29,8 @@ public class Match {
 		String[] inputSplited= s.split(",");
 		String respuesta=""; 
 		int numSeedsInInputString=0;
+		int numSeedsInSlotPlayer1=0;
+		int numSeedsInSlotPlayer2=0;
 		
 		if(inputSplited.length!=15)
 		{
@@ -51,7 +53,10 @@ public class Match {
 					if(i<inputSplited.length-1)
 						numSeedsInInputString+=numSeed;
 					
-					
+					if(i<6)
+						numSeedsInSlotPlayer2=numSeed;
+					if(i>5 && i<12)
+						numSeedsInSlotPlayer1=numSeed;
 				} 
 				catch (NumberFormatException e) 
 				{
@@ -62,6 +67,11 @@ public class Match {
 		if(numSeedsInInputString!=36)
 		{
 			respuesta+="The total number of seeds in the board has to be 36. ";
+		}
+		
+		if(respuesta=="" && (numSeedsInSlotPlayer1==0 || numSeedsInSlotPlayer2==0))
+		{
+			
 		}
 		return respuesta;
 }
