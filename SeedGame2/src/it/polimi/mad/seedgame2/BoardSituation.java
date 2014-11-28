@@ -87,14 +87,15 @@ public class BoardSituation
 	public void paintBoardInConsole(String s) {
 		
 		
-		Log.d("GameConsola", " =====================================================");
-		Log.v("GameConsola", s);
-		Log.e("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		Log.w("GameConsola", " | "+ Board[0][0].getNumSeed()+" | "+ Board[0][1].getNumSeed()+" | "+ Board[0][2].getNumSeed()+" | "+  Board[0][3].getNumSeed()+" | "+  Board[0][4].getNumSeed()+" | "+  Board[0][5].getNumSeed()+" | " );
-		Log.v("GameConsola", " | "+ Board[1][0].getNumSeed()+" |  | " + Board[1][5].getNumSeed()+" | " );
-		Log.v("GameConsola", " | "+ Board[2][0].getNumSeed()+" | "+ Board[2][1].getNumSeed()+" | "+ Board[2][2].getNumSeed()+" | "+  Board[2][3].getNumSeed()+" | "+  Board[2][4].getNumSeed()+" | "+  Board[2][5].getNumSeed()+" | " );
+		Log.v("GameConsola", " ....................................................");
 		Log.v("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
+		Log.w("GameConsola", s+" ");
+		Log.w("GameConsola", " | "+ Board[0][0].getNumSeed()+" | "+ Board[0][1].getNumSeed()+" | "+ Board[0][2].getNumSeed()+" | "+  Board[0][3].getNumSeed()+" | "+  Board[0][4].getNumSeed()+" | "+  Board[0][5].getNumSeed()+" | " );
+		Log.d("GameConsola", " | "+ Board[1][0].getNumSeed()+" | ============= | " + Board[1][5].getNumSeed()+" | " );
+		Log.e("GameConsola", " | "+ Board[2][0].getNumSeed()+" | "+ Board[2][1].getNumSeed()+" | "+ Board[2][2].getNumSeed()+" | "+  Board[2][3].getNumSeed()+" | "+  Board[2][4].getNumSeed()+" | "+  Board[2][5].getNumSeed()+" | " );
+		Log.v("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		Log.v("GameConsola", " ....................................................");
+		Log.v("GameConsola", " _ ");
 
 	}
 
@@ -338,7 +339,69 @@ public class BoardSituation
 		numTotalSeeds+=Board[1][0].getNumSeed()+Board[1][5].getNumSeed();
 		return numTotalSeeds;
 	}
+
+
+	public static int getNumColumn() {
+		return numColumn;
+	}
+
+
+	public static void setNumColumn(int numColumn) {
+		BoardSituation.numColumn = numColumn;
+	}
+
+
+	public static int getNumRow() {
+		return numRow;
+	}
+
+
+	public static void setNumRow(int numRow) {
+		BoardSituation.numRow = numRow;
+	}
+
+
+	public static int getNumBoardSeeds() {
+		return numBoardSeeds;
+	}
+
+
+	public static void setNumBoardSeeds(int numBoardSeeds) {
+		BoardSituation.numBoardSeeds = numBoardSeeds;
+	}
+
+
+	public Slot[][] getBoard() {
+		return Board;
+	}
+
+
+	public void setBoard(Slot[][] board) {
+		Board = board;
+	}
+
+
+	public int getCurrentX() {
+		return currentX;
+	}
+
+
+	public void setCurrentX(int currentX) {
+		this.currentX = currentX;
+	}
+
+
+	public int getCurrentY() {
+		return currentY;
+	}
+
+
+	public void setCurrentY(int currentY) {
+		this.currentY = currentY;
+	}
 	
 
+	
+	
 
 }

@@ -1,13 +1,19 @@
 package it.polimi.mad.seedgame2;
 
-//import static org.junit.Assert.*;
+
 import junit.framework.*;
 import org.junit.Test;
-//import android.test.AndroidTestCase;
-//import android.util.Log;
+import android.test.AndroidTestCase;
+import android.util.Log;
 
-public class BoardSituationTest extends TestCase{
+public class GameSeedTests extends TestCase{
 
+	
+	//===========================================================================================
+	//===========================================================================================
+	// 1.	Creation of Board
+	//===========================================================================================
+	//===========================================================================================
 	
 	/**
 	 * Correct Default Creation of the Board	
@@ -22,6 +28,8 @@ public class BoardSituationTest extends TestCase{
 	@Test
 	public void testBoardCreationDefault() 
 	{
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testBoardCreationDefault"+"..........");
 		BoardSituation b = new BoardSituation();
 		
 		
@@ -68,16 +76,19 @@ public class BoardSituationTest extends TestCase{
 		
 		s= b.Board[1][0];
 		assertTrue(s.getType().equals("T2"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==0);
 		s= b.Board[1][5];
 		assertTrue(s.getType().equals("T1"));
-		assertTrue(s.getNumSeed()==3);
+		assertTrue(s.getNumSeed()==0);
 		
 		
 		assertTrue(b.getTurno()==1);
 		
-		assertTrue(b.CountSeedsInBoard()==b.numBoardSeeds);
+		assertTrue(b.CountSeedsInBoard()==b.getNumBoardSeeds());
 		
+		Log.v("GameConsola", "***************************************");
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                                        ");
 		
 	}
 	
@@ -96,6 +107,8 @@ public class BoardSituationTest extends TestCase{
 	@Test
 	public void testBoardCreationParameters() 
 	{
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testBoardCreationParameters"+"++++++++++++");
 		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
 		BoardSituation b = new BoardSituation(inputString);
 		
@@ -149,7 +162,12 @@ public class BoardSituationTest extends TestCase{
 		assertTrue(s.getNumSeed()==6);
 		
 		assertTrue(b.getTurno()==2);
-		assertTrue(b.CountSeedsInBoard()==b.numBoardSeeds);
+		assertTrue(b.CountSeedsInBoard()==b.getNumBoardSeeds());
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	
+		
 	}
 	
 	/**
@@ -160,38 +178,108 @@ public class BoardSituationTest extends TestCase{
 	 * - There are more numbers in the input text (The length of the input text must be 15)
 	 * - There are less numbers in the input text (The length of the input text must be 15)
 	 * - The last number is not a valid player (Must be 1 or 2). 
-	 * - The last number is not a valid player (Must be 1 or 2). 
 	 * - The input text contains letters.
 	 * - The input text contains decimals.
 	 * - The input text contains negative numbers
 	 * - The total number of seeds in the board is different to 36.
+	 * - The input text contains letters, negative numbers, an invalid player(turn) and total number of seeds in the board is different to 36
 	 */
 	
 	@Test
 	public void testIncorrectInputString() 
 	{
-		//There are more numbers in the input text (The length of the input text must be 15)
-		String inputString="3,3,3,3,3,3,3,3,3,3,3,3,0,0,1";
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testIncorrectInputString"+"++++++++++++");
+		
 		Match m=new Match("","","");
-		//assertTrue(m.verifyStringInput(inputString).equals(""));
+		String inputString="";
+		
+		//There are more numbers in the input text (The length of the input text must be 15)
+		inputString="3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The number of integers separated by comma has to be 15. "));
 		
 		
+		//There are less numbers in the input text (The length of the input text must be 15)
+		inputString="3,3,3,3,3,3,2,16,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The number of integers separated by comma has to be 15. "));
 		
+		//The last number is not a valid player (Must be 1 or 2). 
+		inputString="3,3,3,3,3,3,3,3,3,3,3,3,0,0,9";
+		assertTrue(m.verifyStringInput(inputString).equals("The last number must be 1 or 2 because it is the current player. "));
+			
 		
+		//The input text contains letters.
+		inputString="3,3,3,3,t,6,3,3,3,3,3,3,0,0,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The input text cannot include letters or decimal numbers, it must be integer numbers, greater than 0, separated by comma. "));
+				
+		//The input text contains decimals.
+		inputString="3,3,3,6,3.8,3,3,3,3,3,3,3,0,0,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The input text cannot include letters or decimal numbers, it must be integer numbers, greater than 0, separated by comma. "));
+				
+		//The input text contains negative numbers
+		inputString="3,3,3,3,3,6,10,3,-7,3,3,3,0,0,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The input text must be integer numbers, greater than 0, separated by comma. "));
+	    
+		//The total number of seeds in the board is different to 36.
+		inputString="3,3,3,3,3,3,3,3,3,3,3,3,3,3,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The total number of seeds in the board has to be 36. "));
 		
+				
+		//The input text contains negative numbers
+		inputString="3,3,3,3,3,6,10,3,-7,3,3,3,0,0,1";
+		assertTrue(m.verifyStringInput(inputString).equals("The input text must be integer numbers, greater than 0, separated by comma. "));
+			    
+		
+		//The input text contains letters, negative numbers, an invalid player(turn) and total number of seeds in the board is different to 36
+		inputString="3,3,3,3,3,3,3,3,p,3,3,3,0,0,-7";
+		assertTrue(m.verifyStringInput(inputString).equals("The last number must be 1 or 2 because it is the current player. "+"The input text cannot include letters or decimal numbers, it must be integer numbers, greater than 0, separated by comma. "+"The input text must be integer numbers, greater than 0, separated by comma. "+"The total number of seeds in the board has to be 36. "));
+			    
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	
 	}
+	
+
+
+	
+	//===========================================================================================
+	//===========================================================================================
+	// 2.	Movement
+	//===========================================================================================
+	//===========================================================================================
+	
+
 	
 	
 	/**
 	 * Players	alternate	turns	
-	 * Board Situation 
-	 * 
+	 * Player 2 begins. After Player's 2 movement is the turn of player 1.
+	 * The movement of player 2 doesn't finish on an empty slot, neither in a tray
 	 */
 	@Test
 	public void testAlternateTurns() 
 	{
-
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testAlternateTurns"+"++++++++++++");
+		
+		
+		//Create a initial situation
+		String inputString="1,1,1,1,4,4,2,4,1,1,1,1,10,4,2";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//Player 2 plays 
+		b.movement(0,5);
+		
+		//The turn is for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	
 	}
+	
 	
 	/**
 	 * Player doesn't change turns	(Player1’s	last	seed	drops	in	
@@ -200,13 +288,70 @@ public class BoardSituationTest extends TestCase{
 	 * 
 	 */
 	
+	@Test
+	public void testKeepsTurn() 
+	{
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testKeepsTurn"+"++++++++++++");
+		
+		
+		//Create a initial situation
+		String inputString="1,1,1,1,4,2,2,4,1,3,1,1,10,4,1";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//The turn is for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		//Player 1 plays 
+		b.movement(2,3);
+		
+		//The turn is still for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	
+	}
+	
+	
+	
 	/**
+	 * Normal Movement (Without eating seeds or repeating turn, but with enough seeds to arrive 
+ 	 * in player's 2 Tray and not leave seeds there) 
 	 * Player 1 takes all the	seeds	from	the selected bowl	and	moves
 	 * counter-clockwise,	dropping	one	seed	in	each	bowl	or	tray,
 	 * except	Player2’s Tray		
-	 * Board Situation 
-	 * 
+	 *  
 	 */
+	
+	@Test
+	public void testNormalMoveP1() 
+	{
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testNormalMoveP1"+"++++++++++++");
+		
+		
+		//Create a initial situation
+		String inputString="2,2,2,2,2,2,2,2,2,2,10,2,3,1,1";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//The turn is for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		//Player 1 plays 
+		b.movement(2,4);
+		
+		//The turn is now for Player 2 
+		assertTrue(b.getTurno()==2);
+		
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	
+	}
+	
+	
 	
 	/**
 	 * Player 2 takes all the	seeds	from	the selected bowl	and	moves
@@ -215,6 +360,78 @@ public class BoardSituationTest extends TestCase{
 	 * Board Situation 
 	 * 
 	 */
+	@Test
+	public void testNormalMoveP2() 
+	{
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testNormalMoveP2"+"++++++++++++");
+		
+		
+		//Create a initial situation
+		String inputString="2,2,2,2,2,10,2,2,2,2,2,2,3,1,2";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//The turn is for Player 2 
+		assertTrue(b.getTurno()==2);
+		
+		//Player 1 plays 
+		b.movement(0,5);
+		
+		//The turn is now for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	
+	}
+	
+	
+	/**
+	 * Player's 1	last	seed	drops	in	an	empty	bowl	of	Player2,
+	 * Player don't eat any seed
+	 * 
+	 */
+	
+	@Test
+	public void testP1DoesNotEatSeedsOfP2() 
+	{
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testP1DoesNotEatSeedsOfP2"+"..........");
+		
+		
+		//Create a initial situation
+		String inputString="2,2,2,0,0,0,2,2,2,5,2,2,4,11,1";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//The turn is for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		//Player 1 plays 
+		b.movement(2,3);
+		
+		//The turn is now for Player 2 
+		assertTrue(b.getTurno()==2);
+		
+		//Player's 1 tray only have one seed more (It had 11, now 12)
+		Slot s= b.Board[1][5];
+		assertTrue(s.getNumSeed()==12);
+		
+		
+		//Player's 2 Slot at position [0][4] is 1, not 0 (because it wasn't eaten by player 1)
+		s= b.Board[0][4];
+		assertTrue(s.getNumSeed()==1);
+		
+		
+		//Player's 1 Slot at position [2][4] is 3, not 0 (because it wasn't eaten by player 1)
+		s= b.Board[2][4];
+		assertTrue(s.getNumSeed()==3);
+		
+		
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                   .                   ");
+	}
+	
 	
 
 	/**
@@ -224,6 +441,14 @@ public class BoardSituationTest extends TestCase{
 	 * and	places	them	all	in	Player’s 1	own	tray	
 	 * 
 	 */
+	
+	@Test
+	public void testEatSeedsP1() 
+	{
+		
+	
+	}
+	
 	
 	
 	
@@ -241,7 +466,15 @@ public class BoardSituationTest extends TestCase{
 	 * The	winner	is	the	player	with	the	most	seeds.		
 	 */
 	
+
 	
+	//===========================================================================================
+	//===========================================================================================
+	// 3. Play a game
+	//===========================================================================================
+	//===========================================================================================
+	
+
 	
 	
 	/**
