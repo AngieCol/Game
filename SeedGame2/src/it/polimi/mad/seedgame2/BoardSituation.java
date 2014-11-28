@@ -238,14 +238,14 @@ public class BoardSituation
 	public String eatSeeds() {
 		int seedsToTray=0;
 		String eated="";
-		if(currentX==numRow-1 && getTurno()==1 && Board[currentX][currentY].getNumSeed()==1 && Board[0][currentY].getNumSeed()>0){
+		if(currentX==numRow-1 && getTurno()==1 && Board[currentX][currentY].getNumSeed()==1 ){
 			seedsToTray=(Board[0][currentY].getNumSeed())+1;
 			Board[1][numColumn-1].sumSeed(seedsToTray);
 			Board[0][currentY].setNumSeed(0);
 			Board[currentX][currentY].setNumSeed(0);
 			eated=" Player 1 eated "+ (seedsToTray-1)+ " seeds from Player 2 plus the one that belong to him/her. "; 
 		}
-		else if(currentX==0 && getTurno()==2 && Board[currentX][currentY].getNumSeed()==1 && Board[numRow-1][currentY].getNumSeed()>0){
+		else if(currentX==0 && getTurno()==2 && Board[currentX][currentY].getNumSeed()==1 ){
 			seedsToTray=(Board[numRow-1][currentY].getNumSeed())+1;
 			Board[1][0].sumSeed(seedsToTray);
 			Board[numRow-1][currentY].setNumSeed(0);

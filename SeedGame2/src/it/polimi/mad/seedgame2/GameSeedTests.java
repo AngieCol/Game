@@ -621,29 +621,30 @@ public class GameSeedTests extends TestCase{
 		//The turn is for Player 2 
 		assertTrue(b.getTurno()==2);
 		
-		//Player 1 plays 
+		//Player 2 plays 
 		b.movement(0,5);
 		
 		//The turn is now for Player 1 
 		assertTrue(b.getTurno()==1);
 		
 		//Player's 2 bowls has to be 0, because it's the selected bowl
-		Slot s= b.Board[2][2];
+		Slot s= b.Board[0][5];
 		assertTrue(s.getNumSeed()==0);
 		
-		//Player's 1 ate the seeds of player2 of the position [0][4] and the own seed of position [2][4] 
-		//Player's 1 had 11 seeds on his/her tray, now he/her has 14
-		s= b.Board[1][5];
-		assertTrue(s.getNumSeed()==14);
+		//Player's 2 ate the seeds of player1 of the position [2][3] (The bowl was empty)
+		//Player's 2 ate his/her own seed of position [0][3] 
+		//Player's 2 had 10 seeds on his/her tray, now he/her has 11
+		s= b.Board[1][0];
+		assertTrue(s.getNumSeed()==11);
 		
 		
-		//Player's 2 Slot at position [0][4] is now empty
-		s= b.Board[0][4];
+		//Player's 1 Slot at position [2][3] is still empty
+		s= b.Board[2][3];
 		assertTrue(s.getNumSeed()==0);
 		
 		
-		//Player's 1 Slot at position [2][4] is now empty
-		s= b.Board[2][4];
+		//Player's 2 Slot at position [0][3] is now empty
+		s= b.Board[0][3];
 		assertTrue(s.getNumSeed()==0);
 		
 		
@@ -664,130 +665,63 @@ public class GameSeedTests extends TestCase{
 	
 
 	
-	//===========================================================================================
-	//===========================================================================================
-	// 3. Play a game
-	//===========================================================================================
-	//===========================================================================================
-	
-
-	
-	
-	/**
-	 * The first test consist in:
-	 *  1) Initial situation of the Board has to be the following: 
-	 *  [0][0]: number of seeds 3, type B2
-	 *  [0][1]: number of seeds 3, type B2
-	 *  [0][2]: number of seeds 3, type B2
-	 *  [0][3]: number of seeds 3, type B2
-	 *  [0][4]: number of seeds 3, type B2
-	 *  [0][5]: number of seeds 3, type B2
-	 *  
-	 *  [2][0]: number of seeds 3, type B1
-	 *  [2][1]: number of seeds 3, type B1
-	 *  [2][2]: number of seeds 3, type B1
-	 *  [2][3]: number of seeds 3, type B1
-	 *  [2][4]: number of seeds 3, type B1
-	 *  [2][5]: number of seeds 3, type B1
-	 *  
-	 *  [1][0]: number of seeds 0, type T2
-	 *  [1][5]: number of seeds 0, type T1
-	 *  
-	 *  2) Player 1 selects Player's 2 Bowls and the system doesn't allow player 1 to play
-	 *  
-	 *  
-	 *  3) player 1 moves in position [2][5] and the final state of the board after play 1 moves has to be the following
-	 *  [0][0]: number of seeds 3, type B2
-	 *  [0][1]: number of seeds 3, type B2
-	 *  [0][2]: number of seeds 3, type B2
-	 *  [0][3]: number of seeds 3, type B2
-	 *  [0][4]: number of seeds 4, type B2=> The number of seeds changes from 3 to 4
-	 *  [0][5]: number of seeds 4, type B2=> The number of seeds changes from 3 to 4
-	 *  
-	 *  [2][0]: number of seeds 3, type B1
-	 *  [2][1]: number of seeds 3, type B1
-	 *  [2][2]: number of seeds 3, type B1
-	 *  [2][3]: number of seeds 3, type B1
-	 *  [2][4]: number of seeds 3, type B1
-	 *  [2][5]: number of seeds 0, type B1=> The number of seeds changes to 0 and are distributed on the next positions (counter-clockwise) 
-	 *  
-	 *  [1][0]: number of seeds 0, type T2
-	 *  [1][5]: number of seeds 0, type T1=> The number of seeds changes to 1 
-	 *  
-	 *  
-	 *  2) Player 2 selects a Tray  and the system doesn't allow to play
-	 *  
-	 *  3) player 2 moves in position [0][2], he/she has the right to play again and the final state of the board has to be:
-	 *  [0][0]: number of seeds 4, type B2=> The number of seeds changes from 3 to 4
-	 *  [0][1]: number of seeds 4, type B2=> The number of seeds changes from 3 to 4
-	 *  [0][2]: number of seeds 0, type B2=> The number of seeds changes to 0 and they are distributed on the next positions (counter-clockwise)
-	 *  [0][3]: number of seeds 3, type B2
-	 *  [0][4]: number of seeds 4, type B2
-	 *  [0][5]: number of seeds 4, type B2
-	 *  
-	 *  [2][0]: number of seeds 3, type B1
-	 *  [2][1]: number of seeds 3, type B1
-	 *  [2][2]: number of seeds 3, type B1
-	 *  [2][3]: number of seeds 3, type B1
-	 *  [2][4]: number of seeds 3, type B1
-	 *  [2][5]: number of seeds 0, type B1 
-	 *  
-	 *  [1][0]: number of seeds 1, type T2=> The number of seeds changes to 1
-	 *  [1][5]: number of seeds 0, type T1 
-	 *  
-	 *  4)Player 2 selects Player's 1 Bowls and the system doesn't allow player 1 to play
-	 *  
-	 *  5) player 2 moves in position [0][1], the final state of the board has to be:
-	 *  [0][0]: number of seeds 5, type B2=> The number of seeds changes from 4 to 5
-	 *  [0][1]: number of seeds 0, type B2=> The number of seeds changes to 0 and they are distributed on the next positions (counter-clockwise)
-	 *  [0][2]: number of seeds 0, type B2
-	 *  [0][3]: number of seeds 3, type B2
-	 *  [0][4]: number of seeds 4, type B2
-	 *  [0][5]: number of seeds 4, type B2
-	 *  
-	 *  [2][0]: number of seeds 4, type B1=> The number of seeds changes from 3 to 4
-	 *  [2][1]: number of seeds 4, type B1=> The number of seeds changes from 3 to 4
-	 *  [2][2]: number of seeds 3, type B1
-	 *  [2][3]: number of seeds 3, type B1
-	 *  [2][4]: number of seeds 3, type B1
-	 *  [2][5]: number of seeds 0, type B1 
-	 *  
-	 *  [1][0]: number of seeds 2, type T2=> The number of seeds changes from 1 to 2
-	 *  [1][5]: number of seeds 0, type T1 
-	 *  
-	 *  6) player 1 moves in position [2][2], he/she eat the seeds of player 2 (position [0][5] because the last seed was in [2][5] and it was an empty slot)and the final state of the board has to be:
-	 *  [0][0]: number of seeds 5, type B2=> The number of seeds changes from 4 to 5
-	 *  [0][1]: number of seeds 0, type B2
-	 *  [0][2]: number of seeds 0, type B2
-	 *  [0][3]: number of seeds 3, type B2
-	 *  [0][4]: number of seeds 4, type B2
-	 *  [0][5]: number of seeds 0, type B2=> Player 1 take all the seeds
-	 *  
-	 *  [2][0]: number of seeds 4, type B1
-	 *  [2][1]: number of seeds 4, type B1
-	 *  [2][2]: number of seeds 0, type B1=> The number of seeds changes to 0 and they are distributed on the next positions (counter-clockwise)
-	 *  [2][3]: number of seeds 4, type B1=> The number of seeds changes from 3 to 4
-	 *  [2][4]: number of seeds 4, type B1=> The number of seeds changes from 3 to 4
-	 *  [2][5]: number of seeds 0, type B1=> It was an empty position, and the last seed arrives here, that's why this seed and the Player's 2 seed of the bowl opposite to	the	empty bowl go to the Player's 1 Tray 
-	 *  
-	 *  [1][0]: number of seeds 2, type T2
-	 *  [1][5]: number of seeds 5, type T1=>  Player 1 take all the seeds (one from [2][5] and 4 from [0][5])
-	 *  
-	 */
 	@Test
-	public void testPlayer1Wins() 
+	public void testVerifyIfGameEnds() 
 	{
 		
-		BoardSituation b = new BoardSituation();
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testVerifyIfGameEnds"+"..........");
 		
-		for(int i=0; i<b.numColumn-1; i++){
-			
-			assertTrue(b.movement(0,i).equals("This slot belongs to the player 2. "));
-			
-		}
 		
-	}
+		//Create a initial situation
+		String inputString="0,0,0,0,0,0,2,2,2,2,2,2,18,6,2";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//The turn is for Player 2 
+		assertTrue(b.getTurno()==2);
+		
+		b.movement(2, 2);
+		
+		Boolean bo=b.verifyWin();
+		Log.e("GameConsola", bo+"");
+		
+		
+		
+		
+		/*//Player 2 plays 
+		b.movement(0,5);
+		
+		//The turn is now for Player 1 
+		assertTrue(b.getTurno()==1);
+		
+		//Player's 2 bowls has to be 0, because it's the selected bowl
+		Slot s= b.Board[0][5];
+		assertTrue(s.getNumSeed()==0);
+		
+		//Player's 2 ate the seeds of player1 of the position [2][3] (The bowl was empty)
+		//Player's 2 ate his/her own seed of position [0][3] 
+		//Player's 2 had 10 seeds on his/her tray, now he/her has 11
+		s= b.Board[1][0];
+		assertTrue(s.getNumSeed()==11);
+		
+		
+		//Player's 1 Slot at position [2][3] is still empty
+		s= b.Board[2][3];
+		assertTrue(s.getNumSeed()==0);
+		
+		
+		//Player's 2 Slot at position [0][3] is now empty
+		s= b.Board[0][3];
+		assertTrue(s.getNumSeed()==0);
+		
+		
+		Log.v("GameConsola", "***************************************");
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                                        ");
+		
+		*/
 	
+	}
 	
 	
 	
