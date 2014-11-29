@@ -11,19 +11,19 @@ public class GameSeedTests extends TestCase{
 
 	//===========================================================================================
 	//===========================================================================================
-	// 1.	Creation of Board
+	// 1.	Board Creation
 	//===========================================================================================
 	//===========================================================================================
 	
 	/**
-	 * Correct Default Creation of the Board	
-	 * Creation of each slot
-	 * 3,3,3,3,3,3 belongs to player's 2 bowls
-	 * 3,3,3,3,3,3 belongs to player's 1 bowls
-	 * 0  belongs to player's 2 tray
-	 * 0  belongs to player's 1 tray
-	 * Player 1 has the turn 
-	 * Number of seeds are 36
+	 * Correct Creation of the Default Board (Initial Situation)	
+	 * - Creation of each slot
+	 * - 3,3,3,3,3,3 belongs to player's 2 bowls
+	 * - 3,3,3,3,3,3 belongs to player's 1 bowls
+	 * - 0  belongs to player's 2 tray
+	 * - 0  belongs to player's 1 tray
+	 * - Player 1 has the turn 
+	 * - Number of seeds are 36
 	 */
 	@Test
 	public void testBoardCreationDefault() 
@@ -34,9 +34,9 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation();
 		
 		
+		//Creation of each slot
+		//3,3,3,3,3,3 belongs to player's 2 bowls
 		Slot s= b.Board[0][0];
-		
-		
 		assertTrue(s.getType().equals("B2"));
 		assertTrue(s.getNumSeed()==3);
 		s= b.Board[0][1];
@@ -55,6 +55,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getType().equals("B2"));
 		assertTrue(s.getNumSeed()==3);
 		
+		//3,3,3,3,3,3 belongs to player's 1 bowls
 		s= b.Board[2][0];
 		assertTrue(s.getType().equals("B1"));
 		assertTrue(s.getNumSeed()==3);
@@ -74,17 +75,20 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getType().equals("B1"));
 		assertTrue(s.getNumSeed()==3);
 		
-		
+		//0  belongs to player's 2 tray
 		s= b.Board[1][0];
 		assertTrue(s.getType().equals("T2"));
 		assertTrue(s.getNumSeed()==0);
+		
+		//0  belongs to player's 1 tray
 		s= b.Board[1][5];
 		assertTrue(s.getType().equals("T1"));
 		assertTrue(s.getNumSeed()==0);
 		
-		
+		//Player 1 has the turn 
 		assertTrue(b.getTurno()==1);
 		
+		//Number of seeds are 36
 		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
 		
 		Log.v("GameConsola", "***************************************");
@@ -93,16 +97,18 @@ public class GameSeedTests extends TestCase{
 		
 	}
 	
+	
+	
 	/**
 	 * Correct Creation of the Board using Parameters	
-	 * inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2"
-	 * Creation of each slot. 
-	 * 1,1,1,1,5,5 belongs to player's 2 bowls
-	 * 2,4,0,0,0,0 belongs to player's 1 bowls
-	 * 10  belongs to player's 2 tray
-	 * 6  belongs to player's 1 tray
-	 * Player 2 has the turn 
-	 * Number of seeds are 36
+	 * - Create a Board with the text "1,1,1,1,5,5,2,4,0,0,0,0,10,6,2"
+	 * - Creation of each slot. 
+	 * - 1,1,1,1,5,5 belongs to player's 2 bowls
+	 * - 2,4,0,0,0,0 belongs to player's 1 bowls
+	 * - 10  belongs to player's 2 tray
+	 * - 6  belongs to player's 1 tray
+	 * - Player 2 has the turn 
+	 * - Number of seeds are 36
 	 * 
 	 */
 	@Test
@@ -111,12 +117,14 @@ public class GameSeedTests extends TestCase{
 		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testBoardCreationParameters"+"..........");
+		
+		//Create a Board with the text "1,1,1,1,5,5,2,4,0,0,0,0,10,6,2"
 		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
 		BoardSituation b = new BoardSituation(inputString);
 		
-		
+		//Creation of each slot.
+		//1,1,1,1,5,5 belongs to player's 2 bowls
 		Slot s= b.Board[0][0];
-		
 		assertTrue(s.getType().equals("B2"));
 		assertTrue(s.getNumSeed()==1);
 		s= b.Board[0][1];
@@ -135,7 +143,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getType().equals("B2"));
 		assertTrue(s.getNumSeed()==5);
 		
-		
+		//2,4,0,0,0,0 belongs to player's 1 bowls
 		s= b.Board[2][0];
 		assertTrue(s.getType().equals("B1"));
 		assertTrue(s.getNumSeed()==2);
@@ -155,15 +163,20 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getType().equals("B1"));
 		assertTrue(s.getNumSeed()==0);
 		
-		
+		//10  belongs to player's 2 tray
 		s= b.Board[1][0];
 		assertTrue(s.getType().equals("T2"));
 		assertTrue(s.getNumSeed()==10);
+		
+		//6  belongs to player's 1 tray
 		s= b.Board[1][5];
 		assertTrue(s.getType().equals("T1"));
 		assertTrue(s.getNumSeed()==6);
 		
+		//Player 2 has the turn 
 		assertTrue(b.getTurno()==2);
+		
+		//Number of seeds are 36
 		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
 		
 		Log.v("GameConsola", "***************************************");
@@ -172,20 +185,23 @@ public class GameSeedTests extends TestCase{
 		
 	}
 	
+	
+	
+	
 	/**
-	 * The verification of the input text, before the creation of the Board 
-	 * using Parameters returns the proper message when the inputString 
-	 * is not created properly 
-	 * 
+	 * Verification of the input text done before the creation of the Board using Parameters. It returns 
+	 * the corresponding message when the inputString is not created properly. The situations where there
+	 * is a wrong input text are the following:
 	 * - There are more numbers in the input text (The length of the input text must be 15)
 	 * - There are less numbers in the input text (The length of the input text must be 15)
 	 * - The last number is not a valid player (Must be 1 or 2). 
 	 * - The input text contains letters.
 	 * - The input text contains decimals.
-	 * - The input text contains negative numbers
+	 * - The input text contains negative numbers.
 	 * - The total number of seeds in the board is different to 36.
+	 * - The input text has as initial situation a player without any seeds on his/her bowls.
 	 * - The input text contains letters, negative numbers, an invalid player(turn) and total number of seeds in the board is different to 36
-	 * - The input text has as initial situation a player without any seeds on his/her bowls. 
+	 *  
 	 */
 	
 	@Test
@@ -228,22 +244,14 @@ public class GameSeedTests extends TestCase{
 		inputString="3,3,3,3,3,3,3,3,3,3,3,3,3,3,1";
 		assertTrue(m.verifyStringInput(inputString).equals("The total number of seeds in the board has to be 36. "));
 		
+		//The input text has as initial situation a player without any seeds on his/her bowls. 
+		inputString="0,0,0,0,0,0,3,3,3,3,3,3,10,8,2";
+		assertTrue(m.verifyStringInput(inputString).equals(" The game cannot have as initial situation a player without any seeds on his/her bowls. "));
 				
-		//The input text contains negative numbers
-		inputString="3,3,3,3,3,6,10,3,-7,3,3,3,0,0,1";
-		assertTrue(m.verifyStringInput(inputString).equals("The input text must be integer numbers, greater than 0, separated by comma. "));
-			    
-		
 		//The input text contains letters, negative numbers, an invalid player(turn) and total number of seeds in the board is different to 36
 		inputString="3,3,3,3,3,3,3,3,p,3,3,3,0,0,-7";
 		assertTrue(m.verifyStringInput(inputString).equals("The last number must be 1 or 2 because it is the current player. "+"The input text cannot include letters or decimal numbers, it must be integer numbers, greater than 0, separated by comma. "+"The input text must be integer numbers, greater than 0, separated by comma. "+"The total number of seeds in the board has to be 36. "));
 			    
-		
-		//The input text has as initial situation a player without any seeds on his/her bowls. 
-		inputString="0,0,0,0,0,0,3,3,3,3,3,3,10,8,2";
-		//Log.e("GameConsola",m.verifyStringInput(inputString));
-		assertTrue(m.verifyStringInput(inputString).equals(" The game cannot have as initial situation a player without any seeds on his/her bowls. "));
-		
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -256,7 +264,7 @@ public class GameSeedTests extends TestCase{
 	
 	//===========================================================================================
 	//===========================================================================================
-	// 2.	Movement
+	// 2.	Game Rules
 	//===========================================================================================
 	//===========================================================================================
 	
@@ -264,9 +272,10 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 2 begins. Players	alternate turns.	
-	 * After Player's 2 movement is the turn of player 1.
-	 * The movement of player 2 doesn't finish on an empty slot, neither in a tray
+	 * Alternating turns after a movement. The last seed doesn't finish on an empty slot, neither in a tray.
+	 * - Player 2 begins
+	 * - Player 2 moves
+	 * - The turn is changed
 	 * 
 	 */
 	@Test
@@ -280,6 +289,9 @@ public class GameSeedTests extends TestCase{
 		//Create a initial situation
 		String inputString="1,1,1,1,4,4,2,4,1,1,1,1,10,4,2";
 		BoardSituation b = new BoardSituation(inputString);
+		
+		//Player 2 begins 
+		assertTrue(b.getTurno()==2);
 		
 		//Player 2 plays 
 		b.movement(0,5);
@@ -296,9 +308,12 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 1 begins. Player 1 plays two times (Player1’s	last	seed	drops	in	
-	 * his/her	own	tray, then Player 1	moves again)
-	 * 
+	 * Keeping the turn after a movement. The last seed doesn't finish on an empty slot, but it fishes on
+	 * the player's tray.
+	 * - Player 1 begins. 
+	 * - Player 1 moves and he/she has to play again (Player1’s	last	seed	drops	in  his/her	own	tray)
+	 * - Player 1	moves again
+	 * - The turn is now for Player 2
 	 */
 	
 	@Test
@@ -322,7 +337,11 @@ public class GameSeedTests extends TestCase{
 		//The turn is still for Player 1 
 		assertTrue(b.getTurno()==1);
 		
+		//Player 1 plays again
+		b.movement(2,4);
 		
+		//The turn is now for Player 2 
+		assertTrue(b.getTurno()==2);
 
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -406,13 +425,18 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 1 begins. Player 1 takes all the	seeds	from	the selected bowl	and	moves 
-	 * counter-clockwise, dropping	one	seed	in	each	bowl	or	tray, except	Player2’s 
+	 * Player moves normally (Not special cases). Player 1 takes all the	seeds	from	the selected bowl	
+	 * and	moves counter-clockwise, dropping	one	seed	in	each	bowl	or	tray, except	Player2’s 
 	 * Tray. Player 1 moves normally (Without eating seeds or repeating turn). The seeds of 
 	 * the selected bowl are enough to arrive in player's 2 Tray, but Player 1 doesn't leave seeds 
 	 * there). 
-	 * 	
-	 *  
+	 * - Player 1 begins
+	 * - Player 1 moves
+	 * - The turn is now for Player 2
+	 * - Player's 1 bowls has to be 0, because it's the selected bowl
+	 * - Player's 2 tray have the same number of seeds as before 
+	 * - Player's 1 bowl in position [2][1] also has to change 
+	 * - Player's 1 bowl in position [2][2] has to be the same
 	 */
 	
 	@Test
@@ -465,12 +489,18 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 2 begins. Player 2 takes all the	seeds	from	the selected bowl	and	moves 
-	 * counter-clockwise, dropping	one	seed	in	each	bowl	or	tray, except	Player1’s 
+	 * Player moves normally (Not special cases). Player 2 takes all the	seeds	from	the selected bowl
+	 * and	moves counter-clockwise, dropping	one	seed	in	each	bowl	or	tray, except	Player1’s 
 	 * Tray. Player 2 moves normally (Without eating seeds or repeating turn). The seeds of 
 	 * the selected bowl are enough to arrive in player's 1 Tray, but Player 2 doesn't leave seeds 
 	 * there).
-	 * 
+	 * - Player 2 begins
+	 * - Player 2 moves
+	 * - The turn is now for Player 1
+	 * - Player's 2 bowls has to be 0, because it's the selected bowl
+	 * - Player's 1 tray have the same number of seeds as before 
+	 * - Player's 2 bowl in position [0][5] also has to change
+	 * - Player's 2 bowl in position [0][4] has to be the same 
 	 */
 	@Test
 	public void testNormalMoveP2() 
@@ -519,10 +549,16 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 1 begins. Player's 1	last	seed	drops	in	an	empty	bowl	of	Player2, 
-	 * but Player1 doesn't eat any seed (Player 1 only eats if the last	seed	dropped	is in	
+	 * Player doesn't eat seeds. Player's 1	last	seed	drops	in	an	empty	bowl	of	Player2, 
+	 * but Player1 doesn't eat any seed (Player 1 only eats seeds if the last	one	dropped	is in	
 	 * an	empty bowl belonging to the	Player1)
-	 * 
+	 * - Player 1 begins
+	 * - Player 1 moves
+	 * - The turn is now for Player 2 
+	 * - In Player's 1 bowls must have 0 seeds, because it's the selected bowl
+	 * - Player's 1 tray only have one seed more 
+	 * - Player's 2 bowl at position [0][4] is 1, not 0 (because this seed wasn't eaten by player 1)
+	 * - Player's 1 bowl at position [2][4] is 3, not 0 (because this seed wasn't eaten by player 1)
 	 */
 	
 	@Test
@@ -546,7 +582,7 @@ public class GameSeedTests extends TestCase{
 		//The turn is now for Player 2 
 		assertTrue(b.getTurno()==2);
 		
-		//Player's 1 bowls has to be 0, because it's the selected bowl
+		//In Player's 1 bowls must have 0 seeds, because it's the selected bowl
 		Slot s= b.Board[2][3];
 		assertTrue(s.getNumSeed()==0);
 		
@@ -573,10 +609,16 @@ public class GameSeedTests extends TestCase{
 	}
 	
 	/**
-	 * Player 2 begins. Player's 2	last	seed	drops	in	an	empty	bowl	of	Player1, 
-	 * but Player2 doesn't eat any seed (Player 2 only eats if the last	seed	dropped	is in	
+	 * Player doesn't eat seeds. Player's 2	last	seed	drops	in	an	empty	bowl	of	Player1, 
+	 * but Player2 doesn't eat any seed (Player 2 only eats seeds if the last	one	dropped	is in	
 	 * an	empty bowl belonging to the	Player2)
-	 * 
+	 * - Player 2 begins
+	 * - Player 2 moves
+	 * - The turn is now for Player 1 
+	 * - In Player's 2 bowls must have 0 seeds, because it's the selected bowl
+	 * - Player's 2 tray only have one seed more 
+	 * - Player's 2 Slot at position [0][1] is 3, not 2 (because this seed wasn't eaten by player 2)
+	 * - Player's 1 Slot at position [2][1] is 1, not 0 (because this seed wasn't eaten by player 2)
 	 */
 	
 	@Test
@@ -600,7 +642,7 @@ public class GameSeedTests extends TestCase{
 		//The turn is now for Player 1 
 		assertTrue(b.getTurno()==1);
 		
-		//Player's 2 bowls has to be 0, because it's the selected bowl
+		//In Player's 2 bowls must have 0 seeds, because it's the selected bowl
 		Slot s= b.Board[0][2];
 		assertTrue(s.getNumSeed()==0);
 		
@@ -628,11 +670,16 @@ public class GameSeedTests extends TestCase{
 	
 
 	/**
-	 * Player 1 begins. Player's 1	last	seed	drops	in	an	empty	bowl	of	Player1,
-	 * Player1	moves	that	seed	to his/her	Tray	and	also	picks up all	the	seeds
-	 * in	Player's 2	bowl (opposite	to	the	empty	bowl), and	places	them	all	in	
-	 * Player’s 1	own	tray	
-	 * 
+	 * Player eat the seeds of the other player. Player's 1	last	seed	drops	in	an	empty	bowl	
+	 * of	Player1. Player1	moves	that	seed	to his/her	Tray	and	also	picks up all the seeds
+	 * in	Player's 2	bowl (opposite	to	the	empty	bowl), and	places	them all in Player’s 1 own	tray	
+	 * - Player 1 begins
+	 * - Player 1 moves
+	 * - The turn is now for Player 2 
+	 * - In Player's 1 bowls must have 0 seeds, because it's the selected bowl
+	 * - Player's 1 ate the seeds of player2 
+	 * - Player's 2 Slot at position [0][4] is now empty
+	 * - Player's 1 Slot at position [2][4] is now empty
 	 */
 	
 	@Test
@@ -656,7 +703,7 @@ public class GameSeedTests extends TestCase{
 		//The turn is now for Player 2 
 		assertTrue(b.getTurno()==2);
 		
-		//Player's 2 bowls has to be 0, because it's the selected bowl
+		//In Player's 1 bowls must have 0 seeds, because it's the selected bowl
 		Slot s= b.Board[2][2];
 		assertTrue(s.getNumSeed()==0);
 		
@@ -688,11 +735,17 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 2 begins. Player's 2	last	seed	drops	in	an	empty	bowl	of	Player2,
+	 * Player eat the seeds of the other player. Player's 2	last	seed	drops	in	an	empty	bowl	of	Player2,
 	 * Player2	moves	that	seed	to his/her	Tray	and	also	picks up all	the	seeds
 	 * in	Player's 1	bowl (opposite	to	the	empty	bowl), and	places	them	all	in	Player’s 2	
 	 * own	tray. SPECIAL CASE of the rule when the opponent doesn't have seeds in that positions	
-	 * 
+	 * - Player 2 begins
+	 * - Player 2 moves
+	 * - The turn is now for Player 1 
+	 * - In Player's 2 bowls must have 0 seeds, because it's the selected bowl
+	 * - Player's 2 ate the seeds of player1  (The bowl was empty)
+	 * - Player's 1 Slot at position [2][3] is still empty
+	 * - Player's 2 Slot at position [0][3] is now empty
 	 */
 	
 	@Test
@@ -748,10 +801,15 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 2 begins. Player 2 only has 1 seed on his/her slots. After he/she plays, the game finishes and
-	 * we have a draw. The game finishes because all	the	bowls of player2 are empty. The	remaining	seeds
-	 * are	moved	to	the	player1's	tray.
-	 * 		
+	 * The game finishes with a draw. Player 2 only has 1 seed on his/her slots. After he/she plays, 
+	 * the game finishes and there is a draw. The game finishes because all	the	bowls of player2 are 
+	 * empty. The	remaining	seeds are	moved	to	the	player1's	tray.
+	 * - Player 2 begins
+	 * - Player 2 moves
+	 * - There is a draw 	
+	 * - The number of seeds in Player1's tray are equal to 18
+	 * - The number of seeds in Player2's tray are equal to 18
+	 * - The	remaining	seeds	are	moved	to	the	other player1's	tray
 	 */
 	
 
@@ -812,10 +870,14 @@ public class GameSeedTests extends TestCase{
 	
 	
 	/**
-	 * Player 1 begins. Player 1 only has 1 seed on his/her slots. After he/she plays, the game finishes and
-	 * Player 2 wins. The game finishes because all	the	bowls of player 1 are empty. The	remaining	seeds
-	 * are	moved	to	the	player2's	tray.
-	 * 		
+	 * The game finishes with a winner. Player 1 only has 1 seed on his/her slots. After he/she plays, the
+	 * game finishes and Player 2 wins. The game finishes because all the bowls of player 1 are empty. 
+	 * The	remaining	seeds are	moved	to	the	player2's	tray.
+	 * - Player 1 begins
+	 * - Player 1 moves
+	 * - The number of seeds in Player2's tray are equal to 27
+	 * - The number of seeds in Player1's tray are equal to 9
+	 * - The	remaining	seeds	are	moved	to	the	player2's	tray
 	 */
 	
 

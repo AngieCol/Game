@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class Match {
 
+	/**
+	 * variables
+	 */
 	Date date;
 	String state;
 	String boardSituation;
@@ -12,7 +15,21 @@ public class Match {
 	BoardSituation bs=null;
 	String winner;
 	
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//==================================================================================================
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * Methods
+	 */
+
 	
+
+	/**
+	 * Match Constructor   
+	 */
 	public Match(String boardS,	String usernameP1, String usernameP2) {
 		date= new Date();
 		state="active";
@@ -23,7 +40,9 @@ public class Match {
 	}
 
 	
-	
+	/**
+	 * verifyStringInput verifies the structure of the input string
+	 */
 	public String verifyStringInput(String s) {
 
 		String[] inputSplited= s.split(",");

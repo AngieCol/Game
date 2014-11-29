@@ -10,8 +10,6 @@ public class BoardSituation
 	/**
 	 * variables
 	 */
-
-	
 	static int numColumn = 6;
 	static int numRow = 3;
 	static int numBoardSeeds = 36;
@@ -24,20 +22,19 @@ public class BoardSituation
 	String winner="";
 	//List<String> history = new ArrayList<String>();
 
-	///////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////
-	//=======================================================
-	///////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//==================================================================================================
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	/**
-	 * Métodos
+	 * Methods
 	 */
 
 
 	/**
-	 * Initial BoardSituation
+	 * BoardSituation Builds the initial Board Situation (Default) 
 	 */
 	public BoardSituation() 
 	{
@@ -63,6 +60,9 @@ public class BoardSituation
 	}
 
 
+	/**
+	 *  BoardSituation Builds the initial Board Situation with parameters
+	 */
 	public BoardSituation(String input) 
 	{
 		
@@ -88,6 +88,9 @@ public class BoardSituation
 	}
 
 
+	/**
+	 * paintBoardInConsole Displays the Board on the console
+	 */
 	public void paintBoardInConsole(String s) {
 		
 		
@@ -105,6 +108,10 @@ public class BoardSituation
 	}
 
 
+	
+	/**
+	 * Movement allows the current player make a move
+	 */
 	public String movement(int positionRow, int positionCol)
 	{
 		Slot s= Board[positionRow][positionCol];
@@ -148,7 +155,9 @@ public class BoardSituation
 
 
 
-
+	/**
+	 * setTurn verifies which player is the next one to make a move
+	 */
 
 	public void setTurn() {
 
@@ -168,6 +177,10 @@ public class BoardSituation
 
 	}
 
+	
+	/**
+	 * putSeeds leaves the seeds on the correspondent bowls
+	 */
 	public void putSeeds(int row, int col) {
 
 		int numSeeds=Board[row][col].getNumSeed();
@@ -212,11 +225,11 @@ public class BoardSituation
 	}
 
 
+	
+	/**
+	 * verifyMovement verifies if the player movement is valid or not
+	 */
 	public String verifyMovement(Slot s) {
-
-
-
-
 		//B1, B2, T1, T2, N
 		if (s.type=="B2" && getTurno()==1){
 			return "You are playing with a wrong player. This slot belongs to the player 2 and you are Player 1. ";
@@ -244,6 +257,10 @@ public class BoardSituation
 	}
 
 
+	
+	/**
+	 * eatSeeds gets the seeds of the corresponding bowls and put them in the tray of the current player
+	 */
 	public String eatSeeds() {
 		int seedsToTray=0;
 		String eatenSeeds="";
@@ -266,6 +283,9 @@ public class BoardSituation
 	}
 
 	
+	/**
+	 * verifyWin verifies if the match is finish because a player doesn't have more seeds in his/her bowls
+	 */
 	public boolean verifyWin() {
 		
 		int numSeed1=0;
@@ -314,7 +334,9 @@ public class BoardSituation
 	
 	
 	
-	
+	/**
+	 * CountSeedsInBoard counts all the seeds in the Board
+	 */
 	public int CountSeedsInBoard() 
 	{
 		int numTotalSeeds=0;
@@ -327,92 +349,88 @@ public class BoardSituation
 	}
 
 
-	
+	/**
+	 * getTurno returns the current player
+	 */
 	public int getTurno() {
 		return turno;
 	}
 
+	
+	/**
+	 * setTurno sets the current player
+	 */
 	public void setTurno(int turno) {
 		this.turno = turno;
 	}
+	
+	/**
+	 * getWinner returns the player who wins the match
+	 */
 	public String getWinner() {
 		return winner;
 	}
 
+	
+	/**
+	 * setWinner sets the player who wins the match
+	 */
 	public void setWinner(String win) {
 		winner = win;
 	}
 	
+	/**
+	 * getNumColumn() returns the number of columns of the Board
+	 */
 	public static int getNumColumn() {
 		return numColumn;
 	}
 
-
-	public static void setNumColumn(int numColumn) {
-		BoardSituation.numColumn = numColumn;
-	}
-
-
+	
+	/**
+	 * getNumRow() returns the number of rows of the Board
+	 */
 	public static int getNumRow() {
 		return numRow;
 	}
 
-
-	public static void setNumRow(int numRow) {
-		BoardSituation.numRow = numRow;
-	}
-
-
+	/**
+	 * getNumBoardSeeds() returns the number of all the seeds in the Board
+	 */
 	public static int getNumBoardSeeds() {
 		return numBoardSeeds;
 	}
 
-
-	public static void setNumBoardSeeds(int numBoardSeeds) {
-		BoardSituation.numBoardSeeds = numBoardSeeds;
-	}
-
-
-	public Slot[][] getBoard() {
-		return Board;
-	}
-
-
-	public void setBoard(Slot[][] board) {
-		Board = board;
-	}
-
-
+	/**
+	 * getCurrentX returns the row position of the last seed dropped by a player
+	 */
 	public int getCurrentX() {
 		return currentX;
 	}
 
-
+	/**
+	 * setCurrentX sets the row position of the last seed dropped by a player
+	 */
 	public void setCurrentX(int currentX) {
 		this.currentX = currentX;
 	}
 
-
+	/**
+	 * getCurrentY returns the column position of the last seed dropped by a player
+	 */
 	public int getCurrentY() {
 		return currentY;
 	}
 
-
+	/**
+	 * setCurrentY sets the column  position of the last seed dropped by a player
+	 */
 	public void setCurrentY(int currentY) {
 		this.currentY = currentY;
 	}
 
 
-	/*public List<String> getHistory() {
-		return history;
-	}
-
-
-	public void setHistory(List<String> history) {
-		this.history = history;
-	}
-	*/
-
+	
 	
 	
 

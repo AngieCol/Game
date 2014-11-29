@@ -12,11 +12,12 @@ public class MatchUI extends Activity {
 
 	
 	
-	
+	/**
+	 * variables
+	 */
 	
 	BoardSituation bs=null;
 	Match mat=null;
-	
 	
 	TextView b00= null;
 	TextView b01= null;
@@ -45,14 +46,24 @@ public class MatchUI extends Activity {
 	
 	
 	
-	
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//==================================================================================================
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/**
+	 * Methods
+	 */
+
 	
 
+	/**
+	 * Match onCreate 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		
-	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.match);
 		bs= new BoardSituation();
@@ -82,9 +93,6 @@ public class MatchUI extends Activity {
 		b15= (TextView) findViewById(R.id.textView12);
 		
 		
-		
-		
-				
 		
 		
 		Button bStart= (Button) findViewById(R.id.button1);
@@ -279,10 +287,12 @@ public class MatchUI extends Activity {
 	}
 
 	
-	public void paintBoard(){
-		
 	
-		
+	/**
+	 * paintBoard shows in the interface the Board
+	 */
+	
+	public void paintBoard(){
 		
 		b00.setText((bs.Board[0][0].getNumSeed())+"");
 		b01.setText((bs.Board[0][1].getNumSeed())+"");
