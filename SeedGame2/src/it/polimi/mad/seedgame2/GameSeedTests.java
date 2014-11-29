@@ -338,7 +338,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(b.getTurno()==1);
 		
 		//Player 1 plays again
-		b.movement(2,4);
+		b.movement(2,5);
 		
 		//The turn is now for Player 2 
 		assertTrue(b.getTurno()==2);
