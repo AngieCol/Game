@@ -241,6 +241,7 @@ public class GameSeedTests extends TestCase{
 		
 		//The input text has as initial situation a player without any seeds on his/her bowls. 
 		inputString="0,0,0,0,0,0,3,3,3,3,3,3,10,8,2";
+		//Log.e("GameConsola",m.verifyStringInput(inputString));
 		assertTrue(m.verifyStringInput(inputString).equals(" The game cannot have as initial situation a player without any seeds on his/her bowls. "));
 		
 		

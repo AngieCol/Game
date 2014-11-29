@@ -57,7 +57,7 @@ public class BoardSituation
 		setTurno(1);
 
 
-		paintBoardInConsole("");
+		paintBoardInConsole("It is the turn of player "+getTurno()+".");
 	//	history.add("Match begin");
 
 	}
@@ -81,8 +81,8 @@ public class BoardSituation
 			Board[1][numColumn-1]=new Slot("T1",Integer.parseInt(inputSplited[13]));
 
 			setTurno(Integer.parseInt(inputSplited[14]));
-
-			paintBoardInConsole("");
+			
+			paintBoardInConsole("It is the turn of player "+getTurno()+".");
 			//history.add("Match begin");
 		
 	}
@@ -219,10 +219,10 @@ public class BoardSituation
 
 		//B1, B2, T1, T2, N
 		if (s.type=="B2" && getTurno()==1){
-			return "This slot belongs to the player 2. ";
+			return "You are playing with a wrong player. This slot belongs to the player 2 and you are Player 1. ";
 		}
 		else if (s.type=="B1" && getTurno()==2){
-			return "This slot belongs to the player 1. ";
+			return "You are playing with a wrong player. This slot belongs to the player 1 and you are Player 2.  ";
 		}	
 		else if (s.type=="T1" || s.type=="T2"){
 			return "You cannot move from here. ";
@@ -232,7 +232,7 @@ public class BoardSituation
 		}
 		else if(s.numSeed==0)
 		{
-			return "It is an empty slot. ";
+			return "You cannot choose this slot. You have to select a slot with at least 1 seed.  ";
 		}
 		else
 		{

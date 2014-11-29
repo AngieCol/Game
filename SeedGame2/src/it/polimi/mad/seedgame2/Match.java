@@ -71,7 +71,7 @@ public class Match {
 		
 		if(respuesta=="" && (numSeedsInSlotPlayer1==0 || numSeedsInSlotPlayer2==0))
 		{
-			respuesta=" The game cannot have as initial situation a player without any seeds on his/her bowls. "+numSeedsInSlotPlayer2+"-"+numSeedsInSlotPlayer1;
+			respuesta=" The game cannot have as initial situation a player without any seeds on his/her bowls. ";
 		}
 		return respuesta;
 }
