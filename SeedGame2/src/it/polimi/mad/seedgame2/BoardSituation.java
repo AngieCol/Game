@@ -1,5 +1,7 @@
 package it.polimi.mad.seedgame2;
 
+
+
 import android.util.Log;
 
 public class BoardSituation 
@@ -9,16 +11,18 @@ public class BoardSituation
 	 * variables
 	 */
 
+	
 	static int numColumn = 6;
 	static int numRow = 3;
 	static int numBoardSeeds = 36;
 
+	
 	Slot[][] Board = null;
 	int turno=0;
 	int currentX=-1;
 	int currentY=-1;
-	
 	String winner="";
+	//List<String> history = new ArrayList<String>();
 
 	///////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////
@@ -54,7 +58,7 @@ public class BoardSituation
 
 
 		paintBoardInConsole("");
-
+	//	history.add("Match begin");
 
 	}
 
@@ -79,7 +83,7 @@ public class BoardSituation
 			setTurno(Integer.parseInt(inputSplited[14]));
 
 			paintBoardInConsole("");
-			
+			//history.add("Match begin");
 		
 	}
 
@@ -87,15 +91,16 @@ public class BoardSituation
 	public void paintBoardInConsole(String s) {
 		
 		
-		Log.v("GameConsola", " ....................................................");
-		Log.v("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		Log.v("GameConsola", "                -----                         ");
 		Log.w("GameConsola", s+" ");
+	//	Log.w("GameConsola",getHistory()+" ");
 		Log.w("GameConsola", " | "+ Board[0][0].getNumSeed()+" | "+ Board[0][1].getNumSeed()+" | "+ Board[0][2].getNumSeed()+" | "+  Board[0][3].getNumSeed()+" | "+  Board[0][4].getNumSeed()+" | "+  Board[0][5].getNumSeed()+" | " );
 		Log.d("GameConsola", " | "+ Board[1][0].getNumSeed()+" | ============= | " + Board[1][5].getNumSeed()+" | " );
 		Log.e("GameConsola", " | "+ Board[2][0].getNumSeed()+" | "+ Board[2][1].getNumSeed()+" | "+ Board[2][2].getNumSeed()+" | "+  Board[2][3].getNumSeed()+" | "+  Board[2][4].getNumSeed()+" | "+  Board[2][5].getNumSeed()+" | " );
-		Log.v("GameConsola", " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		Log.v("GameConsola", " ....................................................");
-		Log.v("GameConsola", " _ ");
+		Log.v("GameConsola", "                -----                         ");
+	
+		
 
 	}
 
@@ -109,30 +114,34 @@ public class BoardSituation
 
 		if (rta!="")
 		{
+	//		history.add("Player "+getTurno()+ ":  Make a bad move->"+rta);
 			return rta;
+			
 		}
 
 		else
 		{
 			putSeeds(positionRow,positionCol);
-			String eated=eatSeeds();
+			String eaten=eatSeeds();
 			setTurn();
 			if(!verifyWin())
 			{
-			 paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurno()+". "+eated);
-			 return "Move done!!! Now It's the turn of Player: "+getTurno()+". "+eated;
+			// history.add("Player "+getTurno()+ ":  Made a move. "+eaten);
+			 paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten);
+			 return "Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten;
 			
 			}
 			else
 			{
-				paintBoardInConsole("The game is finished. "+ winner+". "+". "+eated);
-				return "The game is finished. "+ winner+". "+eated; 
+			//	history.add("The game is finished with the movement of Player "+getTurno()+ winner+". "+eaten);
+				paintBoardInConsole("The game is finished. "+ winner+". "+eaten);
+				return "The game is finished. "+ winner+". "+eaten; 
 			}
 		}
 
 
 
-
+		
 
 	}
 
@@ -237,40 +246,25 @@ public class BoardSituation
 
 	public String eatSeeds() {
 		int seedsToTray=0;
-		String eated="";
+		String eatenSeeds="";
 		if(currentX==numRow-1 && getTurno()==1 && Board[currentX][currentY].getNumSeed()==1 ){
 			seedsToTray=(Board[0][currentY].getNumSeed())+1;
 			Board[1][numColumn-1].sumSeed(seedsToTray);
 			Board[0][currentY].setNumSeed(0);
 			Board[currentX][currentY].setNumSeed(0);
-			eated=" Player 1 eated "+ (seedsToTray-1)+ " seeds from Player 2 plus the one that belong to him/her. "; 
+			eatenSeeds=" Player 1 ate "+ (seedsToTray-1)+ " seeds from Player 2 plus the one that belong to him/her. "; 
 		}
 		else if(currentX==0 && getTurno()==2 && Board[currentX][currentY].getNumSeed()==1 ){
 			seedsToTray=(Board[numRow-1][currentY].getNumSeed())+1;
 			Board[1][0].sumSeed(seedsToTray);
 			Board[numRow-1][currentY].setNumSeed(0);
 			Board[currentX][currentY].setNumSeed(0);
-			eated=" Player 2 eated "+ (seedsToTray-1)+ " seeds from Player 1 plus the one that belong to him/her. ";
+			eatenSeeds=" Player 2 ate "+ (seedsToTray-1)+ " seeds from Player 1 plus the one that belong to him/her. ";
 		}
 
-		return eated;
+		return eatenSeeds;
 	}
 
-	public int getTurno() {
-		return turno;
-	}
-
-	public void setTurno(int turno) {
-		this.turno = turno;
-	}
-	public String getWinner() {
-		return winner;
-	}
-
-	public void setWinner(String win) {
-		winner = win;
-	}
-	
 	
 	public boolean verifyWin() {
 		
@@ -321,14 +315,6 @@ public class BoardSituation
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int CountSeedsInBoard() 
 	{
 		int numTotalSeeds=0;
@@ -341,6 +327,22 @@ public class BoardSituation
 	}
 
 
+	
+	public int getTurno() {
+		return turno;
+	}
+
+	public void setTurno(int turno) {
+		this.turno = turno;
+	}
+	public String getWinner() {
+		return winner;
+	}
+
+	public void setWinner(String win) {
+		winner = win;
+	}
+	
 	public static int getNumColumn() {
 		return numColumn;
 	}
@@ -399,7 +401,17 @@ public class BoardSituation
 	public void setCurrentY(int currentY) {
 		this.currentY = currentY;
 	}
-	
+
+
+	/*public List<String> getHistory() {
+		return history;
+	}
+
+
+	public void setHistory(List<String> history) {
+		this.history = history;
+	}
+	*/
 
 	
 	

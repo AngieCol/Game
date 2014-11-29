@@ -3,7 +3,6 @@ package it.polimi.mad.seedgame2;
 
 import junit.framework.*;
 import org.junit.Test;
-import android.test.AndroidTestCase;
 import android.util.Log;
 
 public class GameSeedTests extends TestCase{
@@ -29,6 +28,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testBoardCreationDefault() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testBoardCreationDefault"+"..........");
 		BoardSituation b = new BoardSituation();
@@ -85,7 +85,7 @@ public class GameSeedTests extends TestCase{
 		
 		assertTrue(b.getTurno()==1);
 		
-		assertTrue(b.CountSeedsInBoard()==b.getNumBoardSeeds());
+		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -108,6 +108,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testBoardCreationParameters() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testBoardCreationParameters"+"..........");
 		String inputString="1,1,1,1,5,5,2,4,0,0,0,0,10,6,2";
@@ -163,7 +164,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getNumSeed()==6);
 		
 		assertTrue(b.getTurno()==2);
-		assertTrue(b.CountSeedsInBoard()==b.getNumBoardSeeds());
+		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -184,11 +185,13 @@ public class GameSeedTests extends TestCase{
 	 * - The input text contains negative numbers
 	 * - The total number of seeds in the board is different to 36.
 	 * - The input text contains letters, negative numbers, an invalid player(turn) and total number of seeds in the board is different to 36
+	 * - The input text has as initial situation a player without any seeds on his/her bowls. 
 	 */
 	
 	@Test
 	public void testIncorrectInputString() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testIncorrectInputString"+"..........");
 		
@@ -236,6 +239,11 @@ public class GameSeedTests extends TestCase{
 		assertTrue(m.verifyStringInput(inputString).equals("The last number must be 1 or 2 because it is the current player. "+"The input text cannot include letters or decimal numbers, it must be integer numbers, greater than 0, separated by comma. "+"The input text must be integer numbers, greater than 0, separated by comma. "+"The total number of seeds in the board has to be 36. "));
 			    
 		
+		//The input text has as initial situation a player without any seeds on his/her bowls. 
+		inputString="0,0,0,0,0,0,3,3,3,3,3,3,10,8,2";
+		assertTrue(m.verifyStringInput(inputString).equals(" The game cannot have as initial situation a player without any seeds on his/her bowls. "));
+		
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -263,6 +271,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testAlternateTurns() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testAlternateTurns"+"..........");
 		
@@ -294,6 +303,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testKeepsTurn() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testKeepsTurn"+"..........");
 		
@@ -334,6 +344,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testNormalMoveP1() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testNormalMoveP1"+"..........");
 		
@@ -390,6 +401,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testNormalMoveP2() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testNormalMoveP2"+"..........");
 		
@@ -442,6 +454,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testP1DoesNotEatSeedsOfP2() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testP1DoesNotEatSeedsOfP2"+"..........");
 		
@@ -495,6 +508,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testP2DoesNotEatSeedsOfP1() 
 	{
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testP2DoesNotEatSeedsOfP1"+"..........");
 		
@@ -550,7 +564,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testEatSeedsP1() 
 	{
-		
+		Log.v("GameConsola", "                                        ");	
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testEatSeedsP1"+"..........");
 		
@@ -611,6 +625,7 @@ public class GameSeedTests extends TestCase{
 	public void testEatSeedsP2SpecialCase() 
 	{
 		
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testEatSeedsP2SpecialCase"+"..........");
 		
@@ -671,6 +686,7 @@ public class GameSeedTests extends TestCase{
 	public void testVerifyIfGameEndsDraw() 
 	{
 		
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testVerifyIfGameEndsDraw"+"..........");
 		
@@ -733,7 +749,7 @@ public class GameSeedTests extends TestCase{
 	@Test
 	public void testVerifyIfGameEndsWinP2() 
 	{
-		
+		Log.v("GameConsola", "                                        ");
 		Log.v("GameConsola", "**************************************************");
 		Log.v("GameConsola", ".........."+"testVerifyIfGameEndsWinP2"+"..........");
 		
@@ -746,7 +762,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(b.getTurno()==1);
 		
 		//Player 1 moves
-		String st= b.movement(2, 5);
+		b.movement(2, 5);
 		
 			
 		//The number of seeds in Player2's tray are equal to 27

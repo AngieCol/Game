@@ -267,6 +267,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/explica"
+        android:textSize="7sp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
@@ -290,6 +291,7 @@
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#7309ba"
         android:text="@string/state"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

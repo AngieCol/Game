@@ -54,9 +54,9 @@ public class Match {
 						numSeedsInInputString+=numSeed;
 					
 					if(i<6)
-						numSeedsInSlotPlayer2=numSeed;
+						numSeedsInSlotPlayer2+=numSeed;
 					if(i>5 && i<12)
-						numSeedsInSlotPlayer1=numSeed;
+						numSeedsInSlotPlayer1+=numSeed;
 				} 
 				catch (NumberFormatException e) 
 				{
@@ -71,7 +71,7 @@ public class Match {
 		
 		if(respuesta=="" && (numSeedsInSlotPlayer1==0 || numSeedsInSlotPlayer2==0))
 		{
-			
+			respuesta=" The game cannot have as initial situation a player without any seeds on his/her bowls. "+numSeedsInSlotPlayer2+"-"+numSeedsInSlotPlayer1;
 		}
 		return respuesta;
 }
