@@ -190,7 +190,7 @@ public class GameSeedTests extends TestCase{
 	
 	/**
 	 * Verification of the input text done before the creation of the Board using Parameters. It returns 
-	 * the corresponding message when the inputString is not created properly. The situations where there
+	 * the corresponding message when the inputString is not created properly. The situations when there
 	 * is a wrong input text are the following:
 	 * - There are more numbers in the input text (The length of the input text must be 15)
 	 * - There are less numbers in the input text (The length of the input text must be 15)
