@@ -331,6 +331,79 @@ public class GameSeedTests extends TestCase{
 	}
 	
 	
+	/**
+	 * Player 1 and Player 2 try to play in invalid situations. 
+	 * - Player 2 tries  to move from player1's bowl.
+	 * - The turn is still for Player 2 because no movement was done. 
+	 * - Player 2 tries  to move from an empty bowl. 
+	 * - The turn is still for Player 2 because no movement was done.
+	 * - Player 2 moves correctly
+	 * - The turn is now for Player 1.
+	 * - Player 1 tries  to move from player2's bowl.
+	 * - Player 1 tries  to move from a tray. 
+	 * - Player 1 moves correctly.
+	 * - The turn is still for Player 1 because the last seed was dropped in his/her tray. 
+	 * 
+	 */
+	
+	@Test
+	public void testWrongMovements() 
+	{
+		Log.v("GameConsola", "                                        ");
+		Log.v("GameConsola", "**************************************************");
+		Log.v("GameConsola", ".........."+"testWrongMovements"+"..........");
+		
+		
+		//Create a initial situation in which it's the turn of player 2
+		String inputString="0,0,1,1,4,2,2,4,0,3,1,1,13,4,2";
+		BoardSituation b = new BoardSituation(inputString);
+		
+		//The turn is for Player 2 
+		assertTrue(b.getTurno()==2);
+		
+		//Player 2 tries  to move from player1's bowl. 
+		String st=b.movement(2,3);
+		assertTrue(st.equals("You are playing with a wrong player. This slot belongs to the player 1 and you are Player 2.  "));
+		
+		//The turn is still for Player 2 because no movement was done. 
+		assertTrue(b.getTurno()==2);
+		
+		//Player 2 tries  to move from an empty bowl. 
+		st=b.movement(0,1);
+		assertTrue(st.equals("You cannot choose this slot. You have to select a slot with at least 1 seed.  "));
+		
+		//The turn is still for Player 2 because no movement was done. 
+		assertTrue(b.getTurno()==2);
+				
+		// Player 2 moves correctly 
+		st=b.movement(0,3);
+		assertTrue(st.contains("Move done!!!"));
+			
+		//The turn is now for Player 1. 
+		assertTrue(b.getTurno()==1);
+		
+		// Player 1 tries  to move from player2's bowl.
+		st=b.movement(0,5);
+		assertTrue(st.equals("You are playing with a wrong player. This slot belongs to the player 2 and you are Player 1. "));
+		
+		// Player 1 tries  to move from a tray. 
+		st=b.movement(1,0);
+		assertTrue(st.equals("You cannot move from here. This is a Tray, you only can move from a Bowl. "));
+		
+		// Player 1 moves correctly.
+		st=b.movement(2,3);
+		assertTrue(st.contains("Move done!!!"));
+		
+		//The turn is still for Player 1 because the last seed was dropped in his/her tray. 
+		assertTrue(b.getTurno()==1);
+
+		Log.v("GameConsola", "***************************************");
+		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
+		Log.v("GameConsola", "                                        ");
+		
+	}
+	
+	
 	
 	/**
 	 * Player 1 begins. Player 1 takes all the	seeds	from	the selected bowl	and	moves 

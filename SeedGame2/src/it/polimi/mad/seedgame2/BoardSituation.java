@@ -225,7 +225,7 @@ public class BoardSituation
 			return "You are playing with a wrong player. This slot belongs to the player 1 and you are Player 2.  ";
 		}	
 		else if (s.type=="T1" || s.type=="T2"){
-			return "You cannot move from here. ";
+			return "You cannot move from here. This is a Tray, you only can move from a Bowl. ";
 		}
 		else if (s.type=="N" || s.type=="N"){
 			return "This is part of the Board, You cannot move from here. ";
