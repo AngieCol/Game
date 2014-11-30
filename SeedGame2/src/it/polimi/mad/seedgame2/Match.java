@@ -96,7 +96,13 @@ public class Match {
 }
 
 
+	public void createPlayer() {
+		
+	}
 	
+	public void AssignInformationToPlayers(Player P1, Player P2, String winner, String[] History) {
+		
+	}
 
 	public Date getDate() {
 		return date;
