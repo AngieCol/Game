@@ -91,6 +91,10 @@ public class GameSeedTests extends TestCase{
 		//Number of seeds are 36
 		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
 		
+		
+		//inputString must be equal to 3,3,3,3,3,3,3,3,3,3,3,3,0,0,1
+		assertTrue(b.getOutputString().equals("3,3,3,3,3,3,3,3,3,3,3,3,0,0,1"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -178,6 +182,9 @@ public class GameSeedTests extends TestCase{
 		
 		//Number of seeds are 36
 		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
+		
+		//inputString and OutputString must be equal
+		assertTrue(inputString.equals(b.getOutputString()));
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -299,6 +306,9 @@ public class GameSeedTests extends TestCase{
 		//The turn is for Player 1 
 		assertTrue(b.getTurno()==1);
 		
+		//OutputString
+		Log.v("GameConsola2",b.getOutputString());
+		assertTrue(b.getOutputString().equals("1,2,2,2,5,0,2,4,1,1,1,1,10,4,1"));
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -337,12 +347,23 @@ public class GameSeedTests extends TestCase{
 		//The turn is still for Player 1 
 		assertTrue(b.getTurno()==1);
 		
+		
+		//OutputString
+		Log.v("GameConsola2",b.getOutputString());
+		assertTrue(b.getOutputString().equals("1,1,1,1,4,2,2,4,1,0,2,2,10,5,1"));
+		
 		//Player 1 plays again
 		b.movement(2,5);
 		
 		//The turn is now for Player 2 
 		assertTrue(b.getTurno()==2);
 
+		
+		//OutputString
+		
+		Log.v("GameConsola2",b.getOutputString());
+		assertTrue(b.getOutputString().equals("1,1,1,1,4,3,2,4,1,0,2,0,10,6,2"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");

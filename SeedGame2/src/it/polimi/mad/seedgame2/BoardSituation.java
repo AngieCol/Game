@@ -14,15 +14,14 @@ public class BoardSituation
 	static int numRow = 3;
 	static int numBoardSeeds = 36;
 
-	
+
 	Slot[][] Board = null;
 	int turno=0;
 	int currentX=-1;
 	int currentY=-1;
 	String winner="";
-	//List<String> history = new ArrayList<String>();
+	String OutputString="";
 
-	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//==================================================================================================
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +54,8 @@ public class BoardSituation
 
 
 		paintBoardInConsole("It is the turn of player "+getTurno()+".");
-	//	history.add("Match begin");
+		generateOutputString();
+		//	history.add("Match begin");
 
 	}
 
@@ -65,26 +65,27 @@ public class BoardSituation
 	 */
 	public BoardSituation(String input) 
 	{
-		
-			String[] inputSplited= input.split(",");
 
-			Board= new Slot[numRow][numColumn];
+		String[] inputSplited= input.split(",");
 
-			for(int i=0, j=6; i<numColumn; i++, j++)
-			{
-				Board[0][i]=new Slot("B2",Integer.parseInt(inputSplited[i]));
-				Board[1][i]=new Slot("N",-1);
-				Board[2][i]=new Slot("B1",Integer.parseInt(inputSplited[j]));		
+		Board= new Slot[numRow][numColumn];
 
-			}
-			Board[1][0]=new Slot("T2",Integer.parseInt(inputSplited[12]));
-			Board[1][numColumn-1]=new Slot("T1",Integer.parseInt(inputSplited[13]));
+		for(int i=0, j=6; i<numColumn; i++, j++)
+		{
+			Board[0][i]=new Slot("B2",Integer.parseInt(inputSplited[i]));
+			Board[1][i]=new Slot("N",-1);
+			Board[2][i]=new Slot("B1",Integer.parseInt(inputSplited[j]));		
 
-			setTurno(Integer.parseInt(inputSplited[14]));
-			
-			paintBoardInConsole("It is the turn of player "+getTurno()+".");
-			//history.add("Match begin");
-		
+		}
+		Board[1][0]=new Slot("T2",Integer.parseInt(inputSplited[12]));
+		Board[1][numColumn-1]=new Slot("T1",Integer.parseInt(inputSplited[13]));
+
+		setTurno(Integer.parseInt(inputSplited[14]));
+
+		paintBoardInConsole("It is the turn of player "+getTurno()+".");
+		generateOutputString();
+		//history.add("Match begin");
+
 	}
 
 
@@ -92,23 +93,23 @@ public class BoardSituation
 	 * paintBoardInConsole Displays the Board on the console
 	 */
 	public void paintBoardInConsole(String s) {
-		
-		
-		
+
+
+
 		Log.v("GameConsola", "                -----                         ");
 		Log.w("GameConsola", s+" ");
-	//	Log.w("GameConsola",getHistory()+" ");
+		//	Log.w("GameConsola",getHistory()+" ");
 		Log.w("GameConsola", " | "+ Board[0][0].getNumSeed()+" | "+ Board[0][1].getNumSeed()+" | "+ Board[0][2].getNumSeed()+" | "+  Board[0][3].getNumSeed()+" | "+  Board[0][4].getNumSeed()+" | "+  Board[0][5].getNumSeed()+" | " );
 		Log.d("GameConsola", " | "+ Board[1][0].getNumSeed()+" | ============= | " + Board[1][5].getNumSeed()+" | " );
 		Log.e("GameConsola", " | "+ Board[2][0].getNumSeed()+" | "+ Board[2][1].getNumSeed()+" | "+ Board[2][2].getNumSeed()+" | "+  Board[2][3].getNumSeed()+" | "+  Board[2][4].getNumSeed()+" | "+  Board[2][5].getNumSeed()+" | " );
 		Log.v("GameConsola", "                -----                         ");
-	
-		
+
+
 
 	}
 
 
-	
+
 	/**
 	 * Movement allows the current player make a move
 	 */
@@ -121,9 +122,10 @@ public class BoardSituation
 
 		if (rta!="")
 		{
-	//		history.add("Player "+getTurno()+ ":  Make a bad move->"+rta);
+			//		history.add("Player "+getTurno()+ ":  Make a bad move->"+rta);
+			generateOutputString();
 			return rta;
-			
+
 		}
 
 		else
@@ -133,22 +135,24 @@ public class BoardSituation
 			setTurn();
 			if(!verifyWin())
 			{
-			// history.add("Player "+getTurno()+ ":  Made a move. "+eaten);
-			 paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten);
-			 return "Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten;
-			
+				// history.add("Player "+getTurno()+ ":  Made a move. "+eaten);
+				paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten);
+				generateOutputString();
+				return "Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten;
+
 			}
 			else
 			{
-			//	history.add("The game is finished with the movement of Player "+getTurno()+ winner+". "+eaten);
+				//	history.add("The game is finished with the movement of Player "+getTurno()+ winner+". "+eaten);
 				paintBoardInConsole("The game is finished. "+ winner+". "+eaten);
+				generateOutputString();
 				return "The game is finished. "+ winner+". "+eaten; 
 			}
 		}
 
 
 
-		
+
 
 	}
 
@@ -173,11 +177,11 @@ public class BoardSituation
 
 		}
 
-		
+
 
 	}
 
-	
+
 	/**
 	 * putSeeds leaves the seeds on the correspondent bowls
 	 */
@@ -225,7 +229,7 @@ public class BoardSituation
 	}
 
 
-	
+
 	/**
 	 * verifyMovement verifies if the player movement is valid or not
 	 */
@@ -257,7 +261,7 @@ public class BoardSituation
 	}
 
 
-	
+
 	/**
 	 * eatSeeds gets the seeds of the corresponding bowls and put them in the tray of the current player
 	 */
@@ -282,21 +286,21 @@ public class BoardSituation
 		return eatenSeeds;
 	}
 
-	
+
 	/**
 	 * verifyWin verifies if the match is finish because a player doesn't have more seeds in his/her bowls
 	 */
 	public boolean verifyWin() {
-		
+
 		int numSeed1=0;
 		int numSeed2=0;
-		
+
 		for(int i=0; i<numColumn; i++)
 		{
 			numSeed2+=Board[0][i].getNumSeed();
 			numSeed1+=Board[numRow-1][i].getNumSeed();
 		}
-		
+
 		if(numSeed1>0 && numSeed2>0)
 		{
 			return false;
@@ -327,13 +331,13 @@ public class BoardSituation
 				setWinner("There is a draw of player 1 and player 2");
 			return true;
 		}
-		
+
 	}
 
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * CountSeedsInBoard counts all the seeds in the Board
 	 */
@@ -356,14 +360,14 @@ public class BoardSituation
 		return turno;
 	}
 
-	
+
 	/**
 	 * setTurno sets the current player
 	 */
 	public void setTurno(int turno) {
 		this.turno = turno;
 	}
-	
+
 	/**
 	 * getWinner returns the player who wins the match
 	 */
@@ -371,14 +375,14 @@ public class BoardSituation
 		return winner;
 	}
 
-	
+
 	/**
 	 * setWinner sets the player who wins the match
 	 */
 	public void setWinner(String win) {
 		winner = win;
 	}
-	
+
 	/**
 	 * getNumColumn() returns the number of columns of the Board
 	 */
@@ -386,7 +390,7 @@ public class BoardSituation
 		return numColumn;
 	}
 
-	
+
 	/**
 	 * getNumRow() returns the number of rows of the Board
 	 */
@@ -430,8 +434,33 @@ public class BoardSituation
 	}
 
 
-	
-	
-	
+	/**
+	 * Generate the output string, which allows to evaluate if the move is performed correctly  
+	 */
+	public String generateOutputString() {
+		OutputString="";
+		for(int j=0; j<numRow ; j++)
+		{
+			if(j!=1)
+			{
+				for(int i=0; i<numColumn; i++)
+				{
+
+					OutputString+=Board[j][i].getNumSeed()+",";
+				}
+			}
+		}
+		OutputString+=Board[1][0].getNumSeed()+",";
+		OutputString+=Board[1][numColumn-1].getNumSeed()+",";
+		OutputString+=getTurno();
+		return OutputString;
+	}
+
+	/**
+	 * getOutputString returns output string, which allows to evaluate if the move is performed correctly
+	 */
+	public String getOutputString() {
+		return OutputString;
+	}
 
 }
