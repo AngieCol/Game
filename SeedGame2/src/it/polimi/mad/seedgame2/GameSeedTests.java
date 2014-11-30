@@ -307,7 +307,6 @@ public class GameSeedTests extends TestCase{
 		assertTrue(b.getTurno()==1);
 		
 		//OutputString
-		Log.v("GameConsola2",b.getOutputString());
 		assertTrue(b.getOutputString().equals("1,2,2,2,5,0,2,4,1,1,1,1,10,4,1"));
 		
 		Log.v("GameConsola", "***************************************");
@@ -349,7 +348,6 @@ public class GameSeedTests extends TestCase{
 		
 		
 		//OutputString
-		Log.v("GameConsola2",b.getOutputString());
 		assertTrue(b.getOutputString().equals("1,1,1,1,4,2,2,4,1,0,2,2,10,5,1"));
 		
 		//Player 1 plays again
@@ -360,8 +358,6 @@ public class GameSeedTests extends TestCase{
 
 		
 		//OutputString
-		
-		Log.v("GameConsola2",b.getOutputString());
 		assertTrue(b.getOutputString().equals("1,1,1,1,4,3,2,4,1,0,2,0,10,6,2"));
 		
 		Log.v("GameConsola", "***************************************");
@@ -405,6 +401,9 @@ public class GameSeedTests extends TestCase{
 		String st=b.movement(2,3);
 		assertTrue(st.equals("You are playing with a wrong player. This slot belongs to the player 1 and you are Player 2.  "));
 		
+		//Output string must be the same as input string
+		assertTrue(b.getOutputString().equals(inputString));
+		
 		//The turn is still for Player 2 because no movement was done. 
 		assertTrue(b.getTurno()==2);
 		
@@ -419,6 +418,9 @@ public class GameSeedTests extends TestCase{
 		st=b.movement(0,3);
 		assertTrue(st.contains("Move done!!!"));
 			
+		//Output string 
+		assertTrue(b.getOutputString().equals("0,0,2,0,4,2,2,4,0,3,1,1,13,4,1"));
+		
 		//The turn is now for Player 1. 
 		assertTrue(b.getTurno()==1);
 		
@@ -437,6 +439,9 @@ public class GameSeedTests extends TestCase{
 		//The turn is still for Player 1 because the last seed was dropped in his/her tray. 
 		assertTrue(b.getTurno()==1);
 
+		//Output string 
+		assertTrue(b.getOutputString().equals("0,0,2,0,4,2,2,4,0,0,2,2,13,5,1"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -498,6 +503,10 @@ public class GameSeedTests extends TestCase{
 		//Player's 1 bowl in position [2][2] has to be the same (2 seeds) because thrown seeds were only 10
 		s= b.Board[2][2];
 		assertTrue(s.getNumSeed()==2);
+		
+		
+		//Output string 
+		assertTrue(b.getOutputString().equals("3,3,3,3,3,3,3,3,2,2,0,3,3,2,2"));
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -562,6 +571,9 @@ public class GameSeedTests extends TestCase{
 		s= b.Board[0][4];
 		assertTrue(s.getNumSeed()==2);
 		
+		//Output string 
+		assertTrue(b.getOutputString().equals("3,3,0,2,2,3,3,3,3,3,3,3,4,1,1"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -621,6 +633,9 @@ public class GameSeedTests extends TestCase{
 		s= b.Board[2][4];
 		assertTrue(s.getNumSeed()==3);
 		
+		
+		//Output string 
+		assertTrue(b.getOutputString().equals("2,2,2,0,1,1,2,2,2,0,3,3,4,12,2"));
 		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
@@ -682,6 +697,9 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getNumSeed()==1);
 		
 		
+		//Output string 
+		assertTrue(b.getOutputString().equals("3,3,0,2,2,2,1,1,0,2,2,2,5,11,1"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -742,6 +760,10 @@ public class GameSeedTests extends TestCase{
 		//Player's 1 Slot at position [2][4] is now empty
 		s= b.Board[2][4];
 		assertTrue(s.getNumSeed()==0);
+		
+		
+		//Output string 
+        assertTrue(b.getOutputString().equals("2,2,5,2,0,2,2,0,0,1,0,2,4,14,2"));
 		
 		
 		Log.v("GameConsola", "***************************************");
@@ -812,6 +834,9 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getNumSeed()==0);
 		
 		
+		//Output string 
+        assertTrue(b.getOutputString().equals("2,2,5,0,3,0,2,0,2,0,0,2,11,7,1"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -880,7 +905,9 @@ public class GameSeedTests extends TestCase{
 		s= b.Board[2][5];
 		assertTrue(s.getNumSeed()==0);
 		
-			
+		//Output string 
+        assertTrue(b.getOutputString().equals("0,0,0,0,0,0,0,0,0,0,0,0,18,18,2"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
@@ -945,7 +972,9 @@ public class GameSeedTests extends TestCase{
 		s= b.Board[0][5];
 		assertTrue(s.getNumSeed()==0);
 		
-			
+		//Output string 
+		assertTrue(b.getOutputString().equals("0,0,0,0,0,0,0,0,0,0,0,0,27,9,1"));
+		
 		Log.v("GameConsola", "***************************************");
 		Log.v("GameConsola", "+++++++++++++++++++++++++++++++++++++++");
 		Log.v("GameConsola", "                                        ");
