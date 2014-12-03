@@ -1,18 +1,24 @@
+
 package it.polimi.mad.seedgame2;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class GameUI extends Activity {
+/**
+ * 
+ *
+ */
+public class MatchPreferencesUI extends Activity {
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game);
+		setContentView(R.layout.matchpreferences);
 		
 		
 		Button b2 = (Button) findViewById(R.id.button1);
@@ -21,10 +27,13 @@ public class GameUI extends Activity {
 			@Override
 			public void onClick(View v) {
 			
-				Intent in= new Intent(GameUI.this, MatchPreferencesUI.class);
+				Intent in= new Intent(MatchPreferencesUI.this, MatchUI.class);
 				startActivity(in);
 			}
 		});
 	}
-
+	
+	
+	
+	
 }

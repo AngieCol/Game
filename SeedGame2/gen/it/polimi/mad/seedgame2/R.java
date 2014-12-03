@@ -24,11 +24,12 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080029;
+        public static final int action_settings=0x7f08002a;
         public static final int button1=0x7f080001;
         public static final int button2=0x7f080002;
         public static final int button3=0x7f080003;
         public static final int editText1=0x7f080027;
+        public static final int editText2=0x7f080029;
         public static final int linearLayout1=0x7f080000;
         public static final int spinner1=0x7f080025;
         public static final int textView1=0x7f080004;
@@ -70,6 +71,7 @@ public final class R {
     public static final class layout {
         public static final int game=0x7f030000;
         public static final int match=0x7f030001;
+        public static final int matchpreferences=0x7f030002;
     }
     public static final class menu {
         public static final int game=0x7f070000;
@@ -91,10 +93,14 @@ public final class R {
         public static final int T2=0x7f050013;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int createPlayer=0x7f05001a;
         public static final int explica=0x7f050018;
         public static final int hello_world=0x7f050002;
         public static final int newgame=0x7f050003;
         public static final int preferences=0x7f050005;
+        public static final int selectPlayer=0x7f050019;
+        public static final int selectPlayer1=0x7f05001b;
+        public static final int selectPlayer2=0x7f05001c;
         public static final int space=0x7f050014;
         public static final int stadistics=0x7f050004;
         public static final int start=0x7f050015;
