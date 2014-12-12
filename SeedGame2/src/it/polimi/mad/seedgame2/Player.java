@@ -10,15 +10,15 @@ public class Player {
 	
 	@DatabaseField(generatedId = true)
 	int id ;
-	@DatabaseField 
+	@DatabaseField //(unique=true)
 	String userName;
-	@DatabaseField
+	@DatabaseField 
 	int totalPoints;
 	@DatabaseField
 	int numPlayedGame;
 	@DatabaseField
 	int numDrawnGame;
-	@DatabaseField
+	@DatabaseField(columnName="numberWonGames")
 	int numWonGames; 
 	@DatabaseField
 	int highestScore;
@@ -38,6 +38,7 @@ public class Player {
 		numWonGames=0; 
 		highestScore=0;
 		lowestscore=0;
+		totalPoints=0;
 		isHuman=true;
 		
 	}
