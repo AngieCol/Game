@@ -1,19 +1,34 @@
 package it.polimi.mad.seedgame2;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+
+@DatabaseTable
 public class Player {
-	
-	
+	@DatabaseField(generatedId = true)
+	int id ;
+	@DatabaseField
 	String userName;
-	int totalPoints; 
+	@DatabaseField
+	int totalPoints;
+	@DatabaseField
 	int numPlayedGame;
+	@DatabaseField
 	int numDrawnGame;
+	@DatabaseField
 	int numWonGames; 
+	@DatabaseField
 	int highestScore;
+	@DatabaseField
 	int lowestscore;
+	@DatabaseField
 	boolean isHuman;
 	
 
-
+	public Player() {
+		
+	}
 	public Player(String usern) {
 		userName=usern;
 		numPlayedGame=0;
@@ -108,6 +123,24 @@ public class Player {
 
 	public void setHuman(boolean isHuman) {
 		this.isHuman = isHuman;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return "Player [id=" + id + ", userName=" + userName + ", totalPoints="
+				+ totalPoints + ", numPlayedGame=" + numPlayedGame
+				+ ", numDrawnGame=" + numDrawnGame + ", numWonGames="
+				+ numWonGames + ", highestScore=" + highestScore
+				+ ", lowestscore=" + lowestscore + ", isHuman=" + isHuman + "]";
 	}
 
 

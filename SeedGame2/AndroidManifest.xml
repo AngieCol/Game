@@ -27,7 +27,10 @@
             android:name="it.polimi.mad.seedgame2.MatchUI"
             android:label="@string/app_name" >
         </activity>
-
+ 		<activity
+            android:name="it.polimi.mad.seedgame2.MatchPreferencesUI"
+            android:label="@string/app_name" >
+        </activity>
         <uses-library android:name="android.test.runner" />
         
     </application>

@@ -1,5 +1,7 @@
 package it.polimi.mad.seedgame2;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MatchUI extends Activity {
+public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 
 	
 	

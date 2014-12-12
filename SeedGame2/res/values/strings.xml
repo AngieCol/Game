@@ -26,7 +26,7 @@
 	<string name="start2">Start In Specific Board Situation</string>
 	<string name="state">Game State</string>
 	<string name="explica">The structure of the Input text has to be 15 numbers (greater than 0) separated by a comma (,) and the last number has to be 1 or 2. The first 6 numbers are all the Bowls of player 1, the following 6 numbers are all the Bowls of player 2, then you have to enter the Tray of player 2 and the Tray of player 1. At least one bowl of each player has at least one seed. An Example is: 3,3,3,3,3,3,3,3,3,3,3,3,0,0,1 </string>
-	<string name="selectPlayer">Please select the player to begin the match </string>
+	<string name="selectPlayer">Please select the player to begin the match.... </string>
 	<string name="createPlayer">Create </string>
 	<string name="selectPlayer1">Select Player 1 </string>
 	<string name="selectPlayer2">Select Player 2</string>

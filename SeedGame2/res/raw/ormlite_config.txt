@@ -1,0 +1,38 @@
+#
+# generated on 2014/12/11 11:26:14
+#
+# --table-start--
+dataClass=it.polimi.mad.seedgame2.Player
+tableName=player
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=userName
+# --field-end--
+# --field-start--
+fieldName=totalPoints
+# --field-end--
+# --field-start--
+fieldName=numPlayedGame
+# --field-end--
+# --field-start--
+fieldName=numDrawnGame
+# --field-end--
+# --field-start--
+fieldName=numWonGames
+# --field-end--
+# --field-start--
+fieldName=highestScore
+# --field-end--
+# --field-start--
+fieldName=lowestscore
+# --field-end--
+# --field-start--
+fieldName=isHuman
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
