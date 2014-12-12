@@ -6,6 +6,7 @@ package it.polimi.mad.seedgame2;
 import java.io.File;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.List;
 
 import android.R.integer;
 import android.content.Context;
@@ -54,6 +55,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 		
 
 		try {
+			
 			TableUtils.createTable(connectionSource, Player.class);
 			Log.d( "GameConsola","table created");
 		} catch (Exception e) {
@@ -72,7 +74,8 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, ConnectionSource cs, int oldVersion,
 			int newVersion) {
 		try {
-			TableUtils.dropTable(cs, Player.class, true);
+			
+			TableUtils.dropTable(connectionSource, Player.class, true);
 			onCreate(db,cs);
 		} catch (SQLException e) {
 			
@@ -80,21 +83,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 		}
 		
 	}
-	/**
-	 * 
-	 * 
-	 */
-	public void savePlayer(Player p)
-	{
-		try {
-			Dao<Player,Integer> pDao = getDao(Player.class);
-			pDao.create(p);
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-	}
+	
 	
 	/**
 	 * 

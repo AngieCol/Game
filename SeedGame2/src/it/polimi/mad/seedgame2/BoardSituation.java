@@ -324,9 +324,9 @@ public class BoardSituation
 				}
 			}
 			if(Board[1][0].getNumSeed()>Board[1][numColumn-1].getNumSeed())
-				setWinner("The winner is Player 1!!!");
-			else if (Board[1][0].getNumSeed()<Board[1][numColumn-1].getNumSeed())
 				setWinner("The winner is Player 2!!!");
+			else if (Board[1][0].getNumSeed()<Board[1][numColumn-1].getNumSeed())
+				setWinner("The winner is Player 1!!!");
 			else
 				setWinner("There is a draw of player 1 and player 2");
 			return true;

@@ -44,7 +44,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 	EditText inputString=null;
 	
 	TextView explica= null;
-	
+	TextView playersInfo=null;
 	
 	
 	
@@ -94,7 +94,8 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		b10= (TextView) findViewById(R.id.textView7);
 		b15= (TextView) findViewById(R.id.textView12);
 		
-		
+		playersInfo= (TextView) findViewById(R.id.textView36);
+		playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
 		
 		
 		Button bStart= (Button) findViewById(R.id.button1);
