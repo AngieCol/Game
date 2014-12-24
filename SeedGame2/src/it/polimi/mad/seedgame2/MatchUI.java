@@ -104,7 +104,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 			@Override
 			public void onClick(View v) {
 				bs= new BoardSituation();
-				message.setText("Player "+bs.getTurno()+" begins");
+				message.setText("Player "+bs.getTurn()+" begins");
 				paintBoard();
 				
 			
@@ -130,7 +130,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 				 bs= new BoardSituation(inputS);
 				 boolean b= bs.verifyWin();
 				 if(!b){
-					 message.setText("Player "+bs.getTurno()+" begins");
+					 message.setText("Player "+bs.getTurn()+" begins");
 				 }
 				 else{
 					 message.setText("The game is finished. "+ bs.getWinner());

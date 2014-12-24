@@ -2,6 +2,8 @@ package it.polimi.mad.seedgame2;
 
 
 
+import java.util.ArrayList;
+
 import android.util.Log;
 
 public class BoardSituation 
@@ -16,11 +18,12 @@ public class BoardSituation
 
 
 	Slot[][] Board = null;
-	int turno=0;
+	int turn=0;
 	int currentX=-1;
 	int currentY=-1;
 	String winner="";
 	String OutputString="";
+	ArrayList<String> movements = new ArrayList<String>();
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//==================================================================================================
@@ -50,12 +53,12 @@ public class BoardSituation
 		Board[1][0]=new Slot("T2",0);
 		Board[1][numColumn-1]=new Slot("T1",0);
 
-		setTurno(1);
+		setTurn(1);
 
 
-		paintBoardInConsole("It is the turn of player "+getTurno()+".");
+		paintBoardInConsole("It is the turn of player "+getTurn()+".");
 		generateOutputString();
-		//	history.add("Match begin");
+	    movements.add("The game begins. It is the turn of player "+getTurn()+".");
 
 	}
 
@@ -80,11 +83,11 @@ public class BoardSituation
 		Board[1][0]=new Slot("T2",Integer.parseInt(inputSplited[12]));
 		Board[1][numColumn-1]=new Slot("T1",Integer.parseInt(inputSplited[13]));
 
-		setTurno(Integer.parseInt(inputSplited[14]));
+		setTurn(Integer.parseInt(inputSplited[14]));
 
-		paintBoardInConsole("It is the turn of player "+getTurno()+".");
+		paintBoardInConsole("It is the turn of player "+getTurn()+".");
 		generateOutputString();
-		//history.add("Match begin");
+		movements.add("The game begins. It is the turn of player "+getTurn()+".");
 
 	}
 
@@ -122,7 +125,7 @@ public class BoardSituation
 
 		if (rta!="")
 		{
-			//		history.add("Player "+getTurno()+ ":  Make a bad move->"+rta);
+			movements.add("Player "+getTurn()+ ":  Make a bad move->"+rta);
 			generateOutputString();
 			return rta;
 
@@ -135,15 +138,15 @@ public class BoardSituation
 			setTurn();
 			if(!verifyWin())
 			{
-				// history.add("Player "+getTurno()+ ":  Made a move. "+eaten);
-				paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten);
+				movements.add("Player "+getTurn()+ ":  Made a move. "+eaten);
+				paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurn()+". "+eaten);
 				generateOutputString();
-				return "Move done!!! Now It's the turn of Player: "+getTurno()+". "+eaten;
+				return "Move done!!! Now It's the turn of Player: "+getTurn()+". "+eaten;
 
 			}
 			else
 			{
-				//	history.add("The game is finished with the movement of Player "+getTurno()+ winner+". "+eaten);
+				movements.add("The game is finished with the movement of Player "+getTurn()+ winner+". "+eaten);
 				paintBoardInConsole("The game is finished. "+ winner+". "+eaten);
 				generateOutputString();
 				return "The game is finished. "+ winner+". "+eaten; 
@@ -165,15 +168,15 @@ public class BoardSituation
 
 	public void setTurn() {
 
-		if(getTurno()==1 && !(currentX==1 && currentY==numColumn-1))
+		if(getTurn()==1 && !(currentX==1 && currentY==numColumn-1))
 		{
-			setTurno(2);
+			setTurn(2);
 
 		}
 
-		else if(getTurno()==2 && !(currentX==1 && currentY==0))
+		else if(getTurn()==2 && !(currentX==1 && currentY==0))
 		{
-			setTurno(1);
+			setTurn(1);
 
 		}
 
@@ -204,7 +207,7 @@ public class BoardSituation
 		while (numSeeds>0)
 		{
 			//except P’s opponent's tray
-			if(!(getTurno()==1 && row==1 && col==0) && !(getTurno()==2 && row==1 && col==numColumn-1))
+			if(!(getTurn()==1 && row==1 && col==0) && !(getTurn()==2 && row==1 && col==numColumn-1))
 			{
 				Board[row][col].sumSeed(1);
 				numSeeds--;
@@ -235,10 +238,10 @@ public class BoardSituation
 	 */
 	public String verifyMovement(Slot s) {
 		//B1, B2, T1, T2, N
-		if (s.type=="B2" && getTurno()==1){
+		if (s.type=="B2" && getTurn()==1){
 			return "You are playing with a wrong player. This slot belongs to the player 2 and you are Player 1. ";
 		}
-		else if (s.type=="B1" && getTurno()==2){
+		else if (s.type=="B1" && getTurn()==2){
 			return "You are playing with a wrong player. This slot belongs to the player 1 and you are Player 2.  ";
 		}	
 		else if (s.type=="T1" || s.type=="T2"){
@@ -268,14 +271,14 @@ public class BoardSituation
 	public String eatSeeds() {
 		int seedsToTray=0;
 		String eatenSeeds="";
-		if(currentX==numRow-1 && getTurno()==1 && Board[currentX][currentY].getNumSeed()==1 ){
+		if(currentX==numRow-1 && getTurn()==1 && Board[currentX][currentY].getNumSeed()==1 ){
 			seedsToTray=(Board[0][currentY].getNumSeed())+1;
 			Board[1][numColumn-1].sumSeed(seedsToTray);
 			Board[0][currentY].setNumSeed(0);
 			Board[currentX][currentY].setNumSeed(0);
 			eatenSeeds=" Player 1 ate "+ (seedsToTray-1)+ " seeds from Player 2 plus the one that belong to him/her. "; 
 		}
-		else if(currentX==0 && getTurno()==2 && Board[currentX][currentY].getNumSeed()==1 ){
+		else if(currentX==0 && getTurn()==2 && Board[currentX][currentY].getNumSeed()==1 ){
 			seedsToTray=(Board[numRow-1][currentY].getNumSeed())+1;
 			Board[1][0].sumSeed(seedsToTray);
 			Board[numRow-1][currentY].setNumSeed(0);
@@ -356,16 +359,16 @@ public class BoardSituation
 	/**
 	 * getTurno returns the current player
 	 */
-	public int getTurno() {
-		return turno;
+	public int getTurn() {
+		return turn;
 	}
 
 
 	/**
 	 * setTurno sets the current player
 	 */
-	public void setTurno(int turno) {
-		this.turno = turno;
+	public void setTurn(int turno) {
+		this.turn = turno;
 	}
 
 	/**
@@ -452,7 +455,7 @@ public class BoardSituation
 		}
 		OutputString+=Board[1][0].getNumSeed()+",";
 		OutputString+=Board[1][numColumn-1].getNumSeed()+",";
-		OutputString+=getTurno();
+		OutputString+=getTurn();
 		return OutputString;
 	}
 
@@ -462,5 +465,45 @@ public class BoardSituation
 	public String getOutputString() {
 		return OutputString;
 	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	public ArrayList<String> getMovements() {
+		return movements;
+	}
+	
+	
+	////////////////////////========================================/////////////////////////////////////////
+	//Computer 
+
+	/**
+	 * 
+	 */
+	public ArrayList<Integer> getBestMove() {
+		ArrayList<Integer> bestMove= new ArrayList<Integer>();
+		//Calculate if you can get an extra turn
+		
+		//Calculate if you can eat 
+		
+		
+			
+		
+		return bestMove;
+	}
+	
+	
+
+	
+	
+	
+	
+	
 
 }
+
+
+
+

@@ -24,12 +24,13 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f09002e;
+        public static final int action_settings=0x7f09002f;
         public static final int autoCompleteTextView1=0x7f09002c;
         public static final int autoCompleteTextView2=0x7f09002d;
         public static final int button1=0x7f090001;
         public static final int button2=0x7f090002;
         public static final int button3=0x7f090003;
+        public static final int checkBox2=0x7f09002e;
         public static final int editText1=0x7f09002a;
         public static final int linearLayout1=0x7f090000;
         public static final int spinner1=0x7f090028;
@@ -101,9 +102,10 @@ public final class R {
         public static final int T2=0x7f060013;
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int computer=0x7f06001f;
         public static final int createSelectPlayer1=0x7f06001a;
         public static final int createSelectPlayer2=0x7f06001b;
-        public static final int empty=0x7f06001f;
+        public static final int empty=0x7f060020;
         public static final int explica=0x7f060018;
         public static final int hello_world=0x7f060002;
         public static final int namePlayer1=0x7f06001c;

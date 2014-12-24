@@ -1,18 +1,32 @@
 package it.polimi.mad.seedgame2;
 
 import java.util.Date;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+
+@DatabaseTable
 public class Match {
 
 	/**
 	 * variables
 	 */
+	@DatabaseField(generatedId = true)
+	int id ;
+	
+	@DatabaseField
 	Date date;
+	@DatabaseField
 	String state;
+	@DatabaseField
 	String boardSituation;
+	@DatabaseField
 	String usernamePlayer1;
+	@DatabaseField
 	String usernamePlayer2;
+	@DatabaseField
 	BoardSituation bs=null;
+	@DatabaseField
 	String winner;
 	
 

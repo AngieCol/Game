@@ -10,7 +10,7 @@ public class Player {
 	
 	@DatabaseField(generatedId = true)
 	int id ;
-	@DatabaseField //(unique=true)
+	@DatabaseField (unique=true)
 	String userName;
 	@DatabaseField 
 	int totalPoints;
@@ -139,11 +139,11 @@ public class Player {
 	 */
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", userName=" + userName /*+ ", totalPoints="
+		return "Player [id=" + id + ", userName=" + userName + ", totalPoints="
 				+ totalPoints + ", numPlayedGame=" + numPlayedGame
 				+ ", numDrawnGame=" + numDrawnGame + ", numWonGames="
 				+ numWonGames + ", highestScore=" + highestScore
-				+ ", lowestscore=" + lowestscore + ", isHuman=" + isHuman*/ + "]";
+				+ ", lowestscore=" + lowestscore + ", isHuman=" + isHuman + "]";
 	}
 
 

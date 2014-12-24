@@ -30,7 +30,9 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	private static final String DB_NAME="SeedGame.db";
 	private static final int VERSION=1;
 	private Dao<Player, integer> playerDAO=null;
-	private RuntimeExceptionDao<Player, integer>playerRuntimeDAO=null;
+	private RuntimeExceptionDao<Player, integer> playerRuntimeDAO=null;
+	private Dao<Match, integer> matchDAO=null;
+	private RuntimeExceptionDao<Match, integer> matchRuntimeDAO=null;
 	
 	
 	private Context context;
@@ -88,7 +90,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	/**
 	 * 
 	 */
-	public Dao<Player, integer> getDao() throws SQLException{
+	public Dao<Player, integer> getDaoPlayer() throws SQLException{
 		
 		if(playerDAO==null){
 			playerDAO= getDao(Player.class);
@@ -112,4 +114,40 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 		return playerRuntimeDAO;
 		
 	}
+
+
+	/**
+	 * 
+	 */
+	public Dao<Match, integer> getDaoMatch() throws SQLException{
+		
+		if(matchDAO==null){
+			matchDAO= getDao(Match.class);
+		}
+		
+		
+		return matchDAO;
+		
+	}
+
+	/**
+	 * 
+	 */
+	public RuntimeExceptionDao<Match, integer> getMatchRuntimeExceptionDao() {
+		
+		if(matchRuntimeDAO==null){
+			matchRuntimeDAO= getRuntimeExceptionDao(Match.class);
+		}
+		
+		
+		return matchRuntimeDAO;
+		
+	}
+
+
+
+
+
+
+
 }

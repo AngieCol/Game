@@ -86,7 +86,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getNumSeed()==0);
 		
 		//Player 1 has the turn 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Number of seeds are 36
 		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
@@ -178,7 +178,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(s.getNumSeed()==6);
 		
 		//Player 2 has the turn 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Number of seeds are 36
 		assertTrue(b.CountSeedsInBoard()==BoardSituation.getNumBoardSeeds());
@@ -298,13 +298,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//Player 2 begins 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 plays 
 		b.movement(0,5);
 		
 		//The turn is for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//OutputString
 		assertTrue(b.getOutputString().equals("1,2,2,2,5,0,2,4,1,1,1,1,10,4,1"));
@@ -338,13 +338,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Player 1 plays 
 		b.movement(2,3);
 		
 		//The turn is still for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		
 		//OutputString
@@ -354,7 +354,7 @@ public class GameSeedTests extends TestCase{
 		b.movement(2,5);
 		
 		//The turn is now for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 
 		
 		//OutputString
@@ -395,7 +395,7 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 tries  to move from player1's bowl. 
 		String st=b.movement(2,3);
@@ -405,14 +405,14 @@ public class GameSeedTests extends TestCase{
 		assertTrue(b.getOutputString().equals(inputString));
 		
 		//The turn is still for Player 2 because no movement was done. 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 tries  to move from an empty bowl. 
 		st=b.movement(0,1);
 		assertTrue(st.equals("You cannot choose this slot. You have to select a slot with at least 1 seed.  "));
 		
 		//The turn is still for Player 2 because no movement was done. 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 				
 		// Player 2 moves correctly 
 		st=b.movement(0,3);
@@ -422,7 +422,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(b.getOutputString().equals("0,0,2,0,4,2,2,4,0,3,1,1,13,4,1"));
 		
 		//The turn is now for Player 1. 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		// Player 1 tries  to move from player2's bowl.
 		st=b.movement(0,5);
@@ -437,7 +437,7 @@ public class GameSeedTests extends TestCase{
 		assertTrue(st.contains("Move done!!!"));
 		
 		//The turn is still for Player 1 because the last seed was dropped in his/her tray. 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 
 		//Output string 
 		assertTrue(b.getOutputString().equals("0,0,2,0,4,2,2,4,0,0,2,2,13,5,1"));
@@ -478,13 +478,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Player 1 plays 
 		b.movement(2,4);
 		
 		//The turn is now for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		
 		//Player's 1 bowls has to be 0, because it's the selected bowl
@@ -545,13 +545,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 plays 
 		b.movement(0,2);
 		
 		//The turn is now for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		
 		//Player's 2 bowls has to be 0, because it's the selected bowl
@@ -607,13 +607,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Player 1 plays 
 		b.movement(2,3);
 		
 		//The turn is now for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//In Player's 1 bowls must have 0 seeds, because it's the selected bowl
 		Slot s= b.Board[2][3];
@@ -670,13 +670,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 plays 
 		b.movement(0,2);
 		
 		//The turn is now for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//In Player's 2 bowls must have 0 seeds, because it's the selected bowl
 		Slot s= b.Board[0][2];
@@ -734,13 +734,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Player 1 plays 
 		b.movement(2,2);
 		
 		//The turn is now for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//In Player's 1 bowls must have 0 seeds, because it's the selected bowl
 		Slot s= b.Board[2][2];
@@ -805,13 +805,13 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 plays 
 		b.movement(0,5);
 		
 		//The turn is now for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Player's 2 bowls has to be 0, because it's the selected bowl
 		Slot s= b.Board[0][5];
@@ -874,7 +874,7 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 2 
-		assertTrue(b.getTurno()==2);
+		assertTrue(b.getTurn()==2);
 		
 		//Player 2 moves
 		String st= b.movement(0, 0);
@@ -943,7 +943,7 @@ public class GameSeedTests extends TestCase{
 		BoardSituation b = new BoardSituation(inputString);
 		
 		//The turn is for Player 1 
-		assertTrue(b.getTurno()==1);
+		assertTrue(b.getTurn()==1);
 		
 		//Player 1 moves
 		b.movement(2, 5);
