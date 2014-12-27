@@ -482,14 +482,22 @@ public class BoardSituation
 	/**
 	 * 
 	 */
-	public ArrayList<Integer> getBestMove() {
-		ArrayList<Integer> bestMove= new ArrayList<Integer>();
+	public int getBestMove() {
+		int bestMove= 0;
 		//Calculate if you can get an extra turn
 		
 		//Calculate if you can eat 
 		
-		
-			
+		int numSeed=0;
+		for(int i=0; i<numColumn && numSeed==0 ; i++)
+		{
+			if (Board[0][i].getNumSeed()>0){
+				numSeed=Board[0][i].getNumSeed();
+				bestMove=i;
+			}
+					
+
+		}
 		
 		return bestMove;
 	}

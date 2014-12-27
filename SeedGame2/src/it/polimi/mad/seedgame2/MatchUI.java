@@ -4,6 +4,8 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -158,6 +160,8 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 				String mess= bs.movement(0,0);
 				message.setText(mess);
 				paintBoard();
+				
+				
 			}
 		});
 		
@@ -287,6 +291,10 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		});
 		
 		
+		
+		
+		
+		
 	}
 
 	
@@ -314,6 +322,13 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		b23.setText((bs.Board[2][3].getNumSeed())+"");
 		b24.setText((bs.Board[2][4].getNumSeed())+"");
 		b25.setText((bs.Board[2][5].getNumSeed())+"");
+		
+		if(bs.getTurn()==2 && playersInfo.getText().toString().contains(" and Player 2 is: Computer")){
+			
+			String mess= bs.movement(0,bs.getBestMove());
+			message.setText(mess);
+			paintBoard();
+		}
 		
 	}
 
