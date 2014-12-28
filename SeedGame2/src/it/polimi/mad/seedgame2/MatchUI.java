@@ -1,15 +1,23 @@
 package it.polimi.mad.seedgame2;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
+import android.R.integer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
@@ -49,7 +57,9 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 	TextView playersInfo=null;
 	
 	
+	ImageView player1Chicken; 
 	
+	DataBaseHandler dbHandler;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//==================================================================================================
@@ -98,6 +108,12 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		
 		playersInfo= (TextView) findViewById(R.id.textView36);
 		playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
+		player1Chicken =(ImageView)findViewById(R.id.imageView1);
+		
+		
+		Match match= new Match(bs.generateOutputString(), getIntent().getExtras().getString("p1"), getIntent().getExtras().getString("p2"));
+		
+		//saveMatch(match);
 		
 		
 		Button bStart= (Button) findViewById(R.id.button1);
@@ -160,7 +176,9 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 				String mess= bs.movement(0,0);
 				message.setText(mess);
 				paintBoard();
-				
+				moves(player1Chicken);
+				b00.getX();
+				b00.getY();
 				
 			}
 		});
@@ -172,6 +190,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 				String mess= bs.movement(0,1);
 				message.setText(mess);
 				paintBoard();
+				
 			}
 		});
 		
@@ -222,6 +241,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 				String mess= bs.movement(2,0);
 				message.setText(mess);
 				paintBoard();
+			
 			}
 		});
 
@@ -231,6 +251,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 				String mess= bs.movement(2,1);
 				message.setText(mess);
 				paintBoard();
+				
 			}
 		});
 
@@ -323,6 +344,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		b24.setText((bs.Board[2][4].getNumSeed())+"");
 		b25.setText((bs.Board[2][5].getNumSeed())+"");
 		
+		
 		if(bs.getTurn()==2 && playersInfo.getText().toString().contains(" and Player 2 is: Computer")){
 			
 			String mess= bs.movement(0,bs.getBestMove());
@@ -330,7 +352,73 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 			paintBoard();
 		}
 		
+		if(message.getText().toString().contains("The game is finished. ")){
+			
+		}
+		
 	}
 
+	
+	
+	/**
+	 * 
+	 */
+	public void saveMatch(Match m) {
+		  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
+		  RuntimeExceptionDao<Match, integer> matchDAO= dbHandler.getMatchRuntimeExceptionDao();
+		  matchDAO.create(m);
+		  OpenHelperManager.releaseHelper();
+		  
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param view
+	 */
+	private void initialMove( View view )
+	{
+	   /* RelativeLayout root = (RelativeLayout) findViewById( R.id.relativeLayoutPollo );
+	    DisplayMetrics dm = new DisplayMetrics();
+	    this.getWindowManager().getDefaultDisplay().getMetrics( dm );
+	    int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();
 
+	    int originalPos[] = new int[2];
+	    view.getLocationOnScreen( originalPos );
+
+	    int xDest = dm.widthPixels/2;
+	    xDest -= (view.getMeasuredWidth()/2);
+	    int yDest = dm.heightPixels/2 - (view.getMeasuredHeight()/2) - statusBarOffset;
+*/
+	    TranslateAnimation anim = new TranslateAnimation(
+	    		Animation.RELATIVE_TO_SELF, //fromXType 
+                0.0f,                       //fromXValue
+                Animation.RELATIVE_TO_SELF, //toXType
+                -1.0f,                      //toXValue
+                Animation.RELATIVE_TO_SELF, //fromYType
+                0.0f,                       //fromYValue
+                Animation.RELATIVE_TO_SELF, //toYType
+                0.0f);
+	    anim.setDuration(100);
+	    anim.setFillAfter( true );
+	    view.startAnimation(anim);
+	}
+	
+
+	/**
+	 * 
+	 * @param view
+	 */
+	private void moves( View view )
+	{
+	    
+	    TranslateAnimation anim = new TranslateAnimation(
+	            b00.getX(), b01.getX(), b00.getY(),b00.getY());
+	    anim.setDuration(100);
+	    anim.setFillAfter( true );
+	    view.startAnimation(anim);
+	}
+
+	
 }

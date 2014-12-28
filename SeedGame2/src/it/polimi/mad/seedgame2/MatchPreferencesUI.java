@@ -155,7 +155,7 @@ public class MatchPreferencesUI extends Activity {
 	/**
 	 * 
 	 */
-	private void savePlayer(Player p) {
+	public void savePlayer(Player p) {
 		  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
 		  RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
 		  playerDAO.create(p);
@@ -165,17 +165,7 @@ public class MatchPreferencesUI extends Activity {
 	
 	
 	
-	/**
-	 * 
-	 */
-	private void saveMatch(Match m) {
-		  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
-		  RuntimeExceptionDao<Match, integer> matchDAO= dbHandler.getMatchRuntimeExceptionDao();
-		  matchDAO.create(m);
-		  OpenHelperManager.releaseHelper();
-		  
-	}
-	
+
 	
 	/**
 	 * 
