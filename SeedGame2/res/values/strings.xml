@@ -35,5 +35,6 @@
 	<string name="computer">Play Against Computer</string>
 	
 	<string name="empty">           </string>
+	<string name="moves"> Game moves  </string>
 	
 </resources>

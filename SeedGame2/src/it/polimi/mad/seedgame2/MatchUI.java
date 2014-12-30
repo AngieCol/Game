@@ -6,6 +6,7 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import android.R.integer;
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -60,6 +61,8 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 	ImageView player1Chicken; 
 	
 	DataBaseHandler dbHandler;
+	
+	MediaPlayer mp;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//==================================================================================================
@@ -79,12 +82,12 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.match);
+		setContentView(R.layout.match2);
 		bs= new BoardSituation();
 		mat= new Match("", "", "");
 		
 		message= (TextView) findViewById(R.id.textView34);
-		message.setText("Please Select the Players and Press Start...");
+		
 		explica=(TextView) findViewById(R.id.textView35);
 		
 		b00= (TextView) findViewById(R.id.textView1);
@@ -107,29 +110,23 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		b15= (TextView) findViewById(R.id.textView12);
 		
 		playersInfo= (TextView) findViewById(R.id.textView36);
-		playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
+		//playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
+		playersInfo.setText("Player 1 is: not set and Player 2 is: not set");
+		
 		player1Chicken =(ImageView)findViewById(R.id.imageView1);
 		
 		
-		Match match= new Match(bs.generateOutputString(), getIntent().getExtras().getString("p1"), getIntent().getExtras().getString("p2"));
+		//Match match= new Match(bs.generateOutputString(), getIntent().getExtras().getString("p1"), getIntent().getExtras().getString("p2"));
 		
 		//saveMatch(match);
 		
 		
-		Button bStart= (Button) findViewById(R.id.button1);
-		bStart.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				bs= new BoardSituation();
+		
+				
 				message.setText("Player "+bs.getTurn()+" begins");
 				paintBoard();
-				
-			
-				
-			}
-		});
-		
+				initialMove(player1Chicken);
+
 		
 		
 		
@@ -393,14 +390,14 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 */
 	    TranslateAnimation anim = new TranslateAnimation(
 	    		Animation.RELATIVE_TO_SELF, //fromXType 
-                0.0f,                       //fromXValue
+	    		-1.0f,                       //fromXValue
                 Animation.RELATIVE_TO_SELF, //toXType
-                -1.0f,                      //toXValue
+                0.2f,                      //toXValue
                 Animation.RELATIVE_TO_SELF, //fromYType
-                0.0f,                       //fromYValue
+                -1.0f,                       //fromYValue
                 Animation.RELATIVE_TO_SELF, //toYType
                 0.0f);
-	    anim.setDuration(100);
+	    anim.setDuration(500);
 	    anim.setFillAfter( true );
 	    view.startAnimation(anim);
 	}
