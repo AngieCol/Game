@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 public class GameUI extends Activity {
@@ -29,16 +28,17 @@ public class GameUI extends Activity {
 			
 				//Intent in= new Intent(GameUI.this, MatchPreferencesUI.class);
 				Intent in= new Intent(GameUI.this, MatchUI2.class);
-				startActivity(in);
 				mpButton.start();
+				startActivity(in);
+				
 			}
 		});
 		
+	
 		
 		
 		
-		
-		Button configuratePreferences = (Button) findViewById(R.id.imageButtonpreferences);
+		ImageButton configuratePreferences = (ImageButton) findViewById(R.id.imageButtonpreferences);
 		configuratePreferences.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -46,21 +46,23 @@ public class GameUI extends Activity {
 			
 				
 				Intent in= new Intent(GameUI.this, ConfigurationPreferencesUI.class);
-				startActivity(in);
 				mpButton.start();
+				startActivity(in);
+				
 			}
 		});
 		
-		Button seeStatistics = (Button) findViewById(R.id.imageButtonstatistics);
+		ImageButton  seeStatistics = (ImageButton) findViewById(R.id.imageButtonstatistics);
 		seeStatistics.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 			
 				
-				Intent in= new Intent(GameUI.this, Statistics.class);
-				startActivity(in);
+				Intent in= new Intent(GameUI.this, AnimationUI.class);
 				mpButton.start();
+				startActivity(in);
+				
 			}
 		});
 	}

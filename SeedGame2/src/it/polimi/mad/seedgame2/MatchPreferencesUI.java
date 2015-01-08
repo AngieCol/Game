@@ -8,8 +8,6 @@ import java.util.List;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.j256.ormlite.stmt.DeleteBuilder;
-
 import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;

@@ -3,19 +3,11 @@
  */
 package it.polimi.mad.seedgame2;
 
-import java.io.File;
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.List;
-
 import android.R.integer;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.drm.DrmStore.Playback;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
