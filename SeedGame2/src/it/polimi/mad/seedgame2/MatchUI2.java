@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -65,6 +66,11 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	DataBaseHandler dbHandler;
 
 	MediaPlayer mpButton;
+	
+	//Preferences
+	Boolean controlSoundBool=true; 
+	Boolean backgroundSoundBool=true;
+	Boolean animationBool=true;
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//==================================================================================================
@@ -108,6 +114,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		t10= (ImageView) findViewById(R.id.iv10);
 		t15= (ImageView) findViewById(R.id.iv15);
 
+		history=(TextView) findViewById(R.id.moves);
 		mpButton= MediaPlayer.create(this, R.raw.sound1);
 		playersInfo= (TextView) findViewById(R.id.tvPlayerInfo);
 		
@@ -258,23 +265,89 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		switch(v.getId()){
 		case R.id.iv00:
 			bs.movement(0,0);
-			//history.setText((CharSequence) bs.getMovements());
+			history.setText(bs.getHistoryString());
 			paintBoard();
-			//moves(player1Chicken);
 			mpButton.start();
 			
+			
+		break;
+		case R.id.iv01:
+			bs.movement(0,1);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv02:
+			bs.movement(0,2);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv03:
+			bs.movement(0,3);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv04:
+			bs.movement(0,4);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;		
+		case R.id.iv05:
+			bs.movement(0,5);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv10:
+			bs.movement(1,0);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv15:
+			bs.movement(1,5);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
 		break;
 		case R.id.iv20:
 			bs.movement(2,0);
-			//history.setText((CharSequence) bs.getMovements());
+			history.setText(bs.getHistoryString());
 			paintBoard();
-			//moves(player1Chicken);
+			mpButton.start();
+		case R.id.iv21:
+			bs.movement(2,1);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
 		break;
-		
-		
-		
-		
-		
+		case R.id.iv22:
+			bs.movement(2,2);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv23:
+			bs.movement(2,3);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv24:
+			bs.movement(2,4);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
+		case R.id.iv25:
+			bs.movement(2,5);
+			history.setText(bs.getHistoryString());
+			paintBoard();
+			mpButton.start();
+		break;
 		}
 		
 	}

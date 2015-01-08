@@ -504,7 +504,16 @@ public class BoardSituation
 	
 	
 
-	
+	public String getHistoryString() {
+		
+		String historyAsString="";
+		for (String s: movements) {
+			historyAsString+= s+"\n ";
+		}
+		
+		return historyAsString;
+		
+	}
 	
 	
 	

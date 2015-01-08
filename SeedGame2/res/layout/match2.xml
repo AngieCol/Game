@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tvPlayerInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/empty"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -18,7 +18,7 @@
 
         <TableRow
             android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <ImageView
@@ -38,7 +38,7 @@
 
         <TableRow
             android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <ImageView
@@ -86,7 +86,7 @@
 
         <TableRow
             android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <ImageView
@@ -134,7 +134,7 @@
 
         <TableRow
             android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <ImageView
@@ -188,17 +188,21 @@
         android:text="@string/empty"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_gravity="bottom">"
+        android:layout_gravity="bottom"
+        >
 
         <TextView
             android:id="@+id/moves"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/moves"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </HorizontalScrollView>
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"/>
+    </ScrollView>
 
 </LinearLayout>

@@ -13,10 +13,10 @@ public class Statistics {
 	String nameStatistic;
 	
 	@DatabaseField
-	String playersNames[];
+	String players[];
 	
 	@DatabaseField
-	String matchesName[];
+	String matches[];
 	
 	
 	
@@ -24,16 +24,16 @@ public class Statistics {
 	public Statistics(String name, String[] players, String[] matches)
 	{
 		nameStatistic=name;
-		playersNames=players;
-		matchesName=matches;
+		this.players=players;
+		this.matches=matches;
 		
 	}
 	
 	public void updateStatistics( String[] players, String[] matches)
 	{
 		
-		playersNames=players;
-		matchesName=matches;
+		this.players=players;
+		this.matches=matches;
 		
 	}
 	

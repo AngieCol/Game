@@ -106,6 +106,7 @@ public class MatchUI extends OrmLiteBaseActivity<DataBaseHandler> {
 		b25= (TextView) findViewById(R.id.textView24);
 		
 		
+		
 		b10= (TextView) findViewById(R.id.textView7);
 		b15= (TextView) findViewById(R.id.textView12);
 		

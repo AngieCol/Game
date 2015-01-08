@@ -37,4 +37,9 @@
 	<string name="empty">           </string>
 	<string name="moves"> Game moves  </string>
 	
+	<string name="controlSound">   Control Sound       </string>
+	<string name="backgroundSound"> Background Sound  </string>
+	<string name="animation"> Include Animation  </string>
+	<string name="selectPreferences"> Select the Configuration of the game  </string>
+	
 </resources>

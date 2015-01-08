@@ -8,38 +8,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".GameUI" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-    </LinearLayout>
+      <ImageButton
+          android:id="@+id/imageButtonnewgame"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_above="@+id/imageButtonpreferences"
+          android:layout_centerHorizontal="true"
+          android:layout_marginBottom="22dp"
+          android:background="@drawable/empty"
+          android:contentDescription="@string/empty"
+          android:src="@drawable/custombuttonnewgame" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_alignRight="@+id/linearLayout1"
-        android:layout_alignTop="@+id/linearLayout1"
-        android:text="@string/newgame" />
+      <ImageButton
+          android:id="@+id/imageButtonstatistics"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_alignRight="@+id/imageButtonpreferences"
+          android:layout_marginBottom="150dp"
+          android:background="@drawable/empty"
+          android:contentDescription="@string/empty"
+          android:src="@drawable/custombuttonstatistics" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:text="@string/preferences" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_below="@+id/button2"
-        android:text="@string/stadistics" />
-
+      <ImageButton
+          android:id="@+id/imageButtonpreferences"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_above="@+id/imageButtonstatistics"
+          android:layout_alignRight="@+id/imageButtonnewgame"
+          android:layout_marginBottom="21dp"
+          android:background="@drawable/empty"
+          android:contentDescription="@string/empty"
+          android:src="@drawable/custombuttonpreferences" />
+    
 </RelativeLayout>

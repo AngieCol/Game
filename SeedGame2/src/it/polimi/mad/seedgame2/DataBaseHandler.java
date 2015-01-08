@@ -26,7 +26,8 @@ import com.j256.ormlite.table.TableUtils;
 public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 
 
-	public static final String TABLE_NAME="player";
+	public static final String TABLE_NAME_P="player";
+	public static final String TABLE_NAME_M="match";
 	private static final String DB_NAME="SeedGame.db";
 	private static final int VERSION=1;
 	private Dao<Player, integer> playerDAO=null;
@@ -59,7 +60,8 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 		try {
 			
 			TableUtils.createTable(connectionSource, Player.class);
-			Log.d( "GameConsola","table created");
+			TableUtils.createTable(connectionSource, Match.class);
+			Log.d( "GameConsola","tables created");
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -78,6 +80,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 		try {
 			
 			TableUtils.dropTable(connectionSource, Player.class, true);
+			TableUtils.dropTable(connectionSource, Match.class, true);
 			onCreate(db,cs);
 		} catch (SQLException e) {
 			
