@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
  * 
  *
  */
+@SuppressLint("WrongCall")
 public class AnimationUI extends Activity implements OnTouchListener {
 	
 	AnimationView av;
@@ -29,6 +31,13 @@ public class AnimationUI extends Activity implements OnTouchListener {
 	SpriteAnimation spriteAnimation ;
 	
 	
+	boolean canDrawAnimation=false;
+	SurfaceHolder surfaceHolderAnimation;
+	Thread threadAnimation=null;
+	boolean spriteLoaded=false;
+	
+	int widthScreen; 
+	int heightScreen; 
 	
 	
 	
@@ -36,15 +45,22 @@ public class AnimationUI extends Activity implements OnTouchListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		av= new AnimationView(this);
-		av.setOnTouchListener(this);
+		
 		imageChickenToMove=BitmapFactory.decodeResource(getResources(), R.drawable.pollo);
 		imageChickenAnimated=BitmapFactory.decodeResource(getResources(), R.drawable.chickensheet);
+		
+		av= new AnimationView(this);
+		av.setOnTouchListener(this);
+		
 		coordinateX=0;
 		coordinateY=0;
 		Toast t= Toast.makeText(AnimationUI.this, "Move the chicken, touching the place you want to put it or draging the image", Toast.LENGTH_LONG);
 		t.show();
 		setContentView(av);
+		
+		Display display = getWindowManager().getDefaultDisplay(); 
+		widthScreen = display.getWidth();
+		heightScreen = display.getHeight();
 		
 	}
 	
@@ -111,19 +127,13 @@ public class AnimationUI extends Activity implements OnTouchListener {
 
 		
 		
-		
-		boolean canDrawAnimation=false;
-		SurfaceHolder surfaceHolderAnimation;
-		Thread threadAnimation=null;
-		
-		
 		/**
 		 * @param context
 		 */
 		public AnimationView(Context context) {
 			super(context);
 			surfaceHolderAnimation=getHolder();
-			spriteAnimation= new SpriteAnimation(this, imageChickenAnimated);		
+			spriteAnimation= new SpriteAnimation(this, imageChickenAnimated, widthScreen, heightScreen);		
 			
 		}
 
@@ -135,11 +145,17 @@ public class AnimationUI extends Activity implements OnTouchListener {
 			//Draws the animation
 			while(canDrawAnimation){
 				//loop until the surface is valid
-				if(!surfaceHolderAnimation.getSurface().isValid()){
+				if(!surfaceHolderAnimation.getSurface().isValid())
 					continue;
-				}
-				Canvas canvasAnimation= surfaceHolderAnimation.lockCanvas();
 				
+				
+				if(!spriteLoaded){
+					spriteAnimation= new SpriteAnimation(AnimationView.this,imageChickenAnimated, widthScreen, heightScreen);
+					spriteLoaded=true;
+				}
+				
+				
+				Canvas canvasAnimation= surfaceHolderAnimation.lockCanvas();
 				onDraw(canvasAnimation);
 				surfaceHolderAnimation.unlockCanvasAndPost(canvasAnimation);
 				
@@ -152,7 +168,7 @@ public class AnimationUI extends Activity implements OnTouchListener {
 	/**
 	 *
 	 **/
-	@SuppressLint("WrongCall")
+	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		canvas.drawARGB(255, 150, 150, 10);
