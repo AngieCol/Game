@@ -28,7 +28,7 @@ public class SpriteAnimation {
 	Bitmap bitmapImage;
 	AnimationView animationView;
 	int currentFrame=0;
-	String direction="";
+	int direction=3;
 	int widthScreen; 
 	int heightScreen; 
 	int numColumnsSpriteSheet=12;
@@ -49,7 +49,7 @@ public class SpriteAnimation {
 		speedX=5;
 		speedY=0;
 		widthScreen=widthScr; 
-		heightScreen=heightScr-250; 
+		heightScreen=heightScr;//-250; 
 		
 	
 		
@@ -70,14 +70,14 @@ public class SpriteAnimation {
 		if(coordinateX > /*animationView.getWidth()*/widthScreen- width - speedX){
 			speedX=0;
 			speedY=5;
-			direction="down";
+			direction=1;//down
 		}
 		
 		//Left direction
 		if(coordinateY > /*animationView.getHeight()*/ heightScreen- height - speedY){
 			speedX=-5;
 			speedY=0;
-			direction="left";
+			direction=2;//left
 		
 		}
 		
@@ -87,7 +87,7 @@ public class SpriteAnimation {
 			coordinateX=0;
 			speedX=0;
 			speedY=-5;
-			direction="up";
+			direction=0;//up
 		}
 		
 		//Right direction
@@ -95,8 +95,17 @@ public class SpriteAnimation {
 			coordinateY=0;
 			speedX=5;
 			speedY=0;
-			direction="right";
+			direction=3;//right
 		}
+		
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		currentFrame=++currentFrame%numColumnsSpriteSheet;
 		
 		coordinateX =  coordinateX + speedX;
 		coordinateY = coordinateY + speedY;
@@ -111,8 +120,9 @@ public class SpriteAnimation {
 	public void onDraw(Canvas canvas) {
 	  
 		update();
-		//int sourceY=
-		Rect src= new Rect(0, 0, width, height);
+		int sourceX= currentFrame*width;
+		int sourceY= direction*height;
+		Rect src= new Rect(sourceX, sourceY, sourceX+width, sourceY+ height);
 		Rect dst= new Rect(coordinateX,coordinateY, coordinateX+width, coordinateY+height);
 		canvas.drawBitmap(bitmapImage, src, dst, null);
 		

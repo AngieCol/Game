@@ -60,7 +60,7 @@ public class GameUI extends Activity {
 			
 				
 				Intent in= new Intent(GameUI.this, AnimationUI.class);
-				mpButton.start();
+				//mpButton.start();
 				startActivity(in);
 				
 			}

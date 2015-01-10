@@ -9,6 +9,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -16,6 +18,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.Toast;
 
 /**
@@ -26,7 +29,7 @@ import android.widget.Toast;
 public class AnimationUI extends Activity implements OnTouchListener {
 	
 	AnimationView av;
-	Bitmap imageChickenToMove, imageChickenAnimated;
+	Bitmap imageChickenToMove, imageChickenAnimated, imageSeed;
 	float coordinateX, coordinateY;
 	SpriteAnimation spriteAnimation ;
 	
@@ -39,7 +42,7 @@ public class AnimationUI extends Activity implements OnTouchListener {
 	int widthScreen; 
 	int heightScreen; 
 	
-	
+	int x,y;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +51,38 @@ public class AnimationUI extends Activity implements OnTouchListener {
 		
 		imageChickenToMove=BitmapFactory.decodeResource(getResources(), R.drawable.pollo);
 		imageChickenAnimated=BitmapFactory.decodeResource(getResources(), R.drawable.chickensheet);
+		imageSeed =BitmapFactory.decodeResource(getResources(), R.drawable.seeed);
+		
 		
 		av= new AnimationView(this);
 		av.setOnTouchListener(this);
 		
 		coordinateX=0;
 		coordinateY=0;
+		
+		x=0;
+		y=0;
+		
 		Toast t= Toast.makeText(AnimationUI.this, "Move the chicken, touching the place you want to put it or draging the image", Toast.LENGTH_LONG);
 		t.show();
 		setContentView(av);
 		
+		
+		//Get width and height of the screen without the bar 
 		Display display = getWindowManager().getDefaultDisplay(); 
+		
+		
+		Rect rectangle= new Rect();
+		Window window= getWindow();
+		window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
+		int statusBarHeight= rectangle.top;
+		int contentViewTop= 
+		    window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
+		int titleBarHeight= contentViewTop - statusBarHeight;
 		widthScreen = display.getWidth();
-		heightScreen = display.getHeight();
+		
+		heightScreen = display.getHeight()-(titleBarHeight*5);
+		
 		
 	}
 	
@@ -142,6 +164,9 @@ public class AnimationUI extends Activity implements OnTouchListener {
 		@Override
 		public void run() {
 			
+			
+			spriteAnimation= new SpriteAnimation(AnimationView.this,imageChickenAnimated, widthScreen, heightScreen);
+			
 			//Draws the animation
 			while(canDrawAnimation){
 				//loop until the surface is valid
@@ -149,11 +174,11 @@ public class AnimationUI extends Activity implements OnTouchListener {
 					continue;
 				
 				
-				if(!spriteLoaded){
+				/*if(!spriteLoaded){
 					spriteAnimation= new SpriteAnimation(AnimationView.this,imageChickenAnimated, widthScreen, heightScreen);
 					spriteLoaded=true;
 				}
-				
+				**/
 				
 				Canvas canvasAnimation= surfaceHolderAnimation.lockCanvas();
 				onDraw(canvasAnimation);
@@ -175,6 +200,18 @@ public class AnimationUI extends Activity implements OnTouchListener {
 		canvas.drawBitmap(imageChickenToMove,coordinateX-(imageChickenToMove.getWidth()/2),coordinateY-(imageChickenToMove.getHeight()/2), null);
 		
 		spriteAnimation.onDraw(canvas);
+		
+		
+		if(x< canvas.getWidth())
+			x+=10;
+		else
+			x=0;
+		if(y< canvas.getHeight())
+			y+=10;
+		else
+			y=0;
+	canvas.drawBitmap(imageSeed, x, y, new Paint());
+	
 	}
 		
 		/**
