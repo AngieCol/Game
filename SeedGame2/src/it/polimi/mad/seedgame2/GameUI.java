@@ -17,7 +17,7 @@ public class GameUI extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
-		mpButton= MediaPlayer.create(this, R.raw.sound1);
+		mpButton= MediaPlayer.create(this, R.raw.clicksound);
 
 			
 		ImageButton newMatch = (ImageButton) findViewById(R.id.imageButtonnewgame);
@@ -62,7 +62,7 @@ public class GameUI extends Activity {
 			
 				
 				Intent in= new Intent(GameUI.this, AnimationUI.class);
-				//mpButton.start();
+				mpButton.start();
 				startActivity(in);
 				
 			}

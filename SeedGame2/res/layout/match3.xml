@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pollo"
+    android:background="@drawable/background"
     android:orientation="vertical" >
 
     <TextView
@@ -53,42 +53,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv04"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
         </TableRow>
 
         <TableRow
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <TextView
                 android:id="@+id/tvspace1"
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
         </TableRow>
 
         <TableRow
@@ -149,42 +149,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num10" />
 
             <ImageView
                 android:id="@+id/iv21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num3" />
 
             <ImageView
                 android:id="@+id/iv22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
 
             <ImageView
                 android:id="@+id/iv25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/zero" />
+                android:src="@drawable/num0" />
         </TableRow>
     </TableLayout>
 

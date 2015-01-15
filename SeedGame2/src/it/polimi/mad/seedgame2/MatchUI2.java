@@ -60,9 +60,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	MediaPlayer mpBackgroundSound;
 	
 	//Preferences
-	Boolean controlSoundBool=true; 
-	Boolean backgroundSoundBool=true;
-	Boolean animationBool=true;
+	Boolean controlSoundBool; 
+	Boolean backgroundSoundBool;
+	Boolean animationBool;
 
 	
 	
@@ -88,9 +88,21 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.match3);
 		bs= new BoardSituation();
-		//mat= new Match("", "", "");
+		
 
 		
+		
+		try {
+			controlSoundBool=getIntent().getExtras().getBoolean("controlSound");
+			backgroundSoundBool=getIntent().getExtras().getBoolean("backgroundSound");
+			animationBool=getIntent().getExtras().getBoolean("animation");
+		} catch (Exception e) {
+			controlSoundBool=true; 
+			backgroundSoundBool=true;
+			animationBool=true;
+		}
+
+						
 		b00= (ImageView) findViewById(R.id.iv00);
 		b01= (ImageView) findViewById(R.id.iv01);
 		b02= (ImageView) findViewById(R.id.iv02);
@@ -111,12 +123,12 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		t15= (ImageView) findViewById(R.id.iv15);
 
 		history=(TextView) findViewById(R.id.moves);
+		mpBackgroundSound= MediaPlayer.create(this, R.raw.soundbackgroundgame2);
 		mpButtonSoundEffect= MediaPlayer.create(this, R.raw.soundgame1);
-		mpButtonSoundEffect= MediaPlayer.create(this, R.raw.sound2);
 		if(backgroundSoundBool){
-			//mpBackgroundSound.setLooping(true);
-			mpBackgroundSound.start();
 			
+			mpBackgroundSound.start();
+			mpBackgroundSound.setLooping(true);
 			
 		}
 		mpButtonSoundEffectError= MediaPlayer.create(this, R.raw.pigsound);	
@@ -124,15 +136,20 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		
 		player1Chicken =(ImageView)findViewById(R.id.chickenPlayer1);
 		player2Chicken =(ImageView)findViewById(R.id.chickenPlayer2);
-				
-		//playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
-		playersInfo.setText("Player 1 is: not set and Player 2 is: not set");
+		
+		try{
+			playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
+		}
+		catch(Exception e){
+			playersInfo.setText("Player 1 is: not set and Player 2 is: not set");
+		}
+	
 		
 		//Match match= new Match(bs.generateOutputString(), getIntent().getExtras().getString("p1"), getIntent().getExtras().getString("p2"));
 		//saveMatch(match);
 	
 		paintBoard();
-		//initialMove(player1Chicken);
+		initialMove(player1Chicken);
 
 
 
@@ -179,52 +196,80 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	
 	public int giveImage(int numSeeds){
 		
-		
-		if(numSeeds==0){
-			return R.drawable.zero;
-		}
-		
-		if(numSeeds==1){
-			return R.drawable.one;
-		}
-	//	if ()
-		return R.drawable.zero;
+	if(numSeeds==1)return R.drawable.num1;
+	if(numSeeds==2)return R.drawable.num2;
+	if(numSeeds==3)return R.drawable.num3;
+	if(numSeeds==4)return R.drawable.num4;
+	if(numSeeds==5)return R.drawable.num5;
+	if(numSeeds==6)return R.drawable.num6;
+	if(numSeeds==7)return R.drawable.num7;
+	if(numSeeds==8)return R.drawable.num8;
+	if(numSeeds==9)return R.drawable.num9;
+	if(numSeeds==10)return R.drawable.num10;
+/*	if(numSeeds==11)return R.drawable.num11;
+	if(numSeeds==12)return R.drawable.num12;
+	if(numSeeds==13)return R.drawable.num13;
+	if(numSeeds==14)return R.drawable.num2;
+	if(numSeeds==15)return R.drawable.num2;
+	if(numSeeds==16)return R.drawable.num2;
+	if(numSeeds==17)return R.drawable.num2;
+	if(numSeeds==18)return R.drawable.num2;
+	if(numSeeds==19)return R.drawable.num2;
+	if(numSeeds==20)return R.drawable.num2;
+	if(numSeeds==21)return R.drawable.num2;
+	if(numSeeds==22)return R.drawable.num2;
+	if(numSeeds==23)return R.drawable.num2;
+	if(numSeeds==24)return R.drawable.num2;
+	if(numSeeds==25)return R.drawable.num2;
+	if(numSeeds==26)return R.drawable.num2;
+	if(numSeeds==27)return R.drawable.num2;
+	if(numSeeds==28)return R.drawable.num2;
+	if(numSeeds==29)return R.drawable.num2;
+	if(numSeeds==30)return R.drawable.num2;
+	if(numSeeds==31)return R.drawable.num2;
+	if(numSeeds==32)return R.drawable.num2;
+	if(numSeeds==33)return R.drawable.num2;
+	if(numSeeds==34)return R.drawable.num2;
+	if(numSeeds==35)return R.drawable.num2;
+	if(numSeeds==36)return R.drawable.num2;*/
+		else
+			return R.drawable.num0;
 	}
 	
 	
 	public void paintBoard(){
-		b00.setImageResource(R.drawable.one);
+		b00.setImageResource(giveImage(bs.Board[0][0].getNumSeed()));
+		b01.setImageResource(giveImage(bs.Board[0][0].getNumSeed()));
 		
 		
 		
-		
-		/*b00.setText((bs.Board[0][0].getNumSeed())+"");
-		b01.setText((bs.Board[0][1].getNumSeed())+"");
-		b02.setText((bs.Board[0][2].getNumSeed())+"");
-		b03.setText((bs.Board[0][3].getNumSeed())+"");
-		b04.setText((bs.Board[0][4].getNumSeed())+"");
-		b05.setText((bs.Board[0][5].getNumSeed())+"");
+		b00.setImageResource(giveImage(bs.Board[0][0].getNumSeed()));
+		b01.setImageResource(giveImage(bs.Board[0][1].getNumSeed()));
+		b02.setImageResource(giveImage(bs.Board[0][2].getNumSeed()));
+		b03.setImageResource(giveImage(bs.Board[0][3].getNumSeed()));
+		b04.setImageResource(giveImage(bs.Board[0][4].getNumSeed()));
+		b05.setImageResource(giveImage(bs.Board[0][5].getNumSeed()));
 
-		t10.setText((bs.Board[1][0].getNumSeed())+"");
-		t15.setText((bs.Board[1][5].getNumSeed())+"");
+		t10.setImageResource(giveImage(bs.Board[1][0].getNumSeed()));
+		t15.setImageResource(giveImage(bs.Board[1][5].getNumSeed()));
 
 
-		b20.setText((bs.Board[2][0].getNumSeed())+"");
-		b21.setText((bs.Board[2][1].getNumSeed())+"");
-		b22.setText((bs.Board[2][2].getNumSeed())+"");
-		b23.setText((bs.Board[2][3].getNumSeed())+"");
-		b24.setText((bs.Board[2][4].getNumSeed())+"");
-		b25.setText((bs.Board[2][5].getNumSeed())+"");
+		b20.setImageResource(giveImage(bs.Board[2][0].getNumSeed()));
+		b21.setImageResource(giveImage(bs.Board[2][1].getNumSeed()));
+		b22.setImageResource(giveImage(bs.Board[2][2].getNumSeed()));
+		b23.setImageResource(giveImage(bs.Board[2][3].getNumSeed()));
+		b24.setImageResource(giveImage(bs.Board[2][4].getNumSeed()));
+		b25.setImageResource(giveImage(bs.Board[2][5].getNumSeed()));
 
 
 		if(bs.getTurn()==2 && playersInfo.getText().toString().contains(" and Player 2 is: Computer")){
 
 			String mess= bs.movement(0,bs.getBestMove());
-			message.setText(mess);
+		//	message.setText(mess);
 			paintBoard();
 		}
 
-		if(message.getText().toString().contains("The game is finished. ")){
+	/*	if(message.getText().toString().contains("The game is finished. ")){
 
 		}
 */
@@ -300,7 +345,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		Animation animFad =  AnimationUtils.loadAnimation(MatchUI2.this, R.anim.fadeanim);
 		Animation animForbiddenSelection =  AnimationUtils.loadAnimation(MatchUI2.this, R.anim.forbiddenmoveanim);
 			
-		
+	
 		switch(v.getId()){
 		case R.id.iv00:
 			bs.movement(0,0);
@@ -427,9 +472,6 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	}
 
 
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onPause()
-	 */
 	@Override
 	protected void onPause() {
 		

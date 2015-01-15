@@ -5,12 +5,14 @@ package it.polimi.mad.seedgame2;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 /**
@@ -22,10 +24,12 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 	CheckBox controlSound; 
 	CheckBox backgroundSound;
 	CheckBox animation;
-
+	MediaPlayer mpButton;
 	Boolean controlSoundBool; 
 	Boolean backgroundSoundBool;
 	Boolean animationBool;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -36,11 +40,12 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 		controlSound= (CheckBox)findViewById(R.id.checkBoxControlSound);
 		backgroundSound= (CheckBox)findViewById(R.id.checkBoxBackgroundSound);
 		animation= (CheckBox)findViewById(R.id.checkBoxAnimation);
+		mpButton= MediaPlayer.create(this, R.raw.clicksound);
 
 
 
 
-		Button newGame = (Button) findViewById(R.id.button1);
+		ImageButton  newGame = (ImageButton) findViewById(R.id.imageButtonnewgame);
 		newGame.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -49,9 +54,19 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 				in.putExtra("controlSound", controlSoundBool);
 				in.putExtra("backgroundSound", backgroundSoundBool);
 				in.putExtra("animation", animationBool);
+				mpButton.start();
 				startActivity(in);
 			}
 		});
+		
+		
+	
+		
+		
+		
+		
+		
+		
 	}
 
 	/**
