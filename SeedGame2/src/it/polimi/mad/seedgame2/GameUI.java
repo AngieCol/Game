@@ -31,6 +31,8 @@ public class GameUI extends Activity {
 				mpButton.start();
 				startActivity(in);
 				
+				
+				
 			}
 		});
 		

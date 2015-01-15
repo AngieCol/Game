@@ -5,11 +5,13 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import android.R.integer;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,13 +55,19 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	ImageView player2Chicken;
 	DataBaseHandler dbHandler;
 
-	MediaPlayer mpButton;
+	MediaPlayer mpButtonSoundEffect;
+	MediaPlayer mpButtonSoundEffectError;
+	MediaPlayer mpBackgroundSound;
 	
 	//Preferences
 	Boolean controlSoundBool=true; 
 	Boolean backgroundSoundBool=true;
 	Boolean animationBool=true;
 
+	
+	
+	//frame animation
+	ImageView frameAnimation;
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//==================================================================================================
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +86,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.match2);
+		setContentView(R.layout.match3);
 		bs= new BoardSituation();
 		//mat= new Match("", "", "");
 
@@ -103,7 +111,15 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		t15= (ImageView) findViewById(R.id.iv15);
 
 		history=(TextView) findViewById(R.id.moves);
-		mpButton= MediaPlayer.create(this, R.raw.sound1);
+		mpButtonSoundEffect= MediaPlayer.create(this, R.raw.soundgame1);
+		mpButtonSoundEffect= MediaPlayer.create(this, R.raw.sound2);
+		if(backgroundSoundBool){
+			//mpBackgroundSound.setLooping(true);
+			mpBackgroundSound.start();
+			
+			
+		}
+		mpButtonSoundEffectError= MediaPlayer.create(this, R.raw.pigsound);	
 		playersInfo= (TextView) findViewById(R.id.tvPlayerInfo);
 		
 		player1Chicken =(ImageView)findViewById(R.id.chickenPlayer1);
@@ -139,8 +155,18 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		b23.setOnClickListener(this);
 		b24.setOnClickListener(this);
 		b25.setOnClickListener(this);
-		
-		
+				
+	
+	    frameAnimation = (ImageView)findViewById(R.id.frameAnimation);
+		frameAnimation.setBackgroundResource(R.drawable.animationlist);
+		frameAnimation.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				AnimationDrawable frameAnimationDraw= (AnimationDrawable)frameAnimation.getBackground();
+				frameAnimationDraw.start();
+			}
+		});
 	}
 
 
@@ -149,8 +175,29 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	 * paintBoard shows in the interface the Board
 	 */
 
+	
+	
+	public int giveImage(int numSeeds){
+		
+		
+		if(numSeeds==0){
+			return R.drawable.zero;
+		}
+		
+		if(numSeeds==1){
+			return R.drawable.one;
+		}
+	//	if ()
+		return R.drawable.zero;
+	}
+	
+	
 	public void paintBoard(){
-
+		b00.setImageResource(R.drawable.one);
+		
+		
+		
+		
 		/*b00.setText((bs.Board[0][0].getNumSeed())+"");
 		b01.setText((bs.Board[0][1].getNumSeed())+"");
 		b02.setText((bs.Board[0][2].getNumSeed())+"");
@@ -250,99 +297,145 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	
 	@Override
 	public void onClick(View v) {
+		Animation animFad =  AnimationUtils.loadAnimation(MatchUI2.this, R.anim.fadeanim);
+		Animation animForbiddenSelection =  AnimationUtils.loadAnimation(MatchUI2.this, R.anim.forbiddenmoveanim);
+			
 		
 		switch(v.getId()){
 		case R.id.iv00:
 			bs.movement(0,0);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
-			
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b00.startAnimation(animFad);
 			
 		break;
 		case R.id.iv01:
 			bs.movement(0,1);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b01.startAnimation(animFad);
 		break;
 		case R.id.iv02:
 			bs.movement(0,2);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b02.startAnimation(animFad);
 		break;
 		case R.id.iv03:
 			bs.movement(0,3);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b03.startAnimation(animFad);
 		break;
 		case R.id.iv04:
 			bs.movement(0,4);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b04.startAnimation(animFad);
 		break;		
 		case R.id.iv05:
 			bs.movement(0,5);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b05.startAnimation(animFad);
 		break;
 		case R.id.iv10:
 			bs.movement(1,0);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffectError.start();
+			t10.startAnimation(animForbiddenSelection);
 		break;
 		case R.id.iv15:
 			bs.movement(1,5);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffectError.start();
+			t15.startAnimation(animForbiddenSelection);
 		break;
 		case R.id.iv20:
 			bs.movement(2,0);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b20.startAnimation(animFad);
 		case R.id.iv21:
 			bs.movement(2,1);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b21.startAnimation(animFad);
 		break;
 		case R.id.iv22:
 			bs.movement(2,2);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b22.startAnimation(animFad);
 		break;
 		case R.id.iv23:
 			bs.movement(2,3);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b23.startAnimation(animFad);
 		break;
 		case R.id.iv24:
 			bs.movement(2,4);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b24.startAnimation(animFad);
 		break;
 		case R.id.iv25:
 			bs.movement(2,5);
 			history.setText(bs.getHistoryString());
 			paintBoard();
-			mpButton.start();
+			if(controlSoundBool)
+				mpButtonSoundEffect.start();
+			b25.startAnimation(animFad);
 		break;
 		}
 		
 	}
+	
+	
+	@Override
+	protected void onResume() {
+		
+		super.onResume();
+		mpBackgroundSound.stop();
+	}
 
 
-
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onPause()
+	 */
+	@Override
+	protected void onPause() {
+		
+		super.onPause();
+		mpBackgroundSound.stop();
+	}
 
 
 }

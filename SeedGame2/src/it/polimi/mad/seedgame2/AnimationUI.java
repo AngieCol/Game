@@ -19,6 +19,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
@@ -43,6 +44,8 @@ public class AnimationUI extends Activity implements OnTouchListener {
 	int heightScreen; 
 	
 	int x,y;
+	
+	ImageView frameAnimation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,8 @@ public class AnimationUI extends Activity implements OnTouchListener {
 		widthScreen = display.getWidth();
 		
 		heightScreen = display.getHeight()-(titleBarHeight*5);
+		
+		
 		
 		
 	}
