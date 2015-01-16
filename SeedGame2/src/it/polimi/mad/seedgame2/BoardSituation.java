@@ -332,6 +332,7 @@ public class BoardSituation
 				setWinner("The winner is Player 1!!!");
 			else
 				setWinner("There is a draw of player 1 and player 2");
+			
 			return true;
 		}
 

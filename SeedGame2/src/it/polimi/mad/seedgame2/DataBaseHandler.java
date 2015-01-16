@@ -20,13 +20,15 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 
 	public static final String TABLE_NAME_P="player";
 	public static final String TABLE_NAME_M="match";
+	public static final String TABLE_NAME_S="statistics";
 	private static final String DB_NAME="SeedGame.db";
 	private static final int VERSION=1;
 	private Dao<Player, integer> playerDAO=null;
 	private RuntimeExceptionDao<Player, integer> playerRuntimeDAO=null;
 	private Dao<Match, integer> matchDAO=null;
 	private RuntimeExceptionDao<Match, integer> matchRuntimeDAO=null;
-	
+	private Dao<Statistics, integer> statisticsDAO=null;
+	private RuntimeExceptionDao<Statistics, integer> statisticsRuntimeDAO=null;
 	
 	private Context context;
 	/**
@@ -53,6 +55,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 			
 			TableUtils.createTable(connectionSource, Player.class);
 			TableUtils.createTable(connectionSource, Match.class);
+			TableUtils.createTable(connectionSource, StatisticsUI.class);
 			Log.d( "GameConsola","tables created");
 		} catch (Exception e) {
 			
@@ -73,6 +76,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 			
 			TableUtils.dropTable(connectionSource, Player.class, true);
 			TableUtils.dropTable(connectionSource, Match.class, true);
+			TableUtils.dropTable(connectionSource, StatisticsUI.class, true);
 			onCreate(db,cs);
 		} catch (SQLException e) {
 			
@@ -139,6 +143,33 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 		
 	}
 
+	/**
+	 * 
+	 */
+	public Dao<Statistics, integer> getDaoStatistics() throws SQLException{
+		
+		if(statisticsDAO==null){
+			statisticsDAO= getDao(Statistics.class);
+		}
+		
+		
+		return statisticsDAO;
+		
+	}
+
+	/**
+	 * 
+	 */
+	public RuntimeExceptionDao<Statistics, integer> getStatisticsRuntimeExceptionDao() {
+		
+		if(statisticsRuntimeDAO==null){
+			statisticsRuntimeDAO= getRuntimeExceptionDao(Statistics.class);
+		}
+		
+		
+		return statisticsRuntimeDAO;
+		
+	}
 
 
 

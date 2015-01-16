@@ -61,7 +61,7 @@ public class GameUI extends Activity {
 			public void onClick(View v) {
 			
 				
-				Intent in= new Intent(GameUI.this, AnimationUI.class);
+				Intent in= new Intent(GameUI.this, StatisticsUI.class);
 				mpButton.start();
 				startActivity(in);
 				
