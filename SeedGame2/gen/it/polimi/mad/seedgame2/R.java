@@ -114,7 +114,7 @@ public final class R {
         public static final int statisticspress=0x7f020056;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0052;
+        public static final int action_settings=0x7f0a0051;
         public static final int autoCompleteTextView1=0x7f0a004e;
         public static final int autoCompleteTextView2=0x7f0a004f;
         public static final int button1=0x7f0a002d;
@@ -147,7 +147,6 @@ public final class R {
         public static final int moves=0x7f0a004d;
         public static final int relativeLayoutPollo=0x7f0a000c;
         public static final int spinner1=0x7f0a002c;
-        public static final int spinner2=0x7f0a0051;
         public static final int tableLayout1=0x7f0a000e;
         public static final int tableRow1=0x7f0a0033;
         public static final int tableRow2=0x7f0a0037;

@@ -122,6 +122,21 @@ public class WinUI extends Activity {
 
 			}
 		});
+		
+		ImageButton  seeStatistics = (ImageButton) findViewById(R.id.imageButtonstatistics);
+		seeStatistics.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			
+				
+				Intent in= new Intent(WinUI.this, StatisticsUI.class);
+				mpBAckground.stop();
+				mpButton.start();
+				startActivity(in);
+				
+			}
+		});
 
 	}
 

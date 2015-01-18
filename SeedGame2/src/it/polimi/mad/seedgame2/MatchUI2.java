@@ -12,6 +12,7 @@ import android.R.string;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -129,14 +130,22 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 
 		history=(TextView) findViewById(R.id.moves);
 		history.setTextColor(Color.parseColor("#FFD700"));
-		mpBackgroundSound= MediaPlayer.create(this, R.raw.soundbackgroundgame2);
+		mpBackgroundSound= MediaPlayer.create(this, R.raw.soundbackgroundgame);
 		mpButtonSoundEffect= MediaPlayer.create(this, R.raw.soundgame1);
-		if(backgroundSoundBool){
-			
-			mpBackgroundSound.start();
 		
+		mpBackgroundSound.setOnPreparedListener(new OnPreparedListener() {
 			
-		}
+			public void onPrepared(MediaPlayer mp) {
+				// TODO Auto-generated method stub
+				if(backgroundSoundBool){
+					
+					mpBackgroundSound.start();
+				
+					
+				}
+			}
+		});
+		
 		mpButtonSoundEffectError= MediaPlayer.create(this, R.raw.pigsound);	
 		playersInfo= (TextView) findViewById(R.id.tvPlayerInfo);
 		
@@ -148,7 +157,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 			
 			player1= getIntent().getExtras().getString("p1");
 			player2= getIntent().getExtras().getString("p2");
-			playersInfo.setText("Player 1 is: "+player1+ " and Player 2 is: "+player2);
+			playersInfo.setText("Player 1 is: "+player1+ "\n  Player 2 is: "+player2);
 		}
 		catch(Exception e){
 			playersInfo.setText("Player 1 is: not set and Player 2 is: not set");
@@ -264,7 +273,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		b25.setImageResource(giveImage(bs.Board[2][5].getNumSeed()));
 
 
-		if(bs.getTurn()==2 && playersInfo.getText().toString().contains(" and Player 2 is: Computer")){
+		if(bs.getTurn()==2 && playersInfo.getText().toString().contains("Player 2 is: Computer")){
 			if(bs.getBestMove()!=20){
 			String mess= bs.movement(0,bs.getBestMove());
 		//	message.setText(mess);
@@ -358,7 +367,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				-1.0f,                       //fromYValue
 				Animation.RELATIVE_TO_SELF, //toYType
 				0.0f);
-		anim.setDuration(500);
+		anim.setDuration(1200);
 		anim.setFillAfter( true );
 		view.startAnimation(anim);
 	}
@@ -374,7 +383,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				7.0f,                       //fromYValue
 				Animation.RELATIVE_TO_SELF, //toYType
 				0.0f);
-		anim.setDuration(500);
+		anim.setDuration(1200);
 		anim.setFillAfter( true );
 		view.startAnimation(anim);
 	}

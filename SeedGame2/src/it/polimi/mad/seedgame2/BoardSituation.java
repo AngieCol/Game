@@ -125,7 +125,7 @@ public class BoardSituation
 
 		if (rta!="")
 		{
-			movements.add("Player "+getTurn()+ ":  Make a bad move->"+rta);
+			movements.add("\n Player "+getTurn()+ ":  Make a bad move->"+rta);
 			generateOutputString();
 			return rta;
 
@@ -138,7 +138,7 @@ public class BoardSituation
 			setTurn();
 			if(!verifyWin())
 			{
-				movements.add("Player "+getTurn()+ ":  Made a move. "+eaten);
+				movements.add("\n Player "+getTurn()+ ":  Made a move. "+eaten);
 				paintBoardInConsole("Move done!!! Now It's the turn of Player: "+getTurn()+". "+eaten);
 				generateOutputString();
 				return "Move done!!! Now It's the turn of Player: "+getTurn()+". "+eaten;
@@ -146,7 +146,7 @@ public class BoardSituation
 			}
 			else
 			{
-				movements.add("The game is finished with the movement of Player "+getTurn()+ winner+". "+eaten);
+				movements.add("\n The game is finished with the movement of Player "+getTurn()+ winner+". "+eaten);
 				paintBoardInConsole("The game is finished. "+ winner+". "+eaten);
 				generateOutputString();
 				return "The game is finished. "+ winner+". "+eaten; 

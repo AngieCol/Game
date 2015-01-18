@@ -12,13 +12,14 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 /**
  * 
  *
  */
-public class ConfigurationPreferencesUI extends Activity implements OnCheckedChangeListener {
+public class ConfigurationPreferencesUI extends Activity {
 
 	CheckBox controlSound; 
 	CheckBox backgroundSound;
@@ -41,7 +42,28 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 		
 		mpButton= MediaPlayer.create(this, R.raw.clicksound);
 
-
+		backgroundSound.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				backgroundSoundBool = isChecked;
+				if(isChecked)
+				Toast.makeText(ConfigurationPreferencesUI.this, "checked changed true", Toast.LENGTH_SHORT).show();
+				else {
+					Toast.makeText(ConfigurationPreferencesUI.this, "checked changed false", Toast.LENGTH_SHORT).show();
+					
+				}
+			}
+		});
+		controlSound.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				controlSoundBool = isChecked;
+			}
+		});
 
 
 		ImageButton  newGame = (ImageButton) findViewById(R.id.imageButtonnewgame);
@@ -65,31 +87,6 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 		
 		
 		
-		
-	}
-
-	/**
-	 *
-	 */
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		switch(buttonView.getId()){
-		case R.id.checkBoxControlSound:
-			
-				controlSoundBool=isChecked;
-			
-			break;
-			
-		case R.id.checkBoxBackgroundSound:
-			backgroundSoundBool=isChecked;
-			
-			break;
-
-		
-
-
-		}
-
 	}
 
 
