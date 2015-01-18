@@ -1,10 +1,14 @@
 package it.polimi.mad.seedgame2;
 
+import java.sql.SQLException;
+
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import android.R.integer;
+import android.R.string;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -65,7 +69,8 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	Boolean controlSoundBool; 
 	Boolean backgroundSoundBool;
 	Boolean animationBool;
-
+	String player1;
+	String player2;
 	
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,7 +145,10 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		playersInfo.setTextColor(Color.parseColor("#9400D3"));
 		
 		try{
-			playersInfo.setText("Player 1 is: "+getIntent().getExtras().getString("p1")+ " and Player 2 is: "+getIntent().getExtras().getString("p2"));
+			
+			player1= getIntent().getExtras().getString("p1");
+			player2= getIntent().getExtras().getString("p2");
+			playersInfo.setText("Player 1 is: "+player1+ " and Player 2 is: "+player2);
 		}
 		catch(Exception e){
 			playersInfo.setText("Player 1 is: not set and Player 2 is: not set");
@@ -152,7 +160,8 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		//saveMatch(match);
 	
 		paintBoard();
-		initialMove(player1Chicken);
+		initialMove1(player1Chicken);
+		initialMove2(player2Chicken);
 
 
 
@@ -282,26 +291,64 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 
 	}
 
+	
+	/**
+	 * 
+	 */
+	public void updatePlayers() {
+		dbHandler=  new DataBaseHandler(this);
+		Player p= new Player(player1);
+		Player p2= new Player(player2);
+		try {
+			Dao<Player, String> playerDAO= dbHandler.getDaoPlayer();
+			p=playerDAO.queryForId(player1);
+			
+			p2=playerDAO.queryForId(player2);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	
+		
+		if(bs.getWinner().equalsIgnoreCase("The winner is Player 1!!!")){
+			p.updatePlayer("winner", 10);
+			p2.updatePlayer("noWinner", 0);
+		}
+				
+		else if(bs.getWinner().equalsIgnoreCase("The winner is Player 2!!!")){
+			p.updatePlayer("noWinner", 0);
+			p2.updatePlayer("winner", 10);
+		}
+		else{
+			p.updatePlayer("drawn", 5);
+			p2.updatePlayer("drawn", 5);
+		}
+		
+		dbHandler=  new DataBaseHandler(this);
+		
+		try {
+			Dao<Player, String> playerDAO= dbHandler.getDaoPlayer();
+			playerDAO.update(p);
+			playerDAO.update(p2);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		OpenHelperManager.releaseHelper();
+
+	}
 
 
 	/**
 	 * 
 	 * @param view
 	 */
-	private void initialMove( View view )
+	private void initialMove1( View view )
 	{
-		/* RelativeLayout root = (RelativeLayout) findViewById( R.id.relativeLayoutPollo );
-	    DisplayMetrics dm = new DisplayMetrics();
-	    this.getWindowManager().getDefaultDisplay().getMetrics( dm );
-	    int statusBarOffset = dm.heightPixels - root.getMeasuredHeight();
-
-	    int originalPos[] = new int[2];
-	    view.getLocationOnScreen( originalPos );
-
-	    int xDest = dm.widthPixels/2;
-	    xDest -= (view.getMeasuredWidth()/2);
-	    int yDest = dm.heightPixels/2 - (view.getMeasuredHeight()/2) - statusBarOffset;
-		 */
+		
 		TranslateAnimation anim = new TranslateAnimation(
 				Animation.RELATIVE_TO_SELF, //fromXType 
 				-1.0f,                       //fromXValue
@@ -315,7 +362,22 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		anim.setFillAfter( true );
 		view.startAnimation(anim);
 	}
-
+	private void initialMove2( View view )
+	{
+		
+		TranslateAnimation anim = new TranslateAnimation(
+				Animation.RELATIVE_TO_SELF, //fromXType 
+				5.0f,                       //fromXValue
+				Animation.RELATIVE_TO_SELF, //toXType
+				0.7f,                      //toXValue
+				Animation.RELATIVE_TO_SELF, //fromYType
+				7.0f,                       //fromYValue
+				Animation.RELATIVE_TO_SELF, //toYType
+				0.0f);
+		anim.setDuration(500);
+		anim.setFillAfter( true );
+		view.startAnimation(anim);
+	}
 
 	/**
 	 * 
@@ -353,8 +415,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 			
 		break;
@@ -370,8 +433,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 			
 		break;
@@ -388,8 +452,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		break;
 		case R.id.iv03:
@@ -404,8 +469,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				 
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 			
 		break;
@@ -421,8 +487,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				 
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		break;		
 		case R.id.iv05:
@@ -437,8 +504,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		break;
 		case R.id.iv10:
@@ -471,8 +539,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		case R.id.iv21:
 			bs.movement(2,1);
@@ -486,8 +555,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 			
 		break;
@@ -503,8 +573,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 			
 		break;
@@ -520,8 +591,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		break;
 		case R.id.iv24:
@@ -536,8 +608,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		break;
 		case R.id.iv25:
@@ -552,8 +625,9 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 				Intent in= new Intent(MatchUI2.this, WinUI.class);
 				String sWin= bs.getWinner().toString();
 				in.putExtra("winner", sWin);
-				
+				updatePlayers();
 				startActivity(in);
+				this.finish();
 			}
 		break;
 		
@@ -578,18 +652,6 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 	}
 
 	
-	public void playersUpdate() {
-		
-		
-			  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
-			  RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
-			  /*playerDAO.g
-			  playerDAO.update(arg0);*/
-			  OpenHelperManager.releaseHelper();
-			  
-		
-		
-		
-	}
+
 
 }

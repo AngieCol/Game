@@ -28,14 +28,14 @@
                 android:layout_width="60dp"
                 android:layout_height="105dp"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/pollo" />
+                android:src="@drawable/pollo1" />
 
             <ImageView
                 android:id="@+id/chickenPlayer2"
                 android:layout_width="60dp"
                 android:layout_height="105dp"
                 android:contentDescription="@string/empty"
-                android:src="@drawable/pollo" />
+                android:src="@drawable/pollo2" />
         </TableRow>
 
         <TableRow

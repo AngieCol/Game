@@ -2,11 +2,13 @@
 package it.polimi.mad.seedgame2;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 
@@ -57,25 +59,7 @@ public class MatchPreferencesUI extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.matchpreferences);
 		
-		  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
-		  RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
-		  DeleteBuilder<Player, integer> deleteBuilder = playerDAO.deleteBuilder();
-		  try {
-			
-		//	playerDAO.deleteById(arg0);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-	        
-		  OpenHelperManager.releaseHelper();
 		  
-		 // Player p= new Player("Goku");
-		//	savePlayer(p);
-		  Log.e("Gameconsola",playerDAO.queryForAll().toString() );
-		  
-		
-		
 		  try {
 				controlSoundBool=getIntent().getExtras().getBoolean("controlSound");
 				backgroundSoundBool=getIntent().getExtras().getBoolean("backgroundSound");
@@ -169,10 +153,17 @@ public class MatchPreferencesUI extends Activity {
 	 * 
 	 */
 	public void savePlayer(Player p) {
-		  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
-		  RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
-		  playerDAO.create(p);
-		  OpenHelperManager.releaseHelper();
+		  dbHandler=  new DataBaseHandler(this);
+		  try {
+			  Dao<Player, String> playerDAO= dbHandler.getDaoPlayer();
+			  playerDAO.create(p);
+			  OpenHelperManager.releaseHelper();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		 
 		  
 	}
 	
@@ -185,11 +176,20 @@ public class MatchPreferencesUI extends Activity {
 	 */
 	private void getAllPlayers() {
 		  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
-		  RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
+		  Dao<Player, String> playerDAO;
+		  List<Player> players= new ArrayList<Player>();
+		  
+		try {
+			playerDAO = dbHandler.getDaoPlayer();
+			players= playerDAO.queryForAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		  
 		  
 		  	 		  
-		  List<Player> players= playerDAO.queryForAll();
+		 
 		  List<String> namesList = new ArrayList<String>();
 		  for(Player p : players){
 			 		 

@@ -8,9 +8,8 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Player {
 	
 	
-	@DatabaseField(generatedId = true)
-	int id ;
-	@DatabaseField (unique=true)
+	
+	@DatabaseField (id=true)
 	String userName;
 	@DatabaseField 
 	int totalPoints;
@@ -45,17 +44,17 @@ public class Player {
 
 
 	public void updatePlayer(String winner, int points) {
-		numPlayedGame++;
+		setNumPlayedGame(getNumPlayedGame()+1);
 		
 		if (points> highestScore)
-			highestScore=points;
-		if (points< lowestscore)
-			lowestscore=points;
+			setHighestScore(points);
+		if (points< lowestscore || lowestscore==0)
+			setLowestscore(points);
 		if(winner.equalsIgnoreCase("winner"))
-			numWonGames++;
+			setNumWonGames(getNumWonGames()+1);
 		else if(winner.equalsIgnoreCase("drawn"))
-			numDrawnGame++;
-		
+			setDrawnGames(getDrawnGames()+1);
+		setTotalPoints(getTotalPoints()+points);
 	}
 	
 	
@@ -94,8 +93,16 @@ public class Player {
 	}
 
 
-	public void setNumWonGames(int numWonGames) {
+	public void setNumWonGames(int numDGames) {
 		this.numWonGames = numWonGames;
+	}
+	public int getDrawnGames() {
+		return numDrawnGame;
+	}
+
+
+	public void setDrawnGames(int numDGames) {
+		this.numDrawnGame = numDGames;
 	}
 
 
@@ -127,19 +134,15 @@ public class Player {
 	public void setHuman(boolean isHuman) {
 		this.isHuman = isHuman;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+	
 	
 	/**
 	 * 
 	 */
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", userName=" + userName + ", totalPoints="
+		return "Player [ userName=" + userName + ", totalPoints="
 				+ totalPoints + ", numPlayedGame=" + numPlayedGame
 				+ ", numDrawnGame=" + numDrawnGame + ", numWonGames="
 				+ numWonGames + ", highestScore=" + highestScore

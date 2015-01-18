@@ -3,10 +3,12 @@
  */
 package it.polimi.mad.seedgame2;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import android.R.integer;
@@ -62,11 +64,20 @@ public class StatisticsUI extends Activity {
 		
 		
 		dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
-		RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
+		Dao<Player, String> playerDAO;
+		List<Player> players = new ArrayList<Player>();
+		
+		try {
+			playerDAO = dbHandler.getDaoPlayer();
+			players=playerDAO.queryForAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 
-		List<Player> players= playerDAO.queryForAll();
+		
 		List<String> namesList = new ArrayList<String>();
 
 
@@ -92,7 +103,7 @@ public class StatisticsUI extends Activity {
 			playersMatrix[index][3]=p.getNumPlayedGame()+"";
 			playersMatrix[index][4]=p.getNumWonGames()+"";
 			playersMatrix[index][5]=p.getTotalPoints()+"";
-			playersMatrix[6][index]=p.getId()+"";
+			
 			index++;
 		}
 
@@ -140,7 +151,7 @@ public class StatisticsUI extends Activity {
 			
 					playerInfo.setText(
 						"Name: "+playersMatrix[i-1][0]
-								+"\n ID:"+ playersMatrix[i-1][6]
+								
 								+"\n HighestScore: "+ playersMatrix[i-1][1]
 										+"\n Lowestscore: "+ playersMatrix[i-1][2]
 												+"\n getNumPlayedGame: "+ playersMatrix[i-1][3]

@@ -39,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="@string/namePlayer1" />
+        android:hint="@string/namePlayer1"
+        android:text="" />
 
     <TextView
         android:id="@+id/textView6"
@@ -53,9 +54,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="@string/namePlayer2" >
+        android:hint="@string/namePlayer2"
+        android:text="" >
 
-        <requestFocus />
+       
     </AutoCompleteTextView>
 
     <CheckBox

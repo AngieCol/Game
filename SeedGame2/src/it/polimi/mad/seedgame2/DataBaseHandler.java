@@ -23,8 +23,8 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	public static final String TABLE_NAME_S="statistics";
 	private static final String DB_NAME="SeedGame.db";
 	private static final int VERSION=1;
-	private Dao<Player, integer> playerDAO=null;
-	private RuntimeExceptionDao<Player, integer> playerRuntimeDAO=null;
+	private Dao<Player, String> playerDAO=null;
+	private RuntimeExceptionDao<Player, String> playerRuntimeDAO=null;
 	private Dao<Match, integer> matchDAO=null;
 	private RuntimeExceptionDao<Match, integer> matchRuntimeDAO=null;
 	private Dao<Statistics, integer> statisticsDAO=null;
@@ -37,8 +37,14 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	 * @param factory
 	 * @param databaseVersion
 	 */
+//	public DataBaseHandler(Context context) {
+//		super(context, DB_NAME, null, VERSION, R.raw.ormlite_config);
+//		
+//		this.context = context;
+//	}
+
 	public DataBaseHandler(Context context) {
-		super(context, DB_NAME, null, VERSION, R.raw.ormlite_config);
+		super(context, DB_NAME, null, VERSION);
 		
 		this.context = context;
 	}
@@ -89,7 +95,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	/**
 	 * 
 	 */
-	public Dao<Player, integer> getDaoPlayer() throws SQLException{
+	public Dao<Player, String> getDaoPlayer() throws SQLException{
 		
 		if(playerDAO==null){
 			playerDAO= getDao(Player.class);
@@ -103,7 +109,7 @@ public class DataBaseHandler extends OrmLiteSqliteOpenHelper {
 	/**
 	 * 
 	 */
-	public RuntimeExceptionDao<Player, integer> getPlayerRuntimeExceptionDao() {
+	public RuntimeExceptionDao<Player, String> getPlayerRuntimeExceptionDao() {
 		
 		if(playerRuntimeDAO==null){
 			playerRuntimeDAO= getRuntimeExceptionDao(Player.class);
