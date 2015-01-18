@@ -26,8 +26,8 @@ public class GameUI extends Activity {
 			@Override
 			public void onClick(View v) {
 			
-				//Intent in= new Intent(GameUI.this, MatchPreferencesUI.class);
-				Intent in= new Intent(GameUI.this, MatchUI2.class);
+				Intent in= new Intent(GameUI.this, MatchPreferencesUI.class);
+				
 				mpButton.start();
 				startActivity(in);
 				

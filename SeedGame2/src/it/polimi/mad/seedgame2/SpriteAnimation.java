@@ -31,6 +31,7 @@ public class SpriteAnimation {
 	int numRowsSpriteSheet=9;
 	
 	
+	
 	/**
 	 * @param animationView
 	 * @param imageChickenAnimated

@@ -484,7 +484,9 @@ public class BoardSituation
 	 * 
 	 */
 	public int getBestMove() {
-		int bestMove= 0;
+		int bestMove= 20;
+		int bestMoveEat= 20;
+		int bestMoveTurn= 20;
 		//Calculate if you can get an extra turn
 		
 		//Calculate if you can eat 

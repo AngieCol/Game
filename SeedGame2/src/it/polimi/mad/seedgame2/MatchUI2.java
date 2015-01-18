@@ -7,7 +7,6 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 import android.R.integer;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,11 +95,11 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		try {
 			controlSoundBool=getIntent().getExtras().getBoolean("controlSound");
 			backgroundSoundBool=getIntent().getExtras().getBoolean("backgroundSound");
-			animationBool=getIntent().getExtras().getBoolean("animation");
+			
 		} catch (Exception e) {
 			controlSoundBool=true; 
 			backgroundSoundBool=true;
-			animationBool=true;
+			
 		}
 
 						
@@ -130,7 +129,7 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		if(backgroundSoundBool){
 			
 			mpBackgroundSound.start();
-			mpBackgroundSound.setLooping(true);
+		
 			
 		}
 		mpButtonSoundEffectError= MediaPlayer.create(this, R.raw.pigsound);	
@@ -257,18 +256,16 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 
 
 		if(bs.getTurn()==2 && playersInfo.getText().toString().contains(" and Player 2 is: Computer")){
-
+			if(bs.getBestMove()!=20){
 			String mess= bs.movement(0,bs.getBestMove());
 		//	message.setText(mess);
 			paintBoard();
+			}
 		}
 
 		Log.v("Game Consola", bs.getHistoryString());
 		
-		if(history.getText().toString().contains("The game is finished")){
-			Intent in= new Intent(MatchUI2.this, WinUI.class);
-			startActivity(in);
-		}
+		
 
 	}
 
@@ -347,117 +344,219 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		case R.id.iv00:
 			bs.movement(0,0);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b00.startAnimation(animFad);
-			Intent in= new Intent(MatchUI2.this, WinUI.class);
-			startActivity(in);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 			
 		break;
 		case R.id.iv01:
 			bs.movement(0,1);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b01.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
+			
 		break;
 		case R.id.iv02:
 			bs.movement(0,2);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b02.startAnimation(animFad);
+			
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 		break;
 		case R.id.iv03:
 			bs.movement(0,3);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b03.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				 
+				startActivity(in);
+			}
+			
 		break;
 		case R.id.iv04:
 			bs.movement(0,4);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b04.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				 
+				startActivity(in);
+			}
 		break;		
 		case R.id.iv05:
 			bs.movement(0,5);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b05.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 		break;
 		case R.id.iv10:
 			bs.movement(1,0);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffectError.start();
 			t10.startAnimation(animForbiddenSelection);
+			
 		break;
 		case R.id.iv15:
 			bs.movement(1,5);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffectError.start();
 			t15.startAnimation(animForbiddenSelection);
+			
 		break;
 		case R.id.iv20:
 			bs.movement(2,0);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b20.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 		case R.id.iv21:
 			bs.movement(2,1);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b21.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
+			
 		break;
 		case R.id.iv22:
 			bs.movement(2,2);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b22.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
+			
 		break;
 		case R.id.iv23:
 			bs.movement(2,3);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b23.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 		break;
 		case R.id.iv24:
 			bs.movement(2,4);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+		
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b24.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 		break;
 		case R.id.iv25:
 			bs.movement(2,5);
 			history.setText(bs.getHistoryString());
-			paintBoard();
+			
 			if(controlSoundBool)
 				mpButtonSoundEffect.start();
 			b25.startAnimation(animFad);
+			paintBoard();
+			if(history.getText().toString().contains("The game is finished")){
+				Intent in= new Intent(MatchUI2.this, WinUI.class);
+				String sWin= bs.getWinner().toString();
+				in.putExtra("winner", sWin);
+				
+				startActivity(in);
+			}
 		break;
+		
 		}
 		
 	}
@@ -478,5 +577,19 @@ public class MatchUI2 extends OrmLiteBaseActivity<DataBaseHandler> implements On
 		mpBackgroundSound.stop();
 	}
 
+	
+	public void playersUpdate() {
+		
+		
+			  dbHandler= OpenHelperManager.getHelper(this, DataBaseHandler.class);
+			  RuntimeExceptionDao<Player, integer> playerDAO= dbHandler.getPlayerRuntimeExceptionDao();
+			  /*playerDAO.g
+			  playerDAO.update(arg0);*/
+			  OpenHelperManager.releaseHelper();
+			  
+		
+		
+		
+	}
 
 }

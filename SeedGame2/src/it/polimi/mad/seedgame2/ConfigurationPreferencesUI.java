@@ -9,7 +9,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -25,9 +24,9 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 	CheckBox backgroundSound;
 	CheckBox animation;
 	MediaPlayer mpButton;
-	Boolean controlSoundBool; 
-	Boolean backgroundSoundBool;
-	Boolean animationBool;
+	Boolean controlSoundBool=false; 
+	Boolean backgroundSoundBool=false;
+	
 	
 	
 
@@ -39,7 +38,7 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 
 		controlSound= (CheckBox)findViewById(R.id.checkBoxControlSound);
 		backgroundSound= (CheckBox)findViewById(R.id.checkBoxBackgroundSound);
-		animation= (CheckBox)findViewById(R.id.checkBoxAnimation);
+		
 		mpButton= MediaPlayer.create(this, R.raw.clicksound);
 
 
@@ -50,10 +49,10 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 
 			@Override
 			public void onClick(View v) {
-				Intent in= new Intent(ConfigurationPreferencesUI.this, MatchUI2.class);
+				Intent in= new Intent(ConfigurationPreferencesUI.this, MatchPreferencesUI.class);
 				in.putExtra("controlSound", controlSoundBool);
 				in.putExtra("backgroundSound", backgroundSoundBool);
-				in.putExtra("animation", animationBool);
+				
 				mpButton.start();
 				startActivity(in);
 			}
@@ -77,14 +76,16 @@ public class ConfigurationPreferencesUI extends Activity implements OnCheckedCha
 		switch(buttonView.getId()){
 		case R.id.checkBoxControlSound:
 			
+				controlSoundBool=isChecked;
+			
 			break;
+			
 		case R.id.checkBoxBackgroundSound:
-
+			backgroundSoundBool=isChecked;
+			
 			break;
 
-		case R.id.checkBoxAnimation:
-
-			break;
+		
 
 
 		}
